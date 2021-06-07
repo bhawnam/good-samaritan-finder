@@ -118,7 +118,7 @@ class ServiceRequest(db.Model):
     request_active = db.Column(db.Boolean, default = False)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    service_type_id =  db.Column(db.Integer, db.ForeignKey('_id'))
+    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.service_type_id'))
 
     
     def __repr__(self):
@@ -133,7 +133,7 @@ class ServiceOffered(db.Model):
 
     offered_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    service_type_id =  db.Column(db.Integer, db.ForeignKey('_id'))
+    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.service_type_id'))
  
     def __repr__(self):
         """ """
