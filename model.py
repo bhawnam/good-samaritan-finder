@@ -4,6 +4,8 @@ from flask import Flask
 
 from flask_sqlalchemy import SQLAlchemy 
 
+import enum
+
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -81,7 +83,7 @@ class BeneficiaryRating(db.Model):
     rating_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     rating = db.Column(db.Integer)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
-    request_id =  db.Column(db.Integer, db.ForeignKey('_id'))
+    request_id =  db.Column(db.Integer, db.ForeignKey('requests.request_id'))
 
     
     def __repr__(self):
@@ -97,7 +99,7 @@ class VolunteerRating(db.Model):
     rating_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     rating = db.Column(db.Integer)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    response_id =  db.Column(db.Integer, db.ForeignKey('_id'))
+    response_id =  db.Column(db.Integer, db.ForeignKey('offerings.offered_id'))
 
     
     def __repr__(self):
@@ -138,15 +140,39 @@ class ServiceOffered(db.Model):
         return f'<ServiceOffered offered_id={self.request_id} volunteer_id={self.volunteer_id}>'
 
 
+class ServiceName(enum.Enum):
+    PACKAGED_MEAL_KIT = 1
+    WATER = 2
+    FIRST_AID_KIT = 3
+    BLANKET = 4
+    PET_FOOD = 5
+    
+
 class ServiceType(db.Model):
     """Type of Service. """
 
     __tablename__ = 'services'
 
     type_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    service_name = db.Column()
+    service_name = db.Column(db.Enum(ServiceName), nullable = False)
     for_num_persons = db.Column(db.Integer, nullable = False)
 
     def __repr__(self):
         """ """
         return f'<ServiceType type_id ={self.type_id}, service_name = {self.service_name}>'
+
+
+def connect_to_db(flask_app, db_uri='', echo=True):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print('Connected to the database!')
+
+
+# if __name__== '__main':
+#    from server import app 
+#    connect_to_db(app)    
