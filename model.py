@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 import enum
 
+from datetime import datetime
+
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -106,6 +108,7 @@ class VolunteerRating(db.Model):
     response_id =  db.Column(db.Integer, db.ForeignKey('offerings.offered_id'))
 
     volunteer = db.relationship('Volunteer', backref='volunteer_ratings')
+    
     def __repr__(self):
         """ """
         return f'<VolunteerRating volunteer_id={self.volunteer_id} rating ={self.rating}>'
@@ -117,13 +120,16 @@ class ServiceRequest(db.Model):
     __tablename__ = 'requests'
 
     request_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    date_of_request = db.Column(db.dateTime)
-    date_of_fulfillment = db.Column(db.dateTime)
+    date_of_request = db.Column(db.DateTime)
+    date_of_fulfillment = db.Column(db.DateTime)
     request_active = db.Column(db.Boolean, default = False)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.service_type_id'))
+    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
 
+    volunteer = db.relationship('Volunteer', backref='requests')
+    beneficiary = db.relationship('Beneficiary', backref='requests')
+    service_type = db.relationship('ServiceType', backref='requests')
     
     def __repr__(self):
         """ """
@@ -137,8 +143,10 @@ class ServiceOffered(db.Model):
 
     offered_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.service_type_id'))
+    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
  
+    volunteer = db.relationship('Volunteer', backref='offerings')
+
     def __repr__(self):
         """ """
         return f'<ServiceOffered offered_id={self.request_id} volunteer_id={self.volunteer_id}>'
@@ -166,7 +174,7 @@ class ServiceType(db.Model):
         return f'<ServiceType type_id ={self.type_id}, service_name = {self.service_name}>'
 
 
-def connect_to_db(flask_app, db_uri='', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///samaritan-finder', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -174,9 +182,10 @@ def connect_to_db(flask_app, db_uri='', echo=True):
     db.app = flask_app
     db.init_app(flask_app)
 
-    print('Connected to the database!')
+    print('Connected to the db!')
 
 
-# if __name__== '__main':
-#    from server import app 
-#    connect_to_db(app)    
+if __name__== '__main__':
+    from server import app 
+
+    connect_to_db(app)  
