@@ -39,7 +39,8 @@ class Beneficiary(db.Model):
     is_b_onboarded = db.Column(db.Boolean, default = False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
-
+    user = db.relationship('User', backref='beneficiaries')
+    
     def __repr__(self):
         """ """
         return f'<Beneficiary beneficiary_id={self.beneficiary_id}>'
@@ -54,6 +55,7 @@ class Volunteer(db.Model):
     is_v_onboarded = db.Column(db.Boolean, default = False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
+    user = db.relationship('User', backref='volunteers')
 
     def __repr__(self):
         """ """
@@ -69,6 +71,7 @@ class VolunteerAvailability(db.Model):
     availability = db.Column(db.DateTime)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
 
+    volunteer = db.relationship('Volunteer', backref='volunteer_timings')
 
     def __repr__(self):
         """ """
@@ -85,7 +88,8 @@ class BeneficiaryRating(db.Model):
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     request_id =  db.Column(db.Integer, db.ForeignKey('requests.request_id'))
 
-    
+    beneficiary = db.relationship('Beneficiary', backref='beneficiary_ratings')
+
     def __repr__(self):
         """ """
         return f'<BeneficiaryRating beneficiary_id={self.beneficiary_id} rating ={self.rating}>'
@@ -101,7 +105,7 @@ class VolunteerRating(db.Model):
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     response_id =  db.Column(db.Integer, db.ForeignKey('offerings.offered_id'))
 
-    
+    volunteer = db.relationship('Volunteer', backref='volunteer_ratings')
     def __repr__(self):
         """ """
         return f'<VolunteerRating volunteer_id={self.volunteer_id} rating ={self.rating}>'
