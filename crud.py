@@ -32,6 +32,7 @@ def create_beneficiary(is_b_onboarded, user):
 
     return beneficiary
 
+
 def create_volunteer(is_v_onboarded, user):    
     """Create a volunteer. """
 
@@ -52,6 +53,7 @@ def create_volunteer_availability(availability, volunteer):
     db.session.commit()
 
     return timing
+
 
 def create_beneficiary_rating(rating, beneficiary, request):
     """Create a rating on a request by a beneficiary."""
