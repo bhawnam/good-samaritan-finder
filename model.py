@@ -15,17 +15,16 @@ class User(db.Model):
 
     __tablename__ = 'users'
 
-    user_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    first_name = db.Column(db.String(50), nullable = False)
-    last_name = db.Column(db.String(50), nullable = False)
-    display_name = db.Column(db.String(50), unique = True)
-    email = db.Column(db.String, unique = True, nullable = False)
-    password = db.Column(db.String, nullable = False)
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    display_name = db.Column(db.String(50), unique=True)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
     street = db.Column(db.String)
-    zipcode = db.Column(db.String(10), nullable = False)
-    phone_number = db.Column(db.String(25), nullable = False)
-    is_active = db.Column(db.Boolean, default = False)
-
+    zipcode = db.Column(db.String(10), nullable=False)
+    phone_number = db.Column(db.String(25), nullable=False)
+    is_active = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         """ """
@@ -37,8 +36,8 @@ class Beneficiary(db.Model):
 
     __tablename__ = 'beneficiaries'
 
-    beneficiary_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    is_b_onboarded = db.Column(db.Boolean, default = False)
+    beneficiary_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    is_b_onboarded = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     user = db.relationship('User', backref='beneficiaries')
@@ -53,8 +52,8 @@ class Volunteer(db.Model):
 
     __tablename__ = 'volunteers'
 
-    volunteer_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    is_v_onboarded = db.Column(db.Boolean, default = False)
+    volunteer_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    is_v_onboarded = db.Column(db.Boolean, default=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     user = db.relationship('User', backref='volunteers')
@@ -69,7 +68,7 @@ class VolunteerAvailability(db.Model):
 
     __tablename__ = 'volunteer_timings'
 
-    timing_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    timing_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     availability = db.Column(db.DateTime)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
 
@@ -77,7 +76,7 @@ class VolunteerAvailability(db.Model):
 
     def __repr__(self):
         """ """
-        return f'<VolunteerAvailability volunteer_id={self.volunteer_id} availability ={self.availability}>'
+        return f'<VolunteerAvailability volunteer_id={self.volunteer_id} availability={self.availability}>'
 
 
 class BeneficiaryRating(db.Model):
@@ -85,7 +84,7 @@ class BeneficiaryRating(db.Model):
 
     __tablename__ = 'beneficiary_ratings'
 
-    rating_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     rating = db.Column(db.Integer)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     request_id =  db.Column(db.Integer, db.ForeignKey('requests.request_id'))
@@ -95,7 +94,7 @@ class BeneficiaryRating(db.Model):
 
     def __repr__(self):
         """ """
-        return f'<BeneficiaryRating beneficiary_id={self.beneficiary_id} rating ={self.rating}>'
+        return f'<BeneficiaryRating beneficiary_id={self.beneficiary_id} rating={self.rating}>'
 
 
 class VolunteerRating(db.Model):
@@ -103,7 +102,7 @@ class VolunteerRating(db.Model):
 
     __tablename__ = 'volunteer_ratings'
 
-    rating_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     rating = db.Column(db.Integer)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     response_id =  db.Column(db.Integer, db.ForeignKey('offerings.offered_id'))
@@ -113,7 +112,7 @@ class VolunteerRating(db.Model):
     
     def __repr__(self):
         """ """
-        return f'<VolunteerRating volunteer_id={self.volunteer_id} rating ={self.rating}>'
+        return f'<VolunteerRating volunteer_id={self.volunteer_id} rating={self.rating}>'
 
 
 class ServiceRequest(db.Model):
@@ -121,10 +120,10 @@ class ServiceRequest(db.Model):
 
     __tablename__ = 'requests'
 
-    request_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    request_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     date_of_request = db.Column(db.DateTime)
     date_of_fulfillment = db.Column(db.DateTime)
-    request_active = db.Column(db.Boolean, default = False)
+    request_active = db.Column(db.Boolean, default=False)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
@@ -143,7 +142,7 @@ class ServiceOffered(db.Model):
 
     __tablename__ = 'offerings'
 
-    offered_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
+    offered_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
  
@@ -156,6 +155,8 @@ class ServiceOffered(db.Model):
 
 
 class ServiceName(enum.Enum):
+    """Name of the service. """
+
     PACKAGED_MEAL_KIT = 1
     WATER = 2
     FIRST_AID_KIT = 3
@@ -168,13 +169,13 @@ class ServiceType(db.Model):
 
     __tablename__ = 'services'
 
-    type_id = db.Column(db.Integer, autoincrement = True, primary_key = True)
-    service_name = db.Column(db.Enum(ServiceName), nullable = False)
-    for_num_persons = db.Column(db.Integer, nullable = False)
+    type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    service_name = db.Column(db.Enum(ServiceName), nullable=False)
+    for_num_persons = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         """ """
-        return f'<ServiceType type_id ={self.type_id}, service_name = {self.service_name}>'
+        return f'<ServiceType type_id ={self.type_id} service_name={self.service_name}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///samaritan-finder', echo=True):
@@ -185,7 +186,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///samaritan-finder', echo=True)
     db.app = flask_app
     db.init_app(flask_app)
 
-    print('Connected to the db!')
+    print('Connected to the database!')
 
 
 if __name__== '__main__':
