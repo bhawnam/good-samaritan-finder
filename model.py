@@ -91,6 +91,7 @@ class BeneficiaryRating(db.Model):
     request_id =  db.Column(db.Integer, db.ForeignKey('requests.request_id'))
 
     beneficiary = db.relationship('Beneficiary', backref='beneficiary_ratings')
+    request = db.relationship('ServiceRequest', backref='beneficiary_ratings')
 
     def __repr__(self):
         """ """
@@ -108,6 +109,7 @@ class VolunteerRating(db.Model):
     response_id =  db.Column(db.Integer, db.ForeignKey('offerings.offered_id'))
 
     volunteer = db.relationship('Volunteer', backref='volunteer_ratings')
+    response = db.relationship('ServiceOffered', backref='volunteer_ratings')
     
     def __repr__(self):
         """ """
@@ -146,10 +148,11 @@ class ServiceOffered(db.Model):
     service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
  
     volunteer = db.relationship('Volunteer', backref='offerings')
+    service_type = db.relationship('ServiceType', backref='offerings')
 
     def __repr__(self):
         """ """
-        return f'<ServiceOffered offered_id={self.request_id} volunteer_id={self.volunteer_id}>'
+        return f'<ServiceOffered offered_id={self.offered_id} volunteer_id={self.volunteer_id}>'
 
 
 class ServiceName(enum.Enum):
