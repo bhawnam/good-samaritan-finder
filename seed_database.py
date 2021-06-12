@@ -28,7 +28,7 @@ for user_key in user_data.keys():
     zipcode = user_data[user_key]['zipcode']
     phone_number = user_data[user_key]['phone_number']
     
-    db_user = crud.create_user(first_name, 
+    user = crud.create_user(first_name, 
                                 last_name, 
                                 display_name, 
                                 email,
@@ -37,4 +37,13 @@ for user_key in user_data.keys():
                                 zipcode,
                                 phone_number)    
 
-    users_in_db.append(db_user)  
+    users_in_db.append(user)  
+    # Creating beneficiary entries for the database
+    if (user_key % 2 == 0):
+        is_b_onboarded = True
+        beneficiary = crud.create_beneficiary(is_b_onboarded, user)
+    
+    # Creating volunteer entries for the database
+    else:
+        is_v_onboarded = True
+        volunteer = crud.create_volunteer(is_v_onboarded, user)  
