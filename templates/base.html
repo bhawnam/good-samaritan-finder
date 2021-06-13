@@ -4,14 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>
-      {% block title %}{% endblock %}
+      {% block title %}
+      {% endblock %}
     </title>
-
-    {% block head %}{% endblock %}
+    <!-- React Dependencies: babel, React, React-DOM, React-Router-DOM -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+	  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-router-dom@5.2.0/umd/react-router-dom.js"></script>
+    {% block head %}
+    {% endblock %}
   </head>
   <body>
-    {% block body %}{% endblock %}
+    {% block body %}
+    {% endblock %}
 
-    {% block after_body %}{% endblock %}
+    {% block js %}
+    {% endblock %}
   </body>
 </html>
