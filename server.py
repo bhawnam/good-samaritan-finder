@@ -49,6 +49,8 @@ def user_registration():
     street = request.get_json(0).get("address")
     zipcode = request.get_json().get("zipcode")
 
+   # register_user = crud.create_user(first_name, last_name, username, email, password, street, zipcode, phone_number)
+
     return jsonify({"success":True})    
 
 if __name__ == "__main__":

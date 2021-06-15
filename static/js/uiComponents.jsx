@@ -144,7 +144,7 @@ function Register(){
 
       <div className="form-register">
         <label> Phone Number </label> <br/>
-        <input type="text" className="form-input" value={phonenumber} onChange={(event) => setPhonenumber(event.target.value)} placeholder="Phone number" required/>
+        <input type="text" className="form-input" value={phonenumber} onChange={(event) => setPhonenumber(event.target.value)} placeholder="Phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required/>
       </div>
 
       <div className="form-register">
@@ -154,7 +154,7 @@ function Register(){
 
       <div className="form-register">
         <label>Zipcode </label> <br/>
-        <input type="text" className="form-input" value={zipcode} onChange={(event)=> setZipcode(event.target.value)} placeholder="Zipcode" required/>
+        <input type="text" className="form-input" value={zipcode} onChange={(event)=> setZipcode(event.target.value)} placeholder="Zipcode" pattern="[0-9]*" required/>
       </div>
 
       <button type="submit" className="btn" >Register</button>
