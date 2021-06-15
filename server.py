@@ -1,6 +1,7 @@
 """Server for good-samaritan-finder app """
 
 from flask import (Flask, render_template, request, flash, session, redirect)
+from flask.json import jsonify
 
 from model import connect_to_db
 import crud
@@ -8,7 +9,7 @@ import crud
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key
+app.secret_key="dev"
 app.jinja_env.undefined = StrictUndefined
 
 
@@ -24,6 +25,14 @@ def route(path):
 
     return render_template('index.html')
 
+@app.route('/login-user', methods=["POST"])
+def user_login():
+    """Process user login. """
+    email = request.get_json().get("email")
+    password = request.get_json().get("password")
+    username = request.get_json().get("username")
+
+    return jsonify({"success":True})
 
 if __name__ == "__main__":
     # Connecting to DB before running the app
