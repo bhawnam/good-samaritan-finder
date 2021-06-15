@@ -28,11 +28,28 @@ def route(path):
 @app.route('/login-user', methods=["POST"])
 def user_login():
     """Process user login. """
+
     email = request.get_json().get("email")
     password = request.get_json().get("password")
     username = request.get_json().get("username")
 
     return jsonify({"success":True})
+
+
+@app.route('/register-user', methods=["POST"])
+def user_registration():
+    """Process user registration. """
+    
+    first_name = request.get_json().get("firstname")
+    last_name = request.get_json().get("lastname")
+    email = request.get_json().get("email")
+    password = request.get_json().get("password")
+    username = request.get_json().get("username")
+    phone_number = request.get_json().get("phonenumber")
+    street = request.get_json(0).get("address")
+    zipcode = request.get_json().get("zipcode")
+
+    return jsonify({"success":True})    
 
 if __name__ == "__main__":
     # Connecting to DB before running the app
