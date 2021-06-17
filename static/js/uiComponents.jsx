@@ -86,7 +86,7 @@ function Login(){
       </p>
     </form>
     {errormessage && <form onSubmit={() => setErrormessage(true)}> 
-      <h6> Sorry the email and password information does not match our records! </h6> 
+      <h6> Sorry the email and password do not match our records! </h6> 
     </form>}
     </React.Fragment>
   )
@@ -175,7 +175,8 @@ function Register(){
       </p>
   </form>
       {errormessage && <form onSubmit={() => setErrormessage(true)}> 
-      <h6> Sorry this username is already registered with us. Please sign in instead. </h6> 
+      <h6> Sorry the username is already registered with us.
+            Please sign in. </h6> 
     </form>}
     </React.Fragment>
   );
