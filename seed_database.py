@@ -22,6 +22,8 @@ users_in_db = []
 beneficiaries_in_db = []
 volunteers_in_db = []
 
+volunteer_timings_in_db = []
+
 for user_key in user_data.keys():
     first_name = user_data[user_key]['first_name']
     last_name = user_data[user_key]['last_name']
@@ -31,6 +33,7 @@ for user_key in user_data.keys():
     street = user_data[user_key]['street']
     zipcode = user_data[user_key]['zipcode']
     phone_number = user_data[user_key]['phone_number']
+    availability = user_data[user_key]['datetime_availability']
     
     user = crud.create_user(first_name, 
                                 last_name, 
@@ -48,12 +51,16 @@ for user_key in user_data.keys():
         is_b_onboarded = True
         beneficiary = crud.create_beneficiary(is_b_onboarded, user)
         beneficiaries_in_db.append(beneficiary)
-    # Creating volunteer entries volunteers table in the database
+    # Creating volunteer entries in volunteers table in the database
     else:
         is_v_onboarded = True
         volunteer = crud.create_volunteer(is_v_onboarded, user)  
         volunteers_in_db.append(volunteer)
 
+# Creating availability timing entries in volunteer_timings table in the database 
+        volunteer_availability = crud.create_volunteer_availability(availability, volunteer)
+        volunteer_timings_in_db.append(volunteer_availability)
+        
 # Creating service type entries services table in the database
 service_type_db = []
 service_name = ["PACKAGED_MEAL_KIT", "WATER", "FIRST_AID_KIT", "BLANKET", "PET_FOOD"]
@@ -63,7 +70,8 @@ for name in service_name:
     service_type = crud.create_service_type(name, for_num_persons)
     service_type_db.append(service_type)
 
-# service_offered_in_db = []
+service_offered_in_db = []
+
 
 # for beneficiary in beneficiaries_in_db:
 #     rating = randint(1,5)

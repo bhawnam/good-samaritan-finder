@@ -26,6 +26,8 @@ def create_user_profile():
         user_profile[i]['zipcode'] = zipcode
         phone_number = fake.phone_number()
         user_profile[i]['phone_number'] = phone_number
+        availability = fake.future_datetime(end_date="+5d")
+        user_profile[i]['datetime_availability'] = availability
 
     return user_profile
 
