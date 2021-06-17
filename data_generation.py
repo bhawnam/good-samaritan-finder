@@ -20,8 +20,8 @@ def create_user_profile():
         user_profile[i]['email'] = email
         password = fake.password()
         user_profile[i]['password'] = password
-        strret_address = fake.street_address()
-        user_profile[i]['street'] = strret_address
+        street_address = fake.street_address()
+        user_profile[i]['street'] = street_address
         zipcode = fake.postcode()
         user_profile[i]['zipcode'] = zipcode
         phone_number = fake.phone_number()
