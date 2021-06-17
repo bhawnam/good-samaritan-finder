@@ -41,6 +41,8 @@ function Login(){
   
   const[errormessage, setErrormessage] = React.useState(false);
 
+  let history  = ReactRouterDOM.useHistory();
+
   function processUserLogin(event){ 
     event.preventDefault();
     fetch("/login-user", 
@@ -55,6 +57,8 @@ function Login(){
       response.json().then((result) => {
         if ((result.success) == false){
           setErrormessage(true);
+        } else {
+          history.push("/welcome-user");
         }
       });
     });
@@ -106,6 +110,8 @@ function Register(){
 
   const[errormessage, setErrormessage] = React.useState(false);
 
+  let history = ReactRouterDOM.useHistory();
+
   function registerUser(event){
     event.preventDefault();
     fetch("/register-user",
@@ -120,6 +126,9 @@ function Register(){
       response.json().then((jsonResponse) => {
         if ((jsonResponse.success) == false){
           setErrormessage(true);
+        }
+        else {
+          history.push("/login")
         }
       });
     });
