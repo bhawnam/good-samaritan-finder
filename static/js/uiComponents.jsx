@@ -52,7 +52,10 @@ function Login(){
       body: JSON.stringify({username, email, password}),
       }).then((response) => {
       response.json().then((result) => {
-        alert("Welcome!")
+        setTimeout(2000);
+        if ((result.success) == false){
+          alert("Sorry the email and password information does not match our records!")
+        }
       });
     });
   }
@@ -109,7 +112,10 @@ function Register(){
         {firstname, lastname, username, email, password, phonenumber, address, zipcode}),
     }).then((response) => {
       response.json().then((jsonResponse) => {
-        alert("User Registration!")
+        setTimeout(2000);
+        if ((jsonResponse.success) == false){
+          alert("Sorry this username is already registered with us. Please sign in instead.")
+        }
       });
     });
   }

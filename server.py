@@ -19,11 +19,13 @@ def homepage():
 
     return render_template('index.html')
 
+
 @app.route('/<path>')
 def route(path):
     """ """
 
     return render_template('index.html')
+
 
 @app.route('/login-user', methods=["POST"])
 def user_login():
@@ -33,7 +35,12 @@ def user_login():
     password = request.get_json().get("password")
     username = request.get_json().get("username")
 
-    return jsonify({"success":True})
+    user_in_db = crud.get_user_by_email(email)
+    if user_in_db.password == password:
+        return jsonify({"success":True})
+
+    else:  
+        return jsonify({"success":False})
 
 
 @app.route('/register-user', methods=["POST"])
@@ -49,9 +56,15 @@ def user_registration():
     street = request.get_json(0).get("address")
     zipcode = request.get_json().get("zipcode")
 
-   # register_user = crud.create_user(first_name, last_name, username, email, password, street, zipcode, phone_number)
+    user_in_db = crud.get_user_by_displayname(username)
 
-    return jsonify({"success":True})    
+    if user_in_db:
+        return jsonify({"success": False})
+    
+    else:
+        register_user = crud.create_user(first_name, last_name, username, email, password, street, zipcode, phone_number)
+        return jsonify({"success":True})    
+
 
 if __name__ == "__main__":
     # Connecting to DB before running the app

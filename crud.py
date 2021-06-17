@@ -22,6 +22,20 @@ def create_user(first_name, last_name, display_name, email, password, street, zi
     return user     
 
 
+def get_user_by_displayname(username):
+    """Get user by username from the DB """
+
+    user = User.query.filter_by(display_name=username).first()
+    return user
+
+
+def get_user_by_email(email):
+    """Get user by email from the DB """
+
+    user = User.query.filter_by(email=email).first()
+    return user  
+
+
 def create_beneficiary(is_b_onboarded, user):
     """Create a beneficiary. """
 
