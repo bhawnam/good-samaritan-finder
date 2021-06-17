@@ -181,3 +181,22 @@ function Register(){
     </React.Fragment>
   );
 }
+
+function Footer(props) {
+
+  const { children, className } = props;
+
+  const footLinks = children.map((el, i) => {
+    return (
+      <div key={i} className="foot-item">
+        {el}
+      </div>
+    );
+  });
+
+  return (
+    <div className="footer">
+      <section className="foot-item">{footLinks}</section>
+    </div>
+  );
+}
