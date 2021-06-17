@@ -76,9 +76,12 @@ service_offered_in_db = []
 for _ in range(5):
     service_type = choice(service_type_in_db)
     volunteer = choice(volunteers_in_db)
+    rating = randint(1,5)
 
     service_offered = crud.create_service_offered(volunteer, service_type)
     service_offered_in_db.append(service_offered)
+    # Creating a rating entry for volunteer for each service offered     
+    volunteer_rating = crud.create_volunteer_rating(rating, volunteer, service_offered)
 
 # Creating service request entries in requests table in the database
 service_request_in_db = []
@@ -86,22 +89,12 @@ for _ in range(7):
     beneficiary = choice(beneficiaries_in_db)
     service_type = choice(service_type_in_db)
     volunteer = choice(volunteers_in_db)
+    rating = randint(1,5)
 
     service_request = crud.create_service_request( datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
     service_request_in_db.append(service_request)
-
-# for beneficiary in beneficiaries_in_db:
-#     rating = randint(1,5)
-#     request = ''
-#     beneficiary_rating = crud.create_beneficiary_rating(rating, beneficiary, request)
-
-
-# for volunteer in volunteers_in_db:
-#     rating = randint(1,5)
-#     response = ''
-#     volunteer_rating = crud.create_volunteer_rating(rating, volunteer, response)
-
-
+    # Creating a rating entry for beneficiry for each service request         
+    beneficiary_rating = crud.create_beneficiary_rating(rating, beneficiary, service_request)
 
 
 
