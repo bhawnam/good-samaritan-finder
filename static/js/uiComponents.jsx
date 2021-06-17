@@ -39,6 +39,7 @@ function Login(){
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   
+  const[errormessage, setErrormessage] = React.useState(false);
 
   function processUserLogin(event){ 
     event.preventDefault();
@@ -52,16 +53,15 @@ function Login(){
       body: JSON.stringify({username, email, password}),
       }).then((response) => {
       response.json().then((result) => {
-        setTimeout(2000);
         if ((result.success) == false){
-          alert("Sorry the email and password information does not match our records!")
+          setErrormessage(true);
         }
       });
     });
   }
 
   return(
-
+    <React.Fragment>
     <form onSubmit={processUserLogin}>
        <h3>Log in</h3>
 
@@ -85,7 +85,11 @@ function Login(){
         <a href="#">Forgot password?</a>
       </p>
     </form>
-  );
+    {errormessage && <form onSubmit={() => setErrormessage(true)}> 
+      <h6> Sorry the email and password information does not match our records! </h6> 
+    </form>}
+    </React.Fragment>
+  )
 }
 
 
@@ -100,6 +104,8 @@ function Register(){
   const [address, setAddress] = React.useState("");
   const [zipcode, setZipcode] = React.useState("");
 
+  const[errormessage, setErrormessage] = React.useState(false);
+
   function registerUser(event){
     event.preventDefault();
     fetch("/register-user",
@@ -112,14 +118,14 @@ function Register(){
         {firstname, lastname, username, email, password, phonenumber, address, zipcode}),
     }).then((response) => {
       response.json().then((jsonResponse) => {
-        setTimeout(2000);
         if ((jsonResponse.success) == false){
-          alert("Sorry this username is already registered with us. Please sign in instead.")
+          setErrormessage(true);
         }
       });
     });
   }
   return (
+    <React.Fragment>
     <form onSubmit={registerUser}>
       <h3>Register</h3>
 
@@ -168,5 +174,9 @@ function Register(){
         <a href="#"> Already registered? </a>
       </p>
   </form>
+      {errormessage && <form onSubmit={() => setErrormessage(true)}> 
+      <h6> Sorry this username is already registered with us. Please sign in instead. </h6> 
+    </form>}
+    </React.Fragment>
   );
 }
