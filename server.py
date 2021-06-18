@@ -22,9 +22,14 @@ def homepage():
 
 @app.route('/<path>')
 def route(path):
-    """ """
 
     return render_template('index.html')
+
+
+@app.route('/<path>/<code>')
+def nested_route(path, code):
+
+    return render_template('index.html')    
 
 
 @app.route('/login-user', methods=["POST"])

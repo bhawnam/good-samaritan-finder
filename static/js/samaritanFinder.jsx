@@ -28,6 +28,7 @@ function App() {
 
       <div className="outer">
         <div className="inner">
+        <ReactRouterDOM.Switch>  
         <ReactRouterDOM.Route exact path="/">
           <Homepage />
         </ReactRouterDOM.Route>
@@ -40,6 +41,8 @@ function App() {
         <ReactRouterDOM.Route exact path="/be-a-beneficiary">
           <Register />
         </ReactRouterDOM.Route>
+        <div> Sorry Page Not found </div>
+        </ReactRouterDOM.Switch>
       </div>
       <Footer >
         <ReactRouterDOM.NavLink
