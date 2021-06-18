@@ -57,6 +57,9 @@ function Login(){
       response.json().then((result) => {
         if ((result.success) == false){
           setErrormessage(true);
+          setEmail("");
+          setPassword("");
+          setUsername("");
         } else {
           history.push("/welcome-user");
         }
@@ -126,6 +129,14 @@ function Register(){
       response.json().then((jsonResponse) => {
         if ((jsonResponse.success) == false){
           setErrormessage(true);
+          setEmail("");
+          setPassword("");
+          setUsername("");
+          setFirstname("");
+          setLastname("");
+          setPhonenumber("");
+          setAddress("");
+          setZipcode("");
         }
         else {
           history.push("/login")
