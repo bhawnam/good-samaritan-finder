@@ -24,22 +24,22 @@ function Navbar(props) {
         to="/login" activeClassName="navlink-active" className="nav-link">
         Log In
         </ReactRouterDOM.Link>
-        <ReactRouterDOM.NavLink
+        <ReactRouterDOM.Link
           to="/about-us" activeClassName="navlink-active" className="nav-link">
           About Us
-        </ReactRouterDOM.NavLink>
-        <ReactRouterDOM.NavLink
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.Link
           to="/contact" activeClassName="navlink-active" className="nav-link">
           Be in touch
-        </ReactRouterDOM.NavLink>
-        <ReactRouterDOM.NavLink
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.Link
           to="/be-a-beneficiary" activeClassName="navlink-active" className="nav-link">
           Be a beneficiary
-        </ReactRouterDOM.NavLink>
-        <ReactRouterDOM.NavLink
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.Link
           to="/be-a-volunteer" activeClassName="navlink-active" className="nav-link">
           Be a Volunteer
-        </ReactRouterDOM.NavLink>
+        </ReactRouterDOM.Link>
       </div>
     </nav>
   );
@@ -215,21 +215,40 @@ function Register(){
   );
 }
 
-function Footer(props) {
-
-  const { children, className } = props;
-
-  const footLinks = children.map((el, i) => {
-    return (
-      <div key={i} className="foot-item">
-        {el}
-      </div>
-    );
-  });
+function Footer() {
 
   return (
     <div className="footer">
-      <section className="foot-item">{footLinks}</section>
+      <div className="foot-item">
+      <ReactRouterDOM.Link
+          to="/be-a-beneficiary" activeClassName="footlink-active" className="foot-link">
+          <b> Be a beneficiary </b> <br/>
+          How it works <br/>
+          Services Offered <br/>
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.Link
+          to="/be-a-volunteer" activeClassName="footlink-active" className="foot-link">
+          <b> Be a Volunteer </b> <br/>  
+           How it works <br/>
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.Link
+          to="/about-us" activeClassName="footlink-active" className="foot-link">
+          <b> Company </b><br/>
+          About Us <br/>
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.Link
+          to="/contact" activeClassName="footlink-active" className="foot-link">
+          <b> Get in touch </b> <br/>
+          Contact Us <br/>
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.Link
+          to="#" activeClassName="footlink-active" className="foot-link">
+           <b>Follow Us</b> <br/>
+          Facebook <br/>
+          Instagram <br/>
+          Twitter
+        </ReactRouterDOM.Link>
+      </div>
     </div>
   );
 }
