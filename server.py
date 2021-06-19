@@ -3,7 +3,7 @@
 from flask import (Flask, render_template, request, flash, session, redirect)
 from flask.json import jsonify
 
-from model import connect_to_db
+import model
 import crud
 
 from jinja2 import StrictUndefined
@@ -71,7 +71,16 @@ def user_registration():
         return jsonify({"success":True})    
 
 
+@app.route('/api/requests', methods=["GET"])
+def get_beneficiary_requests():
+    """Get a list of all the beneficiary requests. """
+
+    beneficiary_requests = model.ServiceRequest.query.all()
+    print(beneficiary_requests)
+
+    return jsonify({request.request_id: request.to_dict() for request in beneficiary_requests})
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
-    connect_to_db(app)
+    model.connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)

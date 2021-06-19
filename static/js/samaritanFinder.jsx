@@ -1,5 +1,14 @@
 function App() {
 
+  const [requests, setRequests] = React.useState({});
+
+  React.useEffect(() => {
+    fetch("api/requests")
+    .then((response) => response.json())
+    .then((requestsData) => {
+      setRequests(requestsData);
+    });
+  }, []);
 
   return (
     <ReactRouterDOM.BrowserRouter>
@@ -40,6 +49,9 @@ function App() {
         </ReactRouterDOM.Route>  
         <ReactRouterDOM.Route exact path="/be-a-beneficiary">
           <Register />
+        </ReactRouterDOM.Route>
+        <ReactRouterDOM.Route exact path="/welcome-beneficiary">
+          <BeneficiaryProfile requests={requests}/>
         </ReactRouterDOM.Route>
         <div> Sorry Page Not found </div>
         </ReactRouterDOM.Switch>

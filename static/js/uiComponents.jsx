@@ -61,7 +61,7 @@ function Login(){
           setPassword("");
           setUsername("");
         } else {
-          history.push("/welcome-user");
+          history.push("/welcome-beneficiary");
         }
       });
     });
@@ -139,7 +139,7 @@ function Register(){
           setZipcode("");
         }
         else {
-          history.push("/login")
+          history.push("/login");
         }
       });
     });
@@ -217,6 +217,37 @@ function Footer(props) {
   return (
     <div className="footer">
       <section className="foot-item">{footLinks}</section>
+    </div>
+  );
+}
+
+function BeneficiaryProfile(props){
+  const {requests} = props
+
+  const requestsTableData = [];
+  for (const request_id in requests){
+    let currentRequest = requests[request_id];
+    requestsTableData.push(
+      <tr key={currentRequest.request_id}>
+        <td>{currentRequest.request_id}</td>
+        <td>{currentRequest.service_type}</td>
+        <td>{currentRequest.request_active.toString()}</td>
+      </tr>
+    );
+  }
+
+  return (
+    <div className="userprofile">
+      <table className="table">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Service Type</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>{requestsTableData}</tbody>
+      </table>
     </div>
   );
 }

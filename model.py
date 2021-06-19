@@ -136,6 +136,17 @@ class ServiceRequest(db.Model):
         """ """
         return f'<ServiceRequest request_id={self.request_id} date_of_request={self.date_of_request}>'
 
+    def to_dict(self):
+        return {
+            'request_id' : self.request_id,
+            'date_of_request': self.date_of_request,
+            'date_of_fulfillment': self.date_of_fulfillment,
+            'request_active': self.request_active,
+            'volunteer': self.volunteer.volunteer_id,
+            'beneficiary': self.beneficiary.beneficiary_id,
+            'service_type': self.service_type.service_name.name
+        }
+
 
 class ServiceOffered(db.Model):
     """Offered services by the Volunteers. """        
