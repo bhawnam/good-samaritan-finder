@@ -9,15 +9,7 @@ function Homepage() {
 
 
 function Navbar(props) {
-  const { logo, brand, children, className } = props;
-
-  const navLinks = children.map((el, i) => {
-    return (
-      <div key={i} className="nav-item">
-        {el}
-      </div>
-    );
-  });
+  const { logo, brand } = props;
 
   return (
     <nav className="navbar">
@@ -27,7 +19,28 @@ function Navbar(props) {
         <span>{brand}</span>
       </ReactRouterDOM.Link>
 
-      <section className="nav-item">{navLinks}</section>
+      <div className="nav-item">
+        <ReactRouterDOM.Link
+        to="/login" activeClassName="navlink-active" className="nav-link">
+        Log In
+        </ReactRouterDOM.Link>
+        <ReactRouterDOM.NavLink
+          to="/about-us" activeClassName="navlink-active" className="nav-link">
+          About Us
+        </ReactRouterDOM.NavLink>
+        <ReactRouterDOM.NavLink
+          to="/contact" activeClassName="navlink-active" className="nav-link">
+          Be in touch
+        </ReactRouterDOM.NavLink>
+        <ReactRouterDOM.NavLink
+          to="/be-a-beneficiary" activeClassName="navlink-active" className="nav-link">
+          Be a beneficiary
+        </ReactRouterDOM.NavLink>
+        <ReactRouterDOM.NavLink
+          to="/be-a-volunteer" activeClassName="navlink-active" className="nav-link">
+          Be a Volunteer
+        </ReactRouterDOM.NavLink>
+      </div>
     </nav>
   );
 }
