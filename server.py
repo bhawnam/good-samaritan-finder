@@ -5,6 +5,7 @@ from flask.json import jsonify
 
 import model
 import crud
+import time
 
 from jinja2 import StrictUndefined
 
@@ -71,11 +72,16 @@ def user_registration():
         return jsonify({"success":True})    
 
 
-@app.route('/api/requests', methods=["GET"])
+@app.route('/api/requests', methods=["POST"])
 def get_beneficiary_requests():
-    """Get a list of all the beneficiary requests. """
-
-    beneficiary_requests = model.ServiceRequest.query.all()
+    """Get a list of the beneficiary requests. """
+    logged_user = request.get_json().get("loggedUser")
+    print(f"loggedUser {logged_user}")
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    print(user_in_db)
+    beneficiary = crud.get_beneficiary_by_user(user_in_db)
+    print(beneficiary)
+    beneficiary_requests = crud.get_requests_by_beneficiary(beneficiary)
     print(beneficiary_requests)
 
     return jsonify({request.request_id: request.to_dict() for request in beneficiary_requests})

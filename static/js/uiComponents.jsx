@@ -56,6 +56,10 @@ function Login(){
 
   let history  = ReactRouterDOM.useHistory();
 
+  React.useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(username));
+  }, [username]);
+
   function processUserLogin(event){ 
     event.preventDefault();
     fetch("/login-user", 
@@ -254,7 +258,7 @@ function Footer() {
 }
 
 function BeneficiaryProfile(props){
-  const {requests} = props
+  const {user, requests} = props
 
   const requestsTableData = [];
   for (const request_id in requests){
@@ -269,6 +273,8 @@ function BeneficiaryProfile(props){
   }
 
   return (
+    <React.Fragment>
+    <h3> Welcome {user}</h3>
     <div className="userprofile">
       <table className="table">
         <thead>
@@ -281,5 +287,6 @@ function BeneficiaryProfile(props){
         <tbody>{requestsTableData}</tbody>
       </table>
     </div>
+    </React.Fragment>
   );
 }

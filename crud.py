@@ -47,6 +47,19 @@ def create_beneficiary(is_b_onboarded, user):
     return beneficiary
 
 
+def get_beneficiary_by_user(user):
+    """Get a beneficiary from DB by it's user reference. """
+
+    beneficiary = Beneficiary.query.filter_by(user=user).first()
+    return beneficiary
+
+
+def get_requests_by_beneficiary(beneficiary):
+    """Get all requests by a beneficiary from DB. """
+
+    req = ServiceRequest.query.filter_by(beneficiary=beneficiary).all()
+    return req
+
 def create_volunteer(is_v_onboarded, user):    
     """Create a volunteer. """
 
