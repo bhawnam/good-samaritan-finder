@@ -258,6 +258,16 @@ function Footer() {
 }
 
 function BeneficiaryProfile(props){
+
+  const [requestForm, setRequestForm] = React.useState(false);
+  const [requestservicetype, setRequestServiceType] = React.useState("");
+  const [requestfornumpersons, setRequestForNumPersons] = React.useState("");
+ 
+  const [offeringForm, setOfferingForm] = React.useState(false);
+  const [offeringservicetype, setOfferingServiceType] = React.useState("");
+  const [offeringfornumpersons, setOfferinForNumPersons] = React.useState("");
+  const [availabledate, setAvailableDate] = React.useState("");
+
   const {user, requests, offerings} = props
 
   const requestsTableData = [];
@@ -283,9 +293,36 @@ function BeneficiaryProfile(props){
     );
   }
 
+  function handleRequestButton(){
+    setRequestForm(true);
+  }
+
+  function addRequest(event){
+    event.preventDefault();
+    alert("Your request was sumbitted!")
+    setRequestServiceType("");
+    setRequestForNumPersons("");
+    setRequestForm(false);
+  }
+
+  function handleOfferingButton(){
+    setOfferingForm(true);
+  }
+
+  function addOffering(event){
+    event.preventDefault();
+    alert("Your request was sumbitted!")
+    setOfferingServiceType("");
+    setOfferinForNumPersons("");
+    setAvailableDate("");
+    setOfferingForm(false);
+  }
+
+
   return (
     <React.Fragment>
     <h3> Welcome {user}</h3>
+    <div className="services">
     <div className="userservices">
       <h6> Your requests: </h6>
       <table className="requeststable">
@@ -299,7 +336,32 @@ function BeneficiaryProfile(props){
         <tbody>{requestsTableData}</tbody>
       </table>
     </div>
+    <button type="submit" className="btn" onClick={handleRequestButton}> Add a request</button>
+    </div>
+    {requestForm ? (
+      <form>
+        <br/>
+        <div className="form-request">
+        <label> Service Type </label>
+        <select className="form-input" value={requestservicetype} onChange={(event) => setRequestServiceType(event.target.value)}>  
+        <option value="">Select a service</option>
+        <option value="PACKAGED_MEAL_KIT"> Packaged Meal Kit</option>
+        <option value="WATER"> Water </option>
+        <option value="FIRST_AID_KIT"> First Aid Kit</option>
+        <option value="BLANKET"> Blanket</option>
+        <option value="PET_FOOD"> Pet Food </option>
+        </select>
+      </div>
+      <br/>
+      <div className="form-request">
+        <label>For number of people </label>
+        <input type="text" className="form-input" value={requestfornumpersons} onChange={(event) => setRequestForNumPersons(event.target.value)} required/>
+      </div>
+      <button type="submit" className="btn" onClick={addRequest}> Add </button>
+      </form>
+    ) : (null) }
     <br />
+    <div className="offerings">
     <div className="userofferings">
     <h6> Your offerings: </h6>
       <table className="offeringstable">
@@ -313,6 +375,34 @@ function BeneficiaryProfile(props){
         <tbody>{offeringsTableData}</tbody>
       </table>
     </div>
+    <button type="submit" className="btn" onClick={handleOfferingButton}> Add an offering </button>
+    </div>
+    {offeringForm ? (
+      <form>
+        <br/>
+        <div className="form-offering">
+        <label> Service Type </label>
+        <select className="form-input" value={offeringservicetype} onChange={(event) => setOfferingServiceType(event.target.value)}>  
+        <option value="">Select a service</option>
+        <option value="PACKAGED_MEAL_KIT"> Packaged Meal Kit</option>
+        <option value="WATER"> Water </option>
+        <option value="FIRST_AID_KIT"> First Aid Kit</option>
+        <option value="BLANKET"> Blanket</option>
+        <option value="PET_FOOD"> Pet Food </option>
+        </select>
+      </div>
+      <br/>
+      <div className="form-offering">
+        <label>For number of people </label>
+        <input type="text" className="form-input" value={offeringfornumpersons} onChange={(event) => setOfferinForNumPersons(event.target.value)} required/>
+      </div>
+      <div className="form-offering">
+        <label> Date of availability </label>
+        <input type="text" className="form-input" value={availabledate} onChange={(event) => setAvailableDate(event.target.value)} required/>
+      </div>
+      <button type="submit" className="btn" onClick={addOffering}> Add </button>
+      </form>
+    ) : (null) }
     </React.Fragment>
   );
 }
