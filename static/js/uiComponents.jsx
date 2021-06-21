@@ -396,9 +396,10 @@ function BeneficiaryProfile(props){
         <label>For number of people </label>
         <input type="text" className="form-input" value={offeringfornumpersons} onChange={(event) => setOfferinForNumPersons(event.target.value)} required/>
       </div>
+      <br/>
       <div className="form-offering">
         <label> Date of availability </label>
-        <input type="text" className="form-input" value={availabledate} onChange={(event) => setAvailableDate(event.target.value)} required/>
+        <input type="date" min="2021-01-01" max="2021-12-31" className="form-input" value={availabledate} onChange={(event) => setAvailableDate(event.target.value)} required/>
       </div>
       <button type="submit" className="btn" onClick={addOffering}> Add </button>
       </form>
