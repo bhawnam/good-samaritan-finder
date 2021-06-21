@@ -86,6 +86,21 @@ def get_beneficiary_requests():
 
     return jsonify({request.request_id: request.to_dict() for request in beneficiary_requests})
 
+
+@app.route('/api/offerings', methods=["POST"])
+def get_beneficiary_offerings():
+    """Get a list of the beneficiary offerings. """
+    logged_user = request.get_json().get("loggedUser")
+    print(f"loggedUser {logged_user}")
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    print(user_in_db)
+    volunteer = crud.get_volunteer_by_user(user_in_db)
+    print(volunteer)
+    volunteer_offerings = crud.get_offerings_by_volunteer(volunteer)
+    print(volunteer_offerings)
+
+    return jsonify({offering.offering_id: offering.to_dict() for offering in volunteer_offerings})
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)

@@ -60,6 +60,7 @@ def get_requests_by_beneficiary(beneficiary):
     req = ServiceRequest.query.filter_by(beneficiary=beneficiary).all()
     return req
 
+
 def create_volunteer(is_v_onboarded, user):    
     """Create a volunteer. """
 
@@ -70,6 +71,18 @@ def create_volunteer(is_v_onboarded, user):
 
     return volunteer
 
+
+def get_volunteer_by_user(user):
+    """Get a volunteer from DB by it's user reference. """
+
+    volunteer = Volunteer.query.filter_by(user=user).first()
+    return volunteer
+
+def get_offerings_by_volunteer(volunteer):
+    """Get all offerings by a volunteer from DB. """
+
+    offerings = ServiceRequest.query.filter_by(volunteer=volunteer).all()
+    return offerings
 
 def create_volunteer_availability(availability, volunteer):
     """Create a volunteer timing availability. """

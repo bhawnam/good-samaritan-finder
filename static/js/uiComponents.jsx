@@ -258,7 +258,7 @@ function Footer() {
 }
 
 function BeneficiaryProfile(props){
-  const {user, requests} = props
+  const {user, requests, offerings} = props
 
   const requestsTableData = [];
   for (const request_id in requests){
@@ -270,13 +270,25 @@ function BeneficiaryProfile(props){
         <td>{currentRequest.request_active.toString()}</td>
       </tr>
     );
+    }
+  const offeringsTableData = [];
+  for (const offering_id in offerings){
+    let currentOffering = offerings[offering_id];
+    offeringsTableData.push(
+      <tr key={currentOffering.offering_id}>
+        <td>{currentOffering.offering_id}</td>
+        <td>{currentOffering.service_type}</td>
+        <td>{currentOffering.for_num_persons}</td>
+      </tr>
+    );
   }
 
   return (
     <React.Fragment>
     <h3> Welcome {user}</h3>
-    <div className="userprofile">
-      <table className="table">
+    <div className="userservices">
+      <h6> Your requests: </h6>
+      <table className="requeststable">
         <thead>
           <tr>
             <th>Request ID</th>
@@ -285,6 +297,20 @@ function BeneficiaryProfile(props){
           </tr>
         </thead>
         <tbody>{requestsTableData}</tbody>
+      </table>
+    </div>
+    <br />
+    <div className="userofferings">
+    <h6> Your offerings: </h6>
+      <table className="offeringstable">
+        <thead>
+          <tr>
+            <th>Offering ID</th>
+            <th>Service Type</th>
+            <th>Active</th>
+          </tr>
+        </thead>
+        <tbody>{offeringsTableData}</tbody>
       </table>
     </div>
     </React.Fragment>

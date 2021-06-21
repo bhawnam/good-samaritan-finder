@@ -1,6 +1,7 @@
 function App() {
 
   const [requests, setRequests] = React.useState({});
+  const [offerings, setOfferings] = React.useState({});
 
   const[loggedUser, setloggedUser] = React.useState("");
 
@@ -16,6 +17,21 @@ function App() {
     .then((response) => response.json())
     .then((requestsData) => {
       setRequests(requestsData);
+    });
+  }, [loggedUser]);
+
+  React.useEffect(() => {
+    fetch("api/offerings",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({loggedUser}),
+    })
+    .then((response) => response.json())
+    .then((offeringsData) => {
+      setOfferings(offeringsData);
     });
   }, [loggedUser]);
 
@@ -45,7 +61,7 @@ function App() {
           <Register />
         </ReactRouterDOM.Route>
         <ReactRouterDOM.Route exact path="/welcome-beneficiary">
-          <BeneficiaryProfile user={loggedUser} requests={requests}/>
+          <BeneficiaryProfile user={loggedUser} requests={requests} offerings={offerings}/>
         </ReactRouterDOM.Route>
         <div> Sorry Page Not found </div>
         </ReactRouterDOM.Switch>

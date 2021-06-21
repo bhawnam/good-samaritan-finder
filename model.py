@@ -164,6 +164,13 @@ class ServiceOffered(db.Model):
         """ """
         return f'<ServiceOffered offered_id={self.offered_id} volunteer_id={self.volunteer_id}>'
 
+    def to_dict(self):
+        return {
+            'offering_id': self.offered_id,
+            'volunteer': self.volunteer.volunteer_id,
+            'service_type': self.service_type.service_name.name,
+            'for_num_persons': self.service_type.for_num_persons
+        }
 
 class ServiceName(enum.Enum):
     """Name of the service. """
