@@ -78,6 +78,7 @@ def get_beneficiary_requests():
     """Get a list of the beneficiary requests. """
 
     logged_user = request.get_json().get("loggedUser")
+    print(f"Loggeduser : {logged_user}")
     user_in_db = crud.get_user_by_displayname(logged_user)
     beneficiary = crud.get_beneficiary_by_user(user_in_db)
     beneficiary_requests = crud.get_requests_by_beneficiary(beneficiary)
@@ -117,7 +118,8 @@ def add_user_request():
     service_type = crud.create_service_type(service_name, for_num_persons)
     service_request = crud.create_service_request(datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
     
-    return jsonify({service_request.request_id: service_request.to_dict()})
+    # return jsonify({service_request.request_id: service_request.to_dict()})
+    return jsonify({"success": True})
 
 if __name__ == "__main__":
     # Connecting to DB before running the app

@@ -11,6 +11,23 @@ function Homepage() {
 function Navbar(props) {
   const { logo, brand } = props;
 
+  const [isLogged, setisLogged] = React.useState(false);
+
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      setisLogged(true);
+    }
+  }, [isLogged]);
+
+  let history = ReactRouterDOM.useHistory();
+
+  function handdleLogout(){
+    localStorage.removeItem("user")
+    setisLogged(false);
+    history.push("/");
+  }
+
   return (
     <nav className="navbar">
       <ReactRouterDOM.Link
@@ -20,10 +37,17 @@ function Navbar(props) {
       </ReactRouterDOM.Link>
 
       <div className="nav-item">
+        {isLogged ? (
+        <ReactRouterDOM.Link
+        onClick = {handdleLogout} activeClassName="navlink-active" className="nav-link">
+        Log Out
+        </ReactRouterDOM.Link>
+        ) : (
         <ReactRouterDOM.Link
         to="/login" activeClassName="navlink-active" className="nav-link">
         Log In
         </ReactRouterDOM.Link>
+        )}
         <ReactRouterDOM.Link
           to="/about-us" activeClassName="navlink-active" className="nav-link">
           About Us
