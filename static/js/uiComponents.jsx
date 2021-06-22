@@ -299,10 +299,28 @@ function BeneficiaryProfile(props){
 
   function addRequest(event){
     event.preventDefault();
-    alert("Your request was sumbitted!")
-    setRequestServiceType("");
-    setRequestForNumPersons("");
-    setRequestForm(false);
+     fetch("/add-request", 
+    {
+      method : "POST",
+      headers : 
+      {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({user, requestservicetype, requestfornumpersons}),
+      })
+      .then((response) => {
+      response.json()
+      .then((result) => {
+        if ((result.success) == true){
+          alert("Your request was sumbitted!")
+          setRequestServiceType("");
+          setRequestForNumPersons("");
+          setRequestForm(false);
+        } else {
+          alert("Sorry there was an error!")
+        }
+      });
+    });
   }
 
   function handleOfferingButton(){

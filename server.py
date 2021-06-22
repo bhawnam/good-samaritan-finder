@@ -1,5 +1,6 @@
 """Server for good-samaritan-finder app """
 
+from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
 from flask.json import jsonify
 
@@ -75,14 +76,11 @@ def user_registration():
 @app.route('/api/requests', methods=["POST"])
 def get_beneficiary_requests():
     """Get a list of the beneficiary requests. """
+
     logged_user = request.get_json().get("loggedUser")
-    print(f"loggedUser {logged_user}")
     user_in_db = crud.get_user_by_displayname(logged_user)
-    print(user_in_db)
     beneficiary = crud.get_beneficiary_by_user(user_in_db)
-    print(beneficiary)
     beneficiary_requests = crud.get_requests_by_beneficiary(beneficiary)
-    print(beneficiary_requests)
 
     return jsonify({request.request_id: request.to_dict() for request in beneficiary_requests})
 
@@ -90,16 +88,36 @@ def get_beneficiary_requests():
 @app.route('/api/offerings', methods=["POST"])
 def get_beneficiary_offerings():
     """Get a list of the beneficiary offerings. """
+
     logged_user = request.get_json().get("loggedUser")
-    print(f"loggedUser {logged_user}")
     user_in_db = crud.get_user_by_displayname(logged_user)
-    print(user_in_db)
     volunteer = crud.get_volunteer_by_user(user_in_db)
-    print(volunteer)
     volunteer_offerings = crud.get_offerings_by_volunteer(volunteer)
-    print(volunteer_offerings)
 
     return jsonify({offering.offering_id: offering.to_dict() for offering in volunteer_offerings})
+
+
+@app.route('/add-request', methods=["POST"])
+def add_user_request():
+    """Process the request added by the user. """
+
+    service_name = request.get_json().get("requestservicetype")
+    print(f"Service type {service_name}" )
+    for_num_persons = request.get_json().get("requestfornumpersons")
+    print(f"Number {for_num_persons}" )
+    logged_user = request.get_json().get("user")
+    print(f"User {logged_user}")
+    # Get user by displayname  
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    # Put user in beneficiary table
+    beneficiary = crud.create_beneficiary(True, user_in_db)
+    # Need to fix 
+    volunteer = model.Volunteer.query.filter_by(user_id = 2).first()
+    # Create a service request to be added to the DB
+    service_type = crud.create_service_type(service_name, for_num_persons)
+    service_request = crud.create_service_request(datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
+    
+    return jsonify({service_request.request_id: service_request.to_dict()})
 
 if __name__ == "__main__":
     # Connecting to DB before running the app
