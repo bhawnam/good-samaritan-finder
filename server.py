@@ -80,8 +80,8 @@ def get_beneficiary_requests():
     logged_user = request.get_json().get("loggedUser")
     print(f"Loggeduser : {logged_user}")
     user_in_db = crud.get_user_by_displayname(logged_user)
-    beneficiary = crud.get_beneficiary_by_user(user_in_db)
-    beneficiary_requests = crud.get_requests_by_beneficiary(beneficiary)
+    # beneficiary = crud.get_beneficiary_by_user(user_in_db)
+    beneficiary_requests = crud.get_requests_by_beneficiary(user_in_db)
 
     return jsonify({request.request_id: request.to_dict() for request in beneficiary_requests})
 
@@ -92,8 +92,8 @@ def get_beneficiary_offerings():
 
     logged_user = request.get_json().get("loggedUser")
     user_in_db = crud.get_user_by_displayname(logged_user)
-    volunteer = crud.get_volunteer_by_user(user_in_db)
-    volunteer_offerings = crud.get_offerings_by_volunteer(volunteer)
+    # volunteer = crud.get_volunteer_by_user(user_in_db)
+    volunteer_offerings = crud.get_offerings_by_volunteer(user_in_db)
 
     return jsonify({offering.offering_id: offering.to_dict() for offering in volunteer_offerings})
 
@@ -112,11 +112,9 @@ def add_user_request():
     user_in_db = crud.get_user_by_displayname(logged_user)
     # Put user in beneficiary table
     beneficiary = crud.create_beneficiary(True, user_in_db)
-    # Need to fix 
-    volunteer = model.Volunteer.query.filter_by(user_id = 2).first()
     # Create a service request to be added to the DB
     service_type = crud.create_service_type(service_name, for_num_persons)
-    service_request = crud.create_service_request(datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
+    service_request = crud.create_service_request(datetime.now(), user_in_db, service_type)
     
     # return jsonify({service_request.request_id: service_request.to_dict()})
     return jsonify({"success": True})

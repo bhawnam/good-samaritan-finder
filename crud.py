@@ -47,17 +47,17 @@ def create_beneficiary(is_b_onboarded, user):
     return beneficiary
 
 
-def get_beneficiary_by_user(user):
-    """Get a beneficiary from DB by it's user reference. """
+# def get_beneficiary_by_user(user):
+#     """Get a beneficiary from DB by it's user reference. """
 
-    beneficiary = Beneficiary.query.filter_by(user=user).first()
-    return beneficiary
+#     beneficiary = Beneficiary.query.filter_by(user=user).first()
+#     return beneficiary
 
 
 def get_requests_by_beneficiary(beneficiary):
-    """Get all requests by a beneficiary from DB. """
+    """Get all requests by a beneficiary user from DB. """
 
-    req = ServiceRequest.query.filter_by(beneficiary=beneficiary).all()
+    req = ServiceRequest.query.filter_by(user=beneficiary).all()
     return req
 
 
@@ -72,16 +72,16 @@ def create_volunteer(is_v_onboarded, user):
     return volunteer
 
 
-def get_volunteer_by_user(user):
-    """Get a volunteer from DB by it's user reference. """
+# def get_volunteer_by_user(user):
+#     """Get a volunteer from DB by it's user reference. """
 
-    volunteer = Volunteer.query.filter_by(user=user).first()
-    return volunteer
+#     volunteer = Volunteer.query.filter_by(user=user).first()
+#     return volunteer
 
 def get_offerings_by_volunteer(volunteer):
-    """Get all offerings by a volunteer from DB. """
+    """Get all offerings by a volunteer user from DB. """
 
-    offerings = ServiceRequest.query.filter_by(volunteer=volunteer).all()
+    offerings = ServiceOffered.query.filter_by(user=volunteer).all()
     return offerings
 
 def create_volunteer_availability(availability, volunteer):
@@ -117,13 +117,24 @@ def create_volunteer_rating(rating, volunteer, response):
     return rating
 
 
-def create_service_request(date_request, date_fulfilled, beneficiary, volunteer, service_type):
+# def create_service_request(date_request, date_fulfilled, beneficiary, volunteer, service_type):
+#     """Create a service request by a beneficiary. """
+
+#     request = ServiceRequest(date_of_request = date_request, 
+#                             date_of_fulfillment = date_fulfilled, 
+#                             beneficiary = beneficiary, 
+#                             volunteer = volunteer, 
+#                             service_type = service_type)
+
+#     db.session.add(request)
+#     db.session.commit()
+
+#     return request
+def create_service_request(date_request, user, service_type):
     """Create a service request by a beneficiary. """
 
     request = ServiceRequest(date_of_request = date_request, 
-                            date_of_fulfillment = date_fulfilled, 
-                            beneficiary = beneficiary, 
-                            volunteer = volunteer, 
+                            user = user, 
                             service_type = service_type)
 
     db.session.add(request)
@@ -132,10 +143,20 @@ def create_service_request(date_request, date_fulfilled, beneficiary, volunteer,
     return request
 
 
-def create_service_offered(volunteer, service_type):
-    """Create a service offered by a volunteer. """
+# def create_service_offered(volunteer, service_type):
+#     """Create a service offered by a volunteer. """
 
-    offering = ServiceOffered(volunteer= volunteer, service_type = service_type)
+#     offering = ServiceOffered(volunteer= volunteer, service_type = service_type)
+
+#     db.session.add(offering)
+#     db.session.commit()
+
+#     return offering
+
+def create_service_offered(user, service_type):
+    """Create a service offered by a volunteer user. """
+
+    offering = ServiceOffered(user= user, service_type = service_type)
 
     db.session.add(offering)
     db.session.commit()
