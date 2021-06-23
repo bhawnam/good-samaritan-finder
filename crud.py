@@ -50,7 +50,7 @@ def create_beneficiary(is_b_onboarded, user):
 def get_requests_by_beneficiary(beneficiary):
     """Get all requests by a beneficiary user from DB. """
 
-    req = ServiceRequest.query.filter_by(user=beneficiary).all()
+    req = ServiceRequest.query.filter_by(beneficiary=beneficiary).all()
     return req
 
 
@@ -68,7 +68,7 @@ def create_volunteer(is_v_onboarded, user):
 def get_offerings_by_volunteer(volunteer):
     """Get all offerings by a volunteer user from DB. """
 
-    offerings = ServiceOffered.query.filter_by(user=volunteer).all()
+    offerings = ServiceOffered.query.filter_by(volunteer=volunteer).all()
     return offerings
 
 
@@ -118,11 +118,11 @@ def create_volunteer_rating(rating, volunteer, response):
 #     db.session.commit()
 
 #     return request
-def create_service_request(date_request, user, service_type):
+def create_service_request(date_request, beneficiary, service_type):
     """Create a service request by a beneficiary. """
 
     request = ServiceRequest(date_of_request = date_request, 
-                            user = user, 
+                            beneficiary = beneficiary, 
                             service_type = service_type)
 
     db.session.add(request)
@@ -141,10 +141,10 @@ def create_service_request(date_request, user, service_type):
 
 #     return offering
 
-def create_service_offered(user, service_type):
+def create_service_offered(volunteer, service_type):
     """Create a service offered by a volunteer user. """
 
-    offering = ServiceOffered(user= user, service_type = service_type)
+    offering = ServiceOffered(volunteer= volunteer, service_type = service_type)
 
     db.session.add(offering)
     db.session.commit()

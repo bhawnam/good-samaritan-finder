@@ -124,14 +124,12 @@ class ServiceRequest(db.Model):
     date_of_request = db.Column(db.DateTime)
     date_of_fulfillment = db.Column(db.DateTime)
     request_active = db.Column(db.Boolean, default=True)
-    # beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
-    # volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    beneficiary_user_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
+    volunteer_user_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
 
-    # volunteer = db.relationship('Volunteer', backref='requests')
-    # beneficiary = db.relationship('Beneficiary', backref='requests')
-    user = db.relationship('User', backref='requests')
+    volunteer = db.relationship('Volunteer', backref='requests')
+    beneficiary = db.relationship('Beneficiary', backref='requests')
     service_type = db.relationship('ServiceType', backref='requests')
     
     def __repr__(self):
@@ -144,9 +142,8 @@ class ServiceRequest(db.Model):
             'date_of_request': self.date_of_request,
             'date_of_fulfillment': self.date_of_fulfillment,
             'request_active': self.request_active,
-            # 'volunteer': self.volunteer.volunteer_id,
-            # 'beneficiary': self.beneficiary.beneficiary_id,
-            'user': self.user.user_id,
+            'volunteer': self.volunteer.volunteer_id,
+            'beneficiary': self.beneficiary.beneficiary_id,
             'service_type': self.service_type.service_name.name,
             'for_num_persons': self.service_type.for_num_persons
         }
@@ -158,23 +155,20 @@ class ServiceOffered(db.Model):
     __tablename__ = 'offerings'
 
     offered_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    # volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
  
-    # volunteer = db.relationship('Volunteer', backref='offerings')
-    user = db.relationship('User', backref='offerings')
+    volunteer = db.relationship('Volunteer', backref='offerings')
     service_type = db.relationship('ServiceType', backref='offerings')
 
     def __repr__(self):
         """ """
-        return f'<ServiceOffered offered_id={self.offered_id} user_id={self.user_id}>'
+        return f'<ServiceOffered offered_id={self.offered_id} user_id={self.volunteer_id}>'
 
     def to_dict(self):
         return {
             'offered_id': self.offered_id,
-            # 'volunteer': self.volunteer.volunteer_id,
-            'user': self.user.user_id,
+            'volunteer': self.volunteer.volunteer_id,
             'service_type': self.service_type.service_name.name,
             'for_num_persons': self.service_type.for_num_persons
         }
