@@ -22,7 +22,7 @@ function Navbar(props) {
 
   let history = ReactRouterDOM.useHistory();
 
-  function handdleLogout(){
+  function handleLogout(){
     localStorage.removeItem("user")
     setisLogged(false);
     history.push("/");
@@ -39,7 +39,7 @@ function Navbar(props) {
       <div className="nav-item">
         {isLogged ? (
         <ReactRouterDOM.Link
-        onClick = {handdleLogout} activeClassName="navlink-active" className="nav-link">
+        onClick = {handleLogout} activeClassName="navlink-active" className="nav-link">
         Log Out
         </ReactRouterDOM.Link>
         ) : (
@@ -306,11 +306,11 @@ function BeneficiaryProfile(props){
     );
     }
   const offeringsTableData = [];
-  for (const offering_id in offerings){
-    let currentOffering = offerings[offering_id];
+  for (const offered_id in offerings){
+    let currentOffering = offerings[offered_id];
     offeringsTableData.push(
-      <tr key={currentOffering.offering_id}>
-        <td>{currentOffering.offering_id}</td>
+      <tr key={currentOffering.offered_id}>
+        <td>{currentOffering.offered_id}</td>
         <td>{currentOffering.service_type}</td>
         <td>{currentOffering.for_num_persons}</td>
       </tr>
@@ -341,7 +341,7 @@ function BeneficiaryProfile(props){
           setRequestForNumPersons("");
           setRequestForm(false);
         } else {
-          alert("Sorry there was an error!")
+          alert("Sorry there was an error!");
         }
       });
     });
@@ -353,13 +353,31 @@ function BeneficiaryProfile(props){
 
   function addOffering(event){
     event.preventDefault();
-    alert("Your request was sumbitted!")
-    setOfferingServiceType("");
-    setOfferinForNumPersons("");
-    setAvailableDate("");
-    setOfferingForm(false);
+    fetch("/add-offering",
+    {
+      method: "POST",
+      headers :
+      {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({user, offeringservicetype, offeringfornumpersons, availabledate}),
+    })
+    .then((response) => {
+    response.json()
+    .then((result) => {
+      if((result.success) == true){
+        alert("Your request was sumbitted!")
+        setOfferingServiceType("");
+        setOfferinForNumPersons("");
+        setAvailableDate("");
+        setOfferingForm(false);
+      }
+      else {
+        alert("Sorry there was an error!")
+      }
+    });  
+    });
   }
-
 
   return (
     <React.Fragment>
@@ -381,7 +399,7 @@ function BeneficiaryProfile(props){
     <button type="submit" className="btn" onClick={handleRequestButton}> Add a request</button>
     </div>
     {requestForm ? (
-      <form>
+      <form onSubmit={addRequest}>
         <br/>
         <div className="form-request">
         <label> Service Type </label>
@@ -399,7 +417,7 @@ function BeneficiaryProfile(props){
         <label>For number of people </label>
         <input type="text" className="form-input" value={requestfornumpersons} onChange={(event) => setRequestForNumPersons(event.target.value)} required/>
       </div>
-      <button type="submit" className="btn" onClick={addRequest}> Add </button>
+      <button type="submit" className="btn"> Add </button>
       </form>
     ) : (null) }
     <br />
@@ -411,7 +429,7 @@ function BeneficiaryProfile(props){
           <tr>
             <th>Offering ID</th>
             <th>Service Type</th>
-            <th>Active</th>
+            <th>For Num persons</th>
           </tr>
         </thead>
         <tbody>{offeringsTableData}</tbody>
@@ -420,7 +438,7 @@ function BeneficiaryProfile(props){
     <button type="submit" className="btn" onClick={handleOfferingButton}> Add an offering </button>
     </div>
     {offeringForm ? (
-      <form>
+      <form onSubmit={addOffering}>
         <br/>
         <div className="form-offering">
         <label> Service Type </label>
@@ -443,7 +461,7 @@ function BeneficiaryProfile(props){
         <label> Date of availability </label>
         <input type="date" min="2021-01-01" max="2021-12-31" className="form-input" value={availabledate} onChange={(event) => setAvailableDate(event.target.value)} required/>
       </div>
-      <button type="submit" className="btn" onClick={addOffering}> Add </button>
+      <button type="submit" className="btn"> Add </button>
       </form>
     ) : (null) }
     </React.Fragment>

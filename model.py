@@ -171,7 +171,7 @@ class ServiceOffered(db.Model):
 
     def to_dict(self):
         return {
-            'offering_id': self.offered_id,
+            'offered_id': self.offered_id,
             # 'volunteer': self.volunteer.volunteer_id,
             'user': self.user.user_id,
             'service_type': self.service_type.service_name.name,

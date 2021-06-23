@@ -60,7 +60,7 @@ def user_registration():
     password = request.get_json().get("password")
     username = request.get_json().get("username")
     phone_number = request.get_json().get("phonenumber")
-    street = request.get_json(0).get("address")
+    street = request.get_json().get("address")
     zipcode = request.get_json().get("zipcode")
 
     user_in_db = crud.get_user_by_displayname(username)
@@ -95,7 +95,7 @@ def get_beneficiary_offerings():
     # volunteer = crud.get_volunteer_by_user(user_in_db)
     volunteer_offerings = crud.get_offerings_by_volunteer(user_in_db)
 
-    return jsonify({offering.offering_id: offering.to_dict() for offering in volunteer_offerings})
+    return jsonify({offering.offered_id: offering.to_dict() for offering in volunteer_offerings})
 
 
 @app.route('/add-request', methods=["POST"])
@@ -115,6 +115,30 @@ def add_user_request():
     # Create a service request to be added to the DB
     service_type = crud.create_service_type(service_name, for_num_persons)
     service_request = crud.create_service_request(datetime.now(), user_in_db, service_type)
+    
+    # return jsonify({service_request.request_id: service_request.to_dict()})
+    return jsonify({"success": True})
+
+
+@app.route('/add-offering', methods=["POST"])
+def add_user_offering():
+    """Process the offering added by the user. """
+
+    service_name = request.get_json().get("offeringservicetype")
+    print(f"Service type {service_name}" )
+    for_num_persons = request.get_json().get("offeringfornumpersons")
+    print(f"Number {for_num_persons}" )
+    available_date = request.get_json().get("availabledate")
+    print(f"Date {available_date}")
+    logged_user = request.get_json().get("user")
+    print(f"User {logged_user}")
+    # Get user by displayname  
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    # Put user in volunteer table
+    volunteer = crud.create_volunteer(True, user_in_db)
+    # Create a service offering to be added to the DB
+    service_type = crud.create_service_type(service_name, for_num_persons)
+    service_offering = crud.create_service_offered(user_in_db, service_type)
     
     # return jsonify({service_request.request_id: service_request.to_dict()})
     return jsonify({"success": True})
