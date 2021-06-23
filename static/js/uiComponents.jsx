@@ -39,29 +39,29 @@ function Navbar(props) {
       <div className="nav-item">
         {isLogged ? (
         <ReactRouterDOM.Link
-        onClick = {handleLogout} activeClassName="navlink-active" className="nav-link">
+        to="#" onClick = {handleLogout} className="nav-link">
         Log Out
         </ReactRouterDOM.Link>
         ) : (
         <ReactRouterDOM.Link
-        to="/login" activeClassName="navlink-active" className="nav-link">
+        to="/login" className="nav-link">
         Log In
         </ReactRouterDOM.Link>
         )}
         <ReactRouterDOM.Link
-          to="/about-us" activeClassName="navlink-active" className="nav-link">
+          to="/about-us" className="nav-link">
           About Us
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
-          to="/contact" activeClassName="navlink-active" className="nav-link">
+          to="/contact" className="nav-link">
           Be in touch
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
-          to="/be-a-beneficiary" activeClassName="navlink-active" className="nav-link">
+          to="/be-a-beneficiary" className="nav-link">
           Be a beneficiary
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
-          to="/be-a-volunteer" activeClassName="navlink-active" className="nav-link">
+          to="/be-a-volunteer" className="nav-link">
           Be a Volunteer
         </ReactRouterDOM.Link>
       </div>
@@ -249,28 +249,28 @@ function Footer() {
     <div className="footer">
       <div className="foot-item">
       <ReactRouterDOM.Link
-          to="/be-a-beneficiary" activeClassName="footlink-active" className="foot-link">
+          to="/be-a-beneficiary" className="foot-link">
           <b> Be a beneficiary </b> <br/>
           How it works <br/>
           Services Offered <br/>
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
-          to="/be-a-volunteer" activeClassName="footlink-active" className="foot-link">
+          to="/be-a-volunteer" className="foot-link">
           <b> Be a Volunteer </b> <br/>  
            How it works <br/>
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
-          to="/about-us" activeClassName="footlink-active" className="foot-link">
+          to="/about-us"  className="foot-link">
           <b> Company </b><br/>
           About Us <br/>
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
-          to="/contact" activeClassName="footlink-active" className="foot-link">
+          to="/contact" className="foot-link">
           <b> Get in touch </b> <br/>
           Contact Us <br/>
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
-          to="#" activeClassName="footlink-active" className="foot-link">
+          to="#" className="foot-link">
            <b>Follow Us</b> <br/>
           Facebook <br/>
           Instagram <br/>
