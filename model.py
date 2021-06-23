@@ -24,7 +24,7 @@ class User(db.Model):
     street = db.Column(db.String)
     zipcode = db.Column(db.String(10), nullable=False)
     phone_number = db.Column(db.String(25), nullable=False)
-    is_active = db.Column(db.Boolean, default=False)
+    is_active = db.Column(db.Boolean, default=True)
 
     def __repr__(self):
         """ """
@@ -123,7 +123,7 @@ class ServiceRequest(db.Model):
     request_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     date_of_request = db.Column(db.DateTime)
     date_of_fulfillment = db.Column(db.DateTime)
-    request_active = db.Column(db.Boolean, default=False)
+    request_active = db.Column(db.Boolean, default=True)
     # beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     # volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
@@ -147,7 +147,8 @@ class ServiceRequest(db.Model):
             # 'volunteer': self.volunteer.volunteer_id,
             # 'beneficiary': self.beneficiary.beneficiary_id,
             'user': self.user.user_id,
-            'service_type': self.service_type.service_name.name
+            'service_type': self.service_type.service_name.name,
+            'for_num_persons': self.service_type.for_num_persons
         }
 
 

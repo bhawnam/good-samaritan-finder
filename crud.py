@@ -47,13 +47,6 @@ def create_beneficiary(is_b_onboarded, user):
     return beneficiary
 
 
-# def get_beneficiary_by_user(user):
-#     """Get a beneficiary from DB by it's user reference. """
-
-#     beneficiary = Beneficiary.query.filter_by(user=user).first()
-#     return beneficiary
-
-
 def get_requests_by_beneficiary(beneficiary):
     """Get all requests by a beneficiary user from DB. """
 
@@ -72,17 +65,12 @@ def create_volunteer(is_v_onboarded, user):
     return volunteer
 
 
-# def get_volunteer_by_user(user):
-#     """Get a volunteer from DB by it's user reference. """
-
-#     volunteer = Volunteer.query.filter_by(user=user).first()
-#     return volunteer
-
 def get_offerings_by_volunteer(volunteer):
     """Get all offerings by a volunteer user from DB. """
 
     offerings = ServiceOffered.query.filter_by(user=volunteer).all()
     return offerings
+
 
 def create_volunteer_availability(availability, volunteer):
     """Create a volunteer timing availability. """
