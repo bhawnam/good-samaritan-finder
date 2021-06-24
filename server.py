@@ -150,6 +150,8 @@ def add_user_offering():
     volunteer = crud.get_volunteer_by_user(user_in_db)
     if volunteer:
         crud.onboard_volunteer(volunteer)
+    # Create volunteer availability in timings table
+    volunteer_timing = crud.create_volunteer_availability(available_date, volunteer)    
     # Create a service type and service offering to be added to the DB
     service_type = crud.create_service_type(service_name, for_num_persons)
     service_offering = crud.create_service_offered(volunteer, service_type)
