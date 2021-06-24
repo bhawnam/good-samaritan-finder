@@ -142,7 +142,7 @@ class ServiceRequest(db.Model):
             'date_of_request': self.date_of_request,
             'date_of_fulfillment': self.date_of_fulfillment,
             'request_active': self.request_active,
-            'volunteer': self.volunteer.volunteer_id,
+            # 'volunteer': self.volunteer.volunteer_id,
             'beneficiary': self.beneficiary.beneficiary_id,
             'service_type': self.service_type.service_name.name,
             'for_num_persons': self.service_type.for_num_persons

@@ -43,8 +43,9 @@ def user_login():
     username = request.get_json().get("username")
 
     user_in_db = crud.get_user_by_email(email)
-    if user_in_db.password == password:
-        return jsonify({"success":True})
+    if user_in_db:
+        if user_in_db.password == password:
+            return jsonify({"success":True})
 
     else:  
         return jsonify({"success":False})
@@ -82,7 +83,6 @@ def get_beneficiary_requests():
     """Get a list of the beneficiary requests. """
 
     logged_user = request.get_json().get("loggedUser")
-    print(f"Loggeduser : {logged_user}")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
     # For user(ben) in beneficiaries table, get all requests
