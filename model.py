@@ -124,8 +124,8 @@ class ServiceRequest(db.Model):
     date_of_request = db.Column(db.DateTime)
     date_of_fulfillment = db.Column(db.DateTime)
     request_active = db.Column(db.Boolean, default=True)
-    beneficiary_user_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
-    volunteer_user_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
+    beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
+    volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
     service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
 
     volunteer = db.relationship('Volunteer', backref='requests')

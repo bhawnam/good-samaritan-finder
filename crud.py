@@ -47,6 +47,23 @@ def create_beneficiary(is_b_onboarded, user):
     return beneficiary
 
 
+def get_beneficiary_by_user(user):
+    """Get a beneficiary from DB by it's user reference. """
+
+    beneficiary = Beneficiary.query.filter_by(user=user).first()
+    return beneficiary
+
+
+def onboard_beneficiary(beneficiary):
+    """Update the value of onboarded beneficiary. """
+
+    beneficiary.is_b_onboarded = True
+    db.session.add(beneficiary)
+    db.session.commit()
+
+    return beneficiary
+
+
 def get_requests_by_beneficiary(beneficiary):
     """Get all requests by a beneficiary user from DB. """
 
@@ -59,6 +76,23 @@ def create_volunteer(is_v_onboarded, user):
 
     volunteer = Volunteer(is_v_onboarded = is_v_onboarded, user = user)
 
+    db.session.add(volunteer)
+    db.session.commit()
+
+    return volunteer
+
+
+def get_volunteer_by_user(user):
+    """Get a volunteer from DB by it's user reference. """
+
+    volunteer = Volunteer.query.filter_by(user=user).first()
+    return volunteer
+
+
+def onboard_volunteer(volunteer):
+    """Update the value of onboarded volunteer. """
+
+    volunteer.is_v_onboarded = True
     db.session.add(volunteer)
     db.session.commit()
 

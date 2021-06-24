@@ -91,7 +91,8 @@ for _ in range(7):
     volunteer = choice(volunteers_in_db)
     rating = randint(1,5)
 
-    service_request = crud.create_service_request( datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
+    # service_request = crud.create_service_request( datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
+    service_request = crud.create_service_request( datetime.now(), beneficiary, service_type)
     service_request_in_db.append(service_request)
     # Creating a rating entry for beneficiry for each service request         
     beneficiary_rating = crud.create_beneficiary_rating(rating, beneficiary, service_request)

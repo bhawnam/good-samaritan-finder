@@ -69,7 +69,11 @@ def user_registration():
         return jsonify({"success": False})
     
     else:
+        # Register the user in the users table in the DB 
         register_user = crud.create_user(first_name, last_name, username, email, password, street, zipcode, phone_number)
+        # Add user in beneficiaries and volunteers table in the DB 
+        beneficiary = crud.create_beneficiary(False, register_user)
+        volunteer = crud.create_volunteer(False, register_user)
         return jsonify({"success":True})    
 
 
@@ -79,9 +83,12 @@ def get_beneficiary_requests():
 
     logged_user = request.get_json().get("loggedUser")
     print(f"Loggeduser : {logged_user}")
+    # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
-    # beneficiary = crud.get_beneficiary_by_user(user_in_db)
-    beneficiary_requests = crud.get_requests_by_beneficiary(user_in_db)
+    # For user(ben) in beneficiaries table, get all requests
+    beneficiary = crud.get_beneficiary_by_user(user_in_db)
+    # Get all the service requests from this beneficiary
+    beneficiary_requests = crud.get_requests_by_beneficiary(beneficiary)
 
     return jsonify({request.request_id: request.to_dict() for request in beneficiary_requests})
 
@@ -91,9 +98,12 @@ def get_beneficiary_offerings():
     """Get a list of the beneficiary offerings. """
 
     logged_user = request.get_json().get("loggedUser")
+    # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
-    # volunteer = crud.get_volunteer_by_user(user_in_db)
-    volunteer_offerings = crud.get_offerings_by_volunteer(user_in_db)
+    # For user(vol) in volunteers table, get all offerings
+    volunteer = crud.get_volunteer_by_user(user_in_db)
+    # Get all the service offerings from this volunteer
+    volunteer_offerings = crud.get_offerings_by_volunteer(volunteer)
 
     return jsonify({offering.offered_id: offering.to_dict() for offering in volunteer_offerings})
 
@@ -108,13 +118,15 @@ def add_user_request():
     print(f"Number {for_num_persons}" )
     logged_user = request.get_json().get("user")
     print(f"User {logged_user}")
-    # Get user by displayname  
+    # Get user object by displayname  
     user_in_db = crud.get_user_by_displayname(logged_user)
-    # Put user in beneficiary table
-    beneficiary = crud.create_beneficiary(True, user_in_db)
-    # Create a service request to be added to the DB
+    # For user(ben)in beneficiaries table, set onboarded to True
+    beneficiary = crud.get_beneficiary_by_user(user_in_db)
+    if beneficiary:
+        crud.onboard_beneficiary(beneficiary)
+    # Create a service type and a service request to be added to the DB
     service_type = crud.create_service_type(service_name, for_num_persons)
-    service_request = crud.create_service_request(datetime.now(), user_in_db, service_type)
+    service_request = crud.create_service_request(datetime.now(), beneficiary, service_type)
     
     # return jsonify({service_request.request_id: service_request.to_dict()})
     return jsonify({"success": True})
@@ -132,16 +144,19 @@ def add_user_offering():
     print(f"Date {available_date}")
     logged_user = request.get_json().get("user")
     print(f"User {logged_user}")
-    # Get user by displayname  
+    # Get user object by displayname  
     user_in_db = crud.get_user_by_displayname(logged_user)
-    # Put user in volunteer table
-    volunteer = crud.create_volunteer(True, user_in_db)
-    # Create a service offering to be added to the DB
+    # For user(vol)in volunteers table, set onboarded to True
+    volunteer = crud.get_volunteer_by_user(user_in_db)
+    if volunteer:
+        crud.onboard_volunteer(volunteer)
+    # Create a service type and service offering to be added to the DB
     service_type = crud.create_service_type(service_name, for_num_persons)
-    service_offering = crud.create_service_offered(user_in_db, service_type)
+    service_offering = crud.create_service_offered(volunteer, service_type)
     
     # return jsonify({service_request.request_id: service_request.to_dict()})
     return jsonify({"success": True})
+
 
 if __name__ == "__main__":
     # Connecting to DB before running the app
