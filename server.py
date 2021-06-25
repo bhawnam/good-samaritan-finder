@@ -125,7 +125,7 @@ def add_user_request():
     if beneficiary:
         crud.onboard_beneficiary(beneficiary)
     # Create a service type and a service request to be added to the DB
-    service_type = crud.create_service_type(service_name, for_num_persons)
+    service_type = crud.create_service_type(service_name, for_num_persons, is_offered=False)
     date_of_request = datetime.now()
     service_request = crud.create_service_request(date_of_request, beneficiary, service_type)
     # Chek if there is an volunteer offering (with service) available for the desired request

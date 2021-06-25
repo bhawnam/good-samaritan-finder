@@ -179,7 +179,7 @@ def create_service_offered(volunteer, service_type):
 def look_for_offering(service_name, for_num_persons, date_of_request):
     """Look for an service and offering based on the request. """
 
-    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons > for_num_persons)).first()
+    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons > for_num_persons) & (ServiceType.is_offered == "true")).first()
     offering = ServiceOffered.query.filter_by(service_type=service).first()
     volunteer = offering.volunteer
     offering_volunteer = VolunteerAvailability.query.filter((VolunteerAvailability.volunteer == volunteer) & (VolunteerAvailability.availability > date_of_request)).first()
