@@ -368,11 +368,14 @@ function BeneficiaryProfile(props){
     response.json()
     .then((result) => {
       if((result.success) == true){
-        alert("Your request was sumbitted!")
+        alert("Thank you for your offering! We found a matching beneficiary request. You will be connected to them shortly")
         setOfferingServiceType("");
         setOfferinForNumPersons("");
         setAvailableDate("");
         setOfferingForm(false);
+      }
+      else if ((result.success) == false){
+        alert("Thank you for your offering! We will find a matching request")
       }
       else {
         alert("Sorry there was an error!")

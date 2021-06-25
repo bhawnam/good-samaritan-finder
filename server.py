@@ -161,8 +161,12 @@ def add_user_offering():
     service_type = crud.create_service_type(service_name, for_num_persons, is_offered=True)
     service_offering = crud.create_service_offered(volunteer, service_type)
     
+    is_request_beneficiary = crud.look_for_request(service_name, for_num_persons)
     # return jsonify({service_request.request_id: service_request.to_dict()})
-    return jsonify({"success": True})
+    if is_request_beneficiary:
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success" : False})    
 
 
 if __name__ == "__main__":

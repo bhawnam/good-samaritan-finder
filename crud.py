@@ -1,5 +1,6 @@
 """ CRUD operations on good-samaritan-finder database."""
 
+from flask.globals import request
 from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
 
@@ -165,6 +166,16 @@ def create_service_request(date_request, beneficiary, service_type):
     return request
 
 
+def look_for_request(service_name, for_num_persons):
+    """Look for a service and request based on the offering. """
+
+    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons < for_num_persons) & (ServiceType.is_offered == "false")).first()
+    request = ServiceRequest.query.filter((ServiceRequest.service_type == service) & (ServiceRequest.request_active== 't')).first()
+    request_beneficiary = request.beneficiary
+    
+    return request_beneficiary
+
+
 def create_service_offered(volunteer, service_type):
     """Create a service offered by a volunteer user. """
 
@@ -177,7 +188,7 @@ def create_service_offered(volunteer, service_type):
 
 
 def look_for_offering(service_name, for_num_persons, date_of_request):
-    """Look for an service and offering based on the request. """
+    """Look for a service and offering based on the request. """
 
     service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons > for_num_persons) & (ServiceType.is_offered == "true")).first()
     offering = ServiceOffered.query.filter_by(service_type=service).first()
