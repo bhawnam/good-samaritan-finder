@@ -68,7 +68,8 @@ service_name = ["PACKAGED_MEAL_KIT", "WATER", "FIRST_AID_KIT", "BLANKET", "PET_F
 
 for name in service_name:
     for_num_persons = randint(1,10)
-    service_type = crud.create_service_type(name, for_num_persons)
+    is_offered = False
+    service_type = crud.create_service_type(name, for_num_persons, is_offered)
     service_type_in_db.append(service_type)
 
 # Creating service offered entries in offerings table in the database

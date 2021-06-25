@@ -191,10 +191,11 @@ class ServiceType(db.Model):
     type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     service_name = db.Column(db.Enum(ServiceName), nullable=False)
     for_num_persons = db.Column(db.Integer, nullable=False)
+    is_offered = db.Column(db.String(10))
 
     def __repr__(self):
         """ """
-        return f'<ServiceType type_id ={self.type_id} service_name={self.service_name}>'
+        return f'<ServiceType type_id ={self.type_id} service_name={self.service_name} is_offered={self.is_offered}>'
 
 
 def connect_to_db(flask_app, db_uri='postgresql:///samaritan-finder', echo=True):

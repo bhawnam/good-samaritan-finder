@@ -187,10 +187,10 @@ def look_for_offering(service_name, for_num_persons, date_of_request):
     return offering_volunteer
 
 
-def create_service_type(service_name, for_num_persons):
+def create_service_type(service_name, for_num_persons, is_offered):
     """Create a type of service. """
 
-    service_type = ServiceType(service_name = service_name, for_num_persons = for_num_persons)
+    service_type = ServiceType(service_name = service_name, for_num_persons = for_num_persons, is_offered=is_offered)
 
     db.session.add(service_type)
     db.session.commit()
