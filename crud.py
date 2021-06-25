@@ -165,16 +165,6 @@ def create_service_request(date_request, beneficiary, service_type):
     return request
 
 
-# def create_service_offered(volunteer, service_type):
-#     """Create a service offered by a volunteer. """
-
-#     offering = ServiceOffered(volunteer= volunteer, service_type = service_type)
-
-#     db.session.add(offering)
-#     db.session.commit()
-
-#     return offering
-
 def create_service_offered(volunteer, service_type):
     """Create a service offered by a volunteer user. """
 
@@ -184,6 +174,17 @@ def create_service_offered(volunteer, service_type):
     db.session.commit()
 
     return offering
+
+
+def look_for_offering(service_name, for_num_persons, date_of_request):
+    """Look for an service and offering based on the request. """
+
+    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons > for_num_persons)).first()
+    offering = ServiceOffered.query.filter_by(service_type=service).first()
+    volunteer = offering.volunteer
+    offering_volunteer = VolunteerAvailability.query.filter((VolunteerAvailability.volunteer == volunteer) & (VolunteerAvailability.availability > date_of_request)).first()
+
+    return offering_volunteer
 
 
 def create_service_type(service_name, for_num_persons):

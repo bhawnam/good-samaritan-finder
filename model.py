@@ -163,7 +163,7 @@ class ServiceOffered(db.Model):
 
     def __repr__(self):
         """ """
-        return f'<ServiceOffered offered_id={self.offered_id} user_id={self.volunteer_id}>'
+        return f'<ServiceOffered offered_id={self.offered_id} volunteer_id={self.volunteer_id}>'
 
     def to_dict(self):
         return {

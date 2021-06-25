@@ -126,10 +126,15 @@ def add_user_request():
         crud.onboard_beneficiary(beneficiary)
     # Create a service type and a service request to be added to the DB
     service_type = crud.create_service_type(service_name, for_num_persons)
-    service_request = crud.create_service_request(datetime.now(), beneficiary, service_type)
-    
+    date_of_request = datetime.now()
+    service_request = crud.create_service_request(date_of_request, beneficiary, service_type)
+    # Chek if there is an volunteer offering (with service) available for the desired request
+    is_offering_volunteer = crud.look_for_offering(service_name, for_num_persons, date_of_request)
     # return jsonify({service_request.request_id: service_request.to_dict()})
-    return jsonify({"success": True})
+    if is_offering_volunteer:
+        return jsonify({"success": True})
+    else:
+        return jsonify({"success": False})    
 
 
 @app.route('/add-offering', methods=["POST"])
