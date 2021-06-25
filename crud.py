@@ -170,11 +170,13 @@ def look_for_request(service_name, for_num_persons):
     """Look for a service and request based on the offering. """
 
     service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons < for_num_persons) & (ServiceType.is_offered == "false")).first()
-    request = ServiceRequest.query.filter((ServiceRequest.service_type == service) & (ServiceRequest.request_active== 't')).first()
-    request_beneficiary = request.beneficiary
-    
-    return request_beneficiary
-
+    if service:
+        request = ServiceRequest.query.filter((ServiceRequest.service_type == service) & (ServiceRequest.request_active== 't')).first()
+        if request:
+            request_beneficiary = request.beneficiary
+            return request_beneficiary
+    else:
+        return None 
 
 def create_service_offered(volunteer, service_type):
     """Create a service offered by a volunteer user. """
@@ -191,11 +193,14 @@ def look_for_offering(service_name, for_num_persons, date_of_request):
     """Look for a service and offering based on the request. """
 
     service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons > for_num_persons) & (ServiceType.is_offered == "true")).first()
-    offering = ServiceOffered.query.filter_by(service_type=service).first()
-    volunteer = offering.volunteer
-    offering_volunteer = VolunteerAvailability.query.filter((VolunteerAvailability.volunteer == volunteer) & (VolunteerAvailability.availability > date_of_request)).first()
-
-    return offering_volunteer
+    if service_name:
+        offering = ServiceOffered.query.filter_by(service_type=service).first()
+        if offering:
+            volunteer = offering.volunteer
+            offering_volunteer = VolunteerAvailability.query.filter((VolunteerAvailability.volunteer == volunteer) & (VolunteerAvailability.availability > date_of_request)).first()
+            return offering_volunteer
+    else: 
+        return None        
 
 
 def create_service_type(service_name, for_num_persons, is_offered):
