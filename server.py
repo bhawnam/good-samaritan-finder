@@ -169,6 +169,22 @@ def add_user_offering():
         return jsonify({"success" : False})    
 
 
+@app.route("/api/matched-requests", methods=["POST"])
+def show_matched_requests():
+    """Display the matched requests to the volunteer for approval. """
+
+    logged_user = request.get_json().get("loggedUser")
+    print(f"Logged user: {logged_user}")
+    # Get the user object from the users table
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    volunteer = crud.get_volunteer_by_user(user_in_db)
+    # Get all the service requests matching for this volunteer
+    matching_requests = crud.get_matching_requests_for_volunteer(volunteer)
+    print(f"Matchings {matching_requests}")
+
+    return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
+
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)

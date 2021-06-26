@@ -107,6 +107,21 @@ def get_offerings_by_volunteer(volunteer):
     return offerings
 
 
+def get_matching_requests_for_volunteer(volunteer):
+    """Get all matching requests for the volunteer. """
+    
+    matching_requests = []
+    requests = ServiceRequest.query.filter(ServiceRequest.request_active == 't').all()
+    offerings = get_offerings_by_volunteer(volunteer)
+    for offering in offerings:
+        for request in requests:
+            if ((request.service_type.service_name == offering.service_type.service_name) and 
+            (request.service_type.for_num_persons < offering.service_type.for_num_persons)):
+                matching_requests.append(request)
+
+    return matching_requests            
+    
+
 def create_volunteer_availability(availability, volunteer):
     """Create a volunteer timing availability. """
 
@@ -177,6 +192,7 @@ def look_for_request(service_name, for_num_persons):
             return request_beneficiary
     else:
         return None 
+
 
 def create_service_offered(volunteer, service_type):
     """Create a service offered by a volunteer user. """

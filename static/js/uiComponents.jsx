@@ -292,7 +292,7 @@ function BeneficiaryProfile(props){
   const [offeringfornumpersons, setOfferinForNumPersons] = React.useState("");
   const [availabledate, setAvailableDate] = React.useState("");
 
-  const {user, requests, offerings} = props
+  const {user, requests, offerings, matchedRequests} = props
 
   const requestsTableData = [];
   for (const request_id in requests){
@@ -315,7 +315,18 @@ function BeneficiaryProfile(props){
         <td>{currentOffering.for_num_persons}</td>
       </tr>
     );
-  }
+    }
+  const matchingRequestsTableData = [];
+  for (const request_id in matchedRequests){
+    let currentMatchingRequest = matchedRequests[request_id];
+    matchingRequestsTableData.push(
+      <tr key = {currentMatchingRequest.request_id}>
+        <td>{currentMatchingRequest.request_id}</td>
+        <td>{currentMatchingRequest.service_type} </td>
+        <td> {currentMatchingRequest.for_num_persons}</td>
+      </tr>
+    );
+  }  
 
   function handleRequestButton(){
     setRequestForm(true);
@@ -469,6 +480,20 @@ function BeneficiaryProfile(props){
       <button type="submit" className="btn"> Add </button>
       </form>
     ) : (null) }
+       <div className="matchedrequests">
+      <h6> Matched requests: </h6>
+      <table className="matchedrequeststable">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Service Type</th>
+            <th>For num persons</th>
+          </tr>
+        </thead>
+        <tbody>{matchingRequestsTableData}</tbody>
+      </table>
+    </div>
+    <button type="submit" className="btn"> Accept </button>
     </React.Fragment>
   );
 }

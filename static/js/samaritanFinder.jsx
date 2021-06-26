@@ -2,7 +2,8 @@ function App() {
 
   const [requests, setRequests] = React.useState({});
   const [offerings, setOfferings] = React.useState({});
-
+  const [matchedRequests, setMatchedRequests] = React.useState({});
+  
   const[loggedUser, setloggedUser] = React.useState("");
 
   React.useEffect(() => {
@@ -35,6 +36,22 @@ function App() {
     });
   }, [loggedUser]);
 
+
+  React.useEffect(() => {
+    fetch("api/matched-requests",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({loggedUser}),
+    })
+    .then((response) => response.json())
+    .then((setMatchedRequestsData) => {
+      setMatchedRequests(setMatchedRequestsData);
+    });
+  }, [loggedUser]);
+
   React.useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
@@ -61,7 +78,7 @@ function App() {
           <Register />
         </ReactRouterDOM.Route>
         <ReactRouterDOM.Route exact path="/welcome-beneficiary">
-          <BeneficiaryProfile user={loggedUser} requests={requests} offerings={offerings}/>
+          <BeneficiaryProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests}/>
         </ReactRouterDOM.Route>
         <div> Sorry Page Not found </div>
         </ReactRouterDOM.Switch>
