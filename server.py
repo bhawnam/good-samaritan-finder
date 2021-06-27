@@ -210,9 +210,12 @@ def process_accepted_requests():
     beneficiary_request = crud.get_beneficiary_request_by_id(request_id)
     # Update request to not active, add volunteer_id to it
     beneficiary_request = crud.update_beneficiary_request(volunteer, beneficiary_request)
-    # Update volunteer offering 
-    crud.update_volunteer_offering(beneficiary_request, volunteer)
+    # Update volunteer offering by updating the servicy type values
+    volunteer_offering = crud.update_volunteer_offering(beneficiary_request, volunteer)
 
+    return jsonify({"success": True})
+
+    
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)

@@ -334,17 +334,18 @@ function BeneficiaryProfile(props){
     );
     }
   const matchingRequestsTableData = [];
-  for (const request_id in matchedRequests){
-    let currentMatchingRequest = matchedRequests[request_id];
-    matchingRequestsTableData.push(
-      <tr key = {currentMatchingRequest.request_id}>
-        <td>{currentMatchingRequest.request_id}</td>
-        <td>{currentMatchingRequest.service_type} </td>
-        <td> {currentMatchingRequest.for_num_persons}</td>
-        <td> <button type="submit" className="btn" onClick={handleAcceptBtn(currentMatchingRequest.request_id)}> Accept </button>
-        </td>
-      </tr>
-    );
+  for (const currentMatchingRequest of Object.values(matchedRequests)){
+    // let currentMatchingRequest = matchedRequests[request_id];
+    const requestAcceptCard = (
+      <RequestAccept
+      key={currentMatchingRequest.request_id}
+      request_id={currentMatchingRequest.request_id}
+      service_type={currentMatchingRequest.service_type}
+      for_num_persons={currentMatchingRequest.for_num_persons}
+      handleAcceptRequest={handleAcceptBtn}
+      />
+      );
+      matchingRequestsTableData.push(requestAcceptCard);
   }  
 
 
@@ -363,9 +364,9 @@ function BeneficiaryProfile(props){
         response.json()
       .then((result) => {
         if ((result.success) == true){
-          alert("Thank you for providing your service. You will be reciving an email with the next steps.")
+          alert("Thank you for providing your service. You will be receiving an email with the next steps.")
       } else {
-        alert("!!")
+        alert("")
       }
       }); 
       });
@@ -538,5 +539,22 @@ function BeneficiaryProfile(props){
       </table>
     </div>
     </React.Fragment>
+  );
+}
+
+function RequestAccept(props){
+
+  const {request_id, handleAcceptRequest, service_type, for_num_persons} = props;
+
+  return (
+    <React.Fragment>
+    <tr key = {request_id}>
+    <td>{request_id}</td>
+    <td>{service_type} </td>
+    <td> {for_num_persons}</td>
+    <td> <button type="submit" className="btn" onClick={()=>handleAcceptRequest(request_id)}> Accept </button>
+    </td>
+  </tr>
+  </React.Fragment>
   );
 }
