@@ -324,9 +324,35 @@ function BeneficiaryProfile(props){
         <td>{currentMatchingRequest.request_id}</td>
         <td>{currentMatchingRequest.service_type} </td>
         <td> {currentMatchingRequest.for_num_persons}</td>
+        <td> <button type="submit" className="btn" onClick={handleAcceptBtn(currentMatchingRequest.request_id)}> Accept </button>
+        </td>
       </tr>
     );
   }  
+
+
+  function handleAcceptBtn(request_id){
+    console.log(request_id)
+    fetch("/accept-request",
+    {
+      method : "POST",
+      headers : 
+      {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({user, request_id}),
+      })
+      .then((response) => {
+        response.json()
+      .then((result) => {
+        if ((result.success) == true){
+          alert("Thank you for providing your service. You will be reciving an email with the next steps.")
+      } else {
+        alert("!!")
+      }
+      }); 
+      });
+  }
 
   function handleRequestButton(){
     setRequestForm(true);
@@ -480,6 +506,7 @@ function BeneficiaryProfile(props){
       <button type="submit" className="btn"> Add </button>
       </form>
     ) : (null) }
+    <br/>
        <div className="matchedrequests">
       <h6> Matched requests: </h6>
       <table className="matchedrequeststable">
@@ -493,7 +520,6 @@ function BeneficiaryProfile(props){
         <tbody>{matchingRequestsTableData}</tbody>
       </table>
     </div>
-    <button type="submit" className="btn"> Accept </button>
     </React.Fragment>
   );
 }

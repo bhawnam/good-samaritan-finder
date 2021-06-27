@@ -72,6 +72,23 @@ def get_requests_by_beneficiary(beneficiary):
     return req
 
 
+def get_beneficiary_request_by_id(request_id):
+    """Get the requests by a beneficiary user from DB. """
+
+    req = ServiceRequest.query.filter_by(request_id=request_id).first()
+    return req
+
+
+def update_beneficiary_request(volunteer, beneficiary_request):
+    """Update the request_active and volunteer assigned to the beneficiary request. """
+
+    beneficiary_request.request_active = False
+    beneficiary_request.volunteer = volunteer
+    db.session.add(beneficiary_request)
+    db.session.commit()
+
+    return beneficiary_request
+
 def create_volunteer(is_v_onboarded, user):    
     """Create a volunteer. """
 
@@ -121,7 +138,18 @@ def get_matching_requests_for_volunteer(volunteer):
 
     return matching_requests            
     
+def update_volunteer_offering(beneficiary_request, volunteer):
+    """Based on fulfilled request update volunteer's offering for num persons. """
 
+    volunteer_offering = ServiceOffered.query.filter((ServiceOffered.volunteer == volunteer) & (ServiceOffered.service_type.service_name==beneficiary_request.service_type.service_name)) 
+    for_num_persons  = volunteer_offering.for_num_persons - beneficiary_request.service_type.for_num_persons
+    volunteer_offering.for_num_persons = for_num_persons
+
+    db.session.add(volunteer_offering)
+    db.session.commit()
+
+    return volunteer_offering
+    
 def create_volunteer_availability(availability, volunteer):
     """Create a volunteer timing availability. """
 

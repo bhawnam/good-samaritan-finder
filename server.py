@@ -185,6 +185,22 @@ def show_matched_requests():
     return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
 
 
+@app.route("/accept-request", methods=["POST"])
+def process_accepted_requests():
+    """Process the request accepted by the volunteer. """
+
+    logged_user = request.get_json().get("user")
+    request_id = request.get_json().get("request_id")
+    # Get the user object from the users table
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    volunteer = crud.get_volunteer_by_user(user_in_db)
+    # Search the request by the id in the requests table
+    beneficiary_request = crud.get_beneficiary_request_by_id(request_id)
+    # Update request to not active, add volunteer_id to it
+    beneficiary_request = crud.update_beneficiary_request(volunteer, beneficiary_request)
+    # Update volunteer offering 
+    crud.update_volunteer_offering(beneficiary_request, volunteer)
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)
