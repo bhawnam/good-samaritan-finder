@@ -60,32 +60,32 @@ function App() {
   }, []);
 
   return (
-    <ReactRouterDOM.BrowserRouter>
-      <Navbar logo="" brand="Good Samaritan Finder" />
-      <div className="outer">
-        <div className="inner">
-        <ReactRouterDOM.Switch>  
-        <ReactRouterDOM.Route exact path="/">
-          <Homepage />
-        </ReactRouterDOM.Route>
-        <ReactRouterDOM.Route exact path="/login">
-          <Login />
-        </ReactRouterDOM.Route>
-        <ReactRouterDOM.Route exact path="/be-a-volunteer">
-          <Register />
-        </ReactRouterDOM.Route>  
-        <ReactRouterDOM.Route exact path="/be-a-beneficiary">
-          <Register />
-        </ReactRouterDOM.Route>
-        <ReactRouterDOM.Route exact path="/welcome-beneficiary">
-          <BeneficiaryProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests}/>
-        </ReactRouterDOM.Route>
-        <div> Sorry Page Not found </div>
-        </ReactRouterDOM.Switch>
-      </div>
-      <Footer />
-      </div>
-    </ReactRouterDOM.BrowserRouter>
+      <ReactRouterDOM.BrowserRouter>
+        <Navbar logo="/static/img/logo.png" brand="Good Samaritan Finder" />
+        <div>
+          <div>
+            <ReactRouterDOM.Switch>
+              <ReactRouterDOM.Route exact path="/">
+                <Homepage />
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/login">
+                <Login />
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/be-a-volunteer">
+                <Register />
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/be-a-beneficiary">
+                <Register />
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/welcome-beneficiary">
+                <BeneficiaryProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests}/>
+              </ReactRouterDOM.Route>
+              <div> Sorry Page Not found </div>
+            </ReactRouterDOM.Switch>
+          </div>
+        </div>
+        <Footer />
+      </ReactRouterDOM.BrowserRouter>
   );
 }
 

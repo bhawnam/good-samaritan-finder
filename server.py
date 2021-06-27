@@ -38,14 +38,26 @@ def nested_route(path, code):
 def user_login():
     """Process user login. """
 
-    email = request.get_json().get("email")
-    password = request.get_json().get("password")
-    username = request.get_json().get("username")
+    username_or_email = request.get_json().get("username_or_email")
+    username = ""
+    email = ""
 
-    user_in_db = crud.get_user_by_email(email)
+    if '@' in username_or_email:
+        email = username_or_email
+        user_in_db = crud.get_user_by_email(email)
+        if user_in_db:
+            username = user_in_db.display_name
+    else:
+        username = username_or_email
+        user_in_db = crud.get_user_by_displayname(username)
+        if user_in_db:
+            email = user_in_db.email
+
+    password = request.get_json().get("password")
+
     if user_in_db:
         if user_in_db.password == password:
-            return jsonify({"success":True})
+            return jsonify({"success": True, "username": username, "email": email})
 
     else:  
         return jsonify({"success":False})

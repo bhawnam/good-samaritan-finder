@@ -1,9 +1,30 @@
 function Homepage() {
   return (
-    <div id="home-banner">
-        <h1>Good Samaritan Finder</h1>
-        <p className="lead">Welcome to our site!</p>
-    </div>
+      <div id="homepage">
+        <div className="container-fluid">
+          <div>
+            <h3>Welcome to Good Samaritan Finder</h3>
+          </div>
+          <div>
+            <p>We are a non-profit organization connect volunteers and beneficiaries during unanticipated times. This
+            started out as a small effort to organize the work being taken up by Volunteers so, they can focus on
+            helping folks without being </p>
+          </div>
+          <div>
+            <blockquote className="twitter-tweet">
+              <a href="https://twitter.com/SonuSood/status/1391298808735174659?ref_src=twsrc%5Etfw">Tweet May 9, 2021</a>
+            </blockquote>
+          </div>
+          <div>
+            <blockquote className="blockquote">
+              <p className="mb-2">Thank you dear Allen for helping us with the much needed essentials to keep us
+              going during our most difficult times!</p>
+              <footer className="blockquote-footer">Richard<cite title="Source Title">Dallas, Texas</cite>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
   );
 }
 
@@ -32,8 +53,7 @@ function Navbar(props) {
     <nav className="navbar">
       <ReactRouterDOM.Link
         to="/" className="navbar-brand">
-        <img src={logo} alt="GSF" height="25" />
-        <span>{brand}</span>
+        <img src={logo} alt={brand} height="40" />
       </ReactRouterDOM.Link>
 
       <div className="nav-item">
@@ -58,7 +78,7 @@ function Navbar(props) {
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
           to="/be-a-beneficiary" className="nav-link">
-          Be a beneficiary
+          Be a Beneficiary
         </ReactRouterDOM.Link>
         <ReactRouterDOM.Link
           to="/be-a-volunteer" className="nav-link">
@@ -72,6 +92,7 @@ function Navbar(props) {
 
 function Login(){
 
+  const [username_or_email, setUsernameOrEmail] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -93,15 +114,16 @@ function Login(){
       {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({username, email, password}),
+      body: JSON.stringify({username_or_email, password}),
       }).then((response) => {
       response.json().then((result) => {
         if ((result.success) == false){
           setErrormessage(true);
-          setEmail("");
           setPassword("");
-          setUsername("");
+          setUsernameOrEmail("");
         } else {
+          setEmail(result.email)
+          setUsername(result.username)
           history.push("/welcome-beneficiary");
         }
       });
@@ -114,13 +136,8 @@ function Login(){
        <h3>Log in</h3>
 
       <div className="form-login">
-        <label>Username </label> <br/>
-        <input type="text" className="form-input" value={username} onChange={(event) => setUsername(event.target.value)} placeholder="Enter username" required/>
-      </div> 
-
-      <div className="form-login">
-        <label>Email </label> <br/>
-        <input type="email" className="form-input" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Enter email" required/>
+        <label>Username or Email </label> <br/>
+        <input type="text" className="form-input" value={username_or_email} onChange={(event) => setUsernameOrEmail(event.target.value)} placeholder="Enter username or email" required/>
       </div>
 
       <div className="form-login">

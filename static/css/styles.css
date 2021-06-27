@@ -40,9 +40,10 @@ a:link{
     font-family: sans-serif;
   }
   
-  body, html, .App, #root, .outer {
+  html, .App, #root, .outer {
     width: 100%;
     height: 100%;
+    background-color: floralwhite;
   }
   
   
@@ -93,4 +94,11 @@ a:link{
     border: 1px solid;
     margin-top: 5px;
 }
+
+  #homepage{
+    min-height: 79vh;
+    display: flex;
+    font-weight: 400;
+    font-family: sans-serif;
+  }
 
