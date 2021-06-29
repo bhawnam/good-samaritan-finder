@@ -62,8 +62,8 @@ def user_login():
         if user_in_db.password == password:
             return jsonify({"success": True, "username": username, "email": email})
 
-    else:  
-        return jsonify({"success":False})
+        else:  
+            return jsonify({"success":False})
 
 
 @app.route('/register-user', methods=["POST"])
@@ -205,7 +205,6 @@ def show_matched_requests():
     volunteer = crud.get_volunteer_by_user(user_in_db)
     # Get all the service requests matching for this volunteer
     matching_requests = crud.get_matching_requests_for_volunteer(volunteer)
-    print(f"Matchings {matching_requests}")
 
     return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
 
