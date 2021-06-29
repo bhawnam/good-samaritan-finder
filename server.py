@@ -8,6 +8,9 @@ import model
 import crud
 import time
 
+import smtplib
+from email.message import EmailMessage
+
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
@@ -223,6 +226,25 @@ def process_accepted_requests():
     # Update volunteer offering by updating the servicy type values
     volunteer_offering = crud.update_volunteer_offering(beneficiary_request, volunteer)
 
+
+    # creates SMTP session
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    
+    # start TLS for security
+    s.starttls()
+    
+    # Authentication
+    s.login("goodsamaritanfinder@gmail.com", "")
+    
+    # message to be sent
+    message = "Hello this is me testing"
+    
+    # sending the mail
+    s.sendmail("goodsamaritanfinder@gmail.com", "bhawna.bm@gmail.com", message)
+    
+    # terminating the session
+    s.quit()
+    
     return jsonify({"success": True})
 
 
