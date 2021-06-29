@@ -135,12 +135,14 @@ def add_user_request():
     # For user(ben)in beneficiaries table, set onboarded to True
     beneficiary = crud.get_beneficiary_by_user(user_in_db)
     if beneficiary:
-        crud.onboard_beneficiary(beneficiary)
+        beneficiary = crud.onboard_beneficiary(beneficiary)
+    else:
+        beneficiary = crud.create_beneficiary(True, user_in_db)
     # Create a service type and a service request to be added to the DB
     service_type = crud.create_service_type(service_name, for_num_persons, is_offered=False)
     date_of_request = datetime.now()
     service_request = crud.create_service_request(date_of_request, beneficiary, service_type)
-    # Chek if there is an volunteer offering (with service) available for the desired request
+    # Check if there is a volunteer offering (with service) available for the desired request
     is_offering_volunteer = crud.look_for_offering(service_name, for_num_persons, date_of_request)
     # return jsonify({service_request.request_id: service_request.to_dict()})
     if is_offering_volunteer:
@@ -166,12 +168,20 @@ def add_user_offering():
     # For user(vol)in volunteers table, set onboarded to True
     volunteer = crud.get_volunteer_by_user(user_in_db)
     if volunteer:
-        crud.onboard_volunteer(volunteer)
+        volunteer = crud.onboard_volunteer(volunteer)
+    else:
+        volunteer = crud.create_volunteer(True, user_in_db)
     # Create volunteer availability in timings table
     volunteer_timing = crud.create_volunteer_availability(available_date, volunteer)    
-    # Create a service type and service offering to be added to the DB
-    service_type = crud.create_service_type(service_name, for_num_persons, is_offered=True)
-    service_offering = crud.create_service_offered(volunteer, service_type)
+    # If the service exists by that volunteer, just update for_num_persons
+    # Else, create a service type and service offering to be added to the DB
+    is_service = crud.check_existing_service(volunteer, service_name)
+    print(f"is_service {is_service}")
+    if is_service: 
+        service_offering = crud.update_service_offering(volunteer, service_name, for_num_persons)
+    else:
+        service_type = crud.create_service_type(service_name, for_num_persons, is_offered=True)
+        service_offering = crud.create_service_offered(volunteer, service_type)
     
     is_request_beneficiary = crud.look_for_request(service_name, for_num_persons)
     # return jsonify({service_request.request_id: service_request.to_dict()})
@@ -215,7 +225,7 @@ def process_accepted_requests():
 
     return jsonify({"success": True})
 
-    
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)

@@ -263,7 +263,32 @@ def create_service_type(service_name, for_num_persons, is_offered):
     return service_type
 
 
-if __name__ == '__main__':
+def check_existing_service(volunteer, service_name):
+    """Check if the service is already being offered by the volunteer. """
 
+    service = ServiceType.query.filter(ServiceType.service_name == service_name).first()
+    volunteer_offerings = ServiceOffered.query.filter_by(volunteer= volunteer).all()
+    for volunteer_offering in volunteer_offerings:
+        if volunteer_offering.service_type.service_name == service.service_name:
+            return True
+        else:
+            return False
+
+
+def update_service_offering(volunteer, service_name, for_num_persons):
+    """ Update the num persons value for the offering by that volunteer. """
+
+    offerings = ServiceOffered.query.filter_by(volunteer= volunteer).all()
+    for offering in offerings:
+        print(f"{offering.service_type.service_name.name} == {service_name} {offering.service_type.service_name.name == service_name}")
+        if offering.service_type.service_name.name == service_name:
+            offering.service_type.for_num_persons = offering.service_type.for_num_persons + int(for_num_persons)
+            db.session.add(offering)
+            db.session.commit()
+
+            return offering
+
+
+if __name__ == '__main__':
     from server import app
     connect_to_db(app)    
