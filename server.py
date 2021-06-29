@@ -225,18 +225,47 @@ def process_accepted_requests():
     # Update volunteer offering by updating the servicy type values
     volunteer_offering = crud.update_volunteer_offering(beneficiary_request, volunteer)
 
-    # creates SMTP session
-    s = smtplib.SMTP('smtp.gmail.com', 587) 
-    # start TLS for security
-    s.starttls() 
-    # Authentication
-    s.login("goodsamaritanfinder@gmail.com", os.environ['LOGIN_PASSWORD'])
-    # message to be sent
-    message = "Hello this is me testing"
-    # sending the mail
-    s.sendmail("goodsamaritanfinder@gmail.com", "bhawna.bm@gmail.com", message)
-    # terminating the session
-    s.quit()
+    #Get the email address and names of volunteers and beneficiaries and send them confirmation emails.    
+    beneficiary_name = beneficiary_request.beneficiary.user.first_name
+    print(f"name {beneficiary_name}")
+    beneficiary_email = beneficiary_request.beneficiary.user.email
+    print(f"email {beneficiary_email}")
+
+    volunteer_name = beneficiary_request.volunteer.user.first_name
+    print(f"name {volunteer_name}")
+    volunteer_email = beneficiary_request.volunteer.user.email
+    print(f"email {volunteer_email}")
+
+    destination_list = [beneficiary_email, volunteer_email]
+
+    for destination in destination_list:
+        if destination == beneficiary_email:
+    # Create SMTP session
+            s = smtplib.SMTP('smtp.gmail.com', 587) 
+            # Start TLS for security
+            s.starttls() 
+            # Authentication with sender email account
+            s.login("goodsamaritanfinder@gmail.com", os.environ['LOGIN_PASSWORD'])
+            # Message to be sent to the users
+            message = f"Hello {beneficiary_name}. Thank you for your request. We have found a volunteer to help you out. You will be recieving your requested item tomorrow."
+            # Sending the mail
+            s.sendmail("goodsamaritanfinder@gmail.com", beneficiary_email, message)
+            # Terminating the session
+            s.quit()
+
+        else:
+            s = smtplib.SMTP('smtp.gmail.com', 587) 
+            # Start TLS for security
+            s.starttls() 
+            # Authentication with sender email account
+            s.login("goodsamaritanfinder@gmail.com", os.environ['LOGIN_PASSWORD'])
+            # Message to be sent to the users
+            message = f"Hello {volunteer_name}. Thank you for helping out with a request. Here are the beneficiary details for your drop-off tomorrow."
+            # Sending the mail
+            s.sendmail("goodsamaritanfinder@gmail.com", volunteer_email, message)
+            # Terminating the session
+            s.quit()
+
     
     return jsonify({"success": True})
 
