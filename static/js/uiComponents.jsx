@@ -124,7 +124,7 @@ function Login(){
         } else {
           setEmail(result.email)
           setUsername(result.username)
-          history.push("/welcome-beneficiary");
+          history.push("/welcome-user");
         }
       });
     });
@@ -298,7 +298,7 @@ function Footer() {
   );
 }
 
-function BeneficiaryProfile(props){
+function UserProfile(props){
 
   const [requestForm, setRequestForm] = React.useState(false);
   const [requestservicetype, setRequestServiceType] = React.useState("");
@@ -366,7 +366,7 @@ function BeneficiaryProfile(props){
         if ((result.success) == true){
           alert("Thank you for providing your service. You will be receiving an email with the next steps.")
       } else {
-        alert("")
+        alert("Sorry something went wrong!")
       }
       }); 
       });

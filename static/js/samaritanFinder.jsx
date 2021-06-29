@@ -77,8 +77,8 @@ function App() {
               <ReactRouterDOM.Route exact path="/be-a-beneficiary">
                 <Register />
               </ReactRouterDOM.Route>
-              <ReactRouterDOM.Route exact path="/welcome-beneficiary">
-                <BeneficiaryProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests}/>
+              <ReactRouterDOM.Route exact path="/welcome-user">
+                <UserProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests}/>
               </ReactRouterDOM.Route>
               <div> Sorry Page Not found </div>
             </ReactRouterDOM.Switch>
