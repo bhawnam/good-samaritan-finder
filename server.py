@@ -266,7 +266,42 @@ def process_accepted_requests():
             # Terminating the session
             s.quit()
 
-    
+    return jsonify({"success": True})
+
+
+@app.route("/api/show-feedback-requests", methods=["POST"])
+def display_beneficiary_feedback_options():
+    """Display the option to provide feedback message for the offered service. """
+
+    logged_user = request.get_json().get("loggedUser")
+    # Get the user object from the users table
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    # For user(ben) in beneficiaries table, get all ben object
+    beneficiary = crud.get_beneficiary_by_user(user_in_db)
+    # Get all the fulfilled service requests of this beneficiary
+    fulfilled_requests = crud.get_fulfilled_requests_of_beneficiary(beneficiary)
+
+    return jsonify({fulfilled_request.request_id: fulfilled_request.to_dict() for fulfilled_request in fulfilled_requests})
+
+
+@app.route("/accept-feedback", methods=["POST"])
+def process_beneficiary_feedback():
+    """Process the feedback message by the beneficiary for the offered service. """
+
+    logged_user = request.get_json().get("user")
+    print(f"User {logged_user}")
+    request_id = request.get_json().get("feedbackRequestID")
+    feedback_message = request.get_json().get("feedbackMessage")
+    print(f"Msg {feedback_message}")
+    # Get user object by displayname  
+    user_in_db = crud.get_user_by_displayname(logged_user)
+    # For user(ben)in beneficiaries table, set onboarded to True
+    beneficiary = crud.get_beneficiary_by_user(user_in_db)
+    # Search the request by the id in the requests table
+    beneficiary_request = crud.get_beneficiary_request_by_id(request_id)
+    # Create the beneficiary rating with the feedback message
+    beneficiary_rating = crud.create_beneficiary_rating(feedback_message, beneficiary, beneficiary_request)
+
     return jsonify({"success": True})
 
 

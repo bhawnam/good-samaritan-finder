@@ -309,7 +309,13 @@ function UserProfile(props){
   const [offeringfornumpersons, setOfferinForNumPersons] = React.useState("");
   const [availabledate, setAvailableDate] = React.useState("");
 
-  const {user, requests, offerings, matchedRequests} = props
+  const [feedbackForm, setFeedbackForm] = React.useState(false);
+  const [feedbackMessage, setFeedbackMessage] = React.useState("");
+  const [feedbackRequestID, setFeedbackRequestID] = React.useState("");
+
+  const [disable, setDisable] = React.useState(false);
+
+  const {user, requests, offerings, matchedRequests, fulfilledRequests} = props
 
   const requestsTableData = [];
   for (const request_id in requests){
@@ -347,7 +353,20 @@ function UserProfile(props){
       );
       matchingRequestsTableData.push(requestAcceptCard);
   }  
-
+  const fulfilledRequestsTableData = [];
+  for (const currentFulfilledRequest of Object.values(fulfilledRequests)){
+    const requestFeedbackCard = (
+      <RequestFeedback
+      key={currentFulfilledRequest.request_id}
+      request_id={currentFulfilledRequest.request_id}
+      service_type={currentFulfilledRequest.service_type}
+      for_num_persons={currentFulfilledRequest.for_num_persons}
+      handleRequestFeedbackBtn={handleFeedbackButton}
+      disableBtn={disable}
+      />
+      );
+      fulfilledRequestsTableData.push(requestFeedbackCard);
+  }  
 
   function handleAcceptBtn(request_id){
     console.log(request_id)
@@ -367,6 +386,35 @@ function UserProfile(props){
           alert("Thank you for providing your service. You will be receiving an email with the next steps.")
       } else {
         alert("Sorry something went wrong!")
+      }
+      }); 
+      });
+  }
+
+  function handleFeedbackButton(request_id){
+    setFeedbackForm(true);
+    setFeedbackRequestID(request_id);
+    setDisable(true);
+  }
+
+  function handleFeedbackResponse(){
+    fetch("/accept-feedback",
+    {
+      method : "POST",
+      headers : 
+      {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({user, feedbackRequestID, feedbackMessage}),
+      })
+      .then((response) => {
+        response.json()
+      .then((result) => {
+        if ((result.success) == true){
+          setFeedbackForm(false);
+          alert("Thank you");
+      } else {
+        alert("Sorry something went wrong!");
       }
       }); 
       });
@@ -538,6 +586,29 @@ function UserProfile(props){
         <tbody>{matchingRequestsTableData}</tbody>
       </table>
     </div>
+    <br/>
+       <div className="fulfilledrequests">
+      <h6> Give feedback for fulfilled requests: </h6>
+      <table className="fulfilledrequeststable">
+        <thead>
+          <tr>
+            <th>Request ID</th>
+            <th>Service Type</th>
+          </tr>
+        </thead>
+        <tbody>{fulfilledRequestsTableData}</tbody>
+      </table>
+    </div>
+    {feedbackForm ? (
+      <form onSubmit={handleFeedbackResponse}>
+        <br/>
+        <div className="form-feedback">
+        <label> Feedback Message</label>
+        <input type="textarea" className="form-input" value={feedbackMessage} onChange={(event) => setFeedbackMessage(event.target.value)} required/>
+      </div>
+      <button type="submit" className="btn"> Submit </button> 
+      </form>
+    ): (null) }
     </React.Fragment>
   );
 }
@@ -553,6 +624,22 @@ function RequestAccept(props){
     <td>{service_type} </td>
     <td> {for_num_persons}</td>
     <td> <button type="submit" className="btn" onClick={()=>handleAcceptRequest(request_id)}> Accept </button>
+    </td>
+  </tr>
+  </React.Fragment>
+  );
+}
+
+function RequestFeedback(props){
+
+  const {request_id, handleRequestFeedbackBtn, service_type, disableBtn} = props;
+
+  return (
+    <React.Fragment>
+    <tr key = {request_id}>
+    <td>{request_id}</td>
+    <td>{service_type} </td>
+    <td> <button type="submit" className="btn" disabled={disableBtn} onClick={()=>handleRequestFeedbackBtn(request_id)}> Give Feedback </button>
     </td>
   </tr>
   </React.Fragment>

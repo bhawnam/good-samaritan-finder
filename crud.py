@@ -79,6 +79,13 @@ def get_beneficiary_request_by_id(request_id):
     return req
 
 
+def get_fulfilled_requests_of_beneficiary(beneficiary):
+    """Get all requests by a beneficiary user from DB. """
+
+    req = ServiceRequest.query.filter((ServiceRequest.beneficiary==beneficiary) & (ServiceRequest.request_active == 'f')).all()
+    return req
+
+
 def update_beneficiary_request(volunteer, beneficiary_request):
     """Update the request_active and volunteer assigned to the beneficiary request. """
 
@@ -166,10 +173,10 @@ def create_volunteer_availability(availability, volunteer):
     return timing
 
 
-def create_beneficiary_rating(rating, beneficiary, request):
+def create_beneficiary_rating(feedback_message, beneficiary, request):
     """Create a rating on a request by a beneficiary."""
 
-    rating = BeneficiaryRating(rating = rating, beneficiary = beneficiary, request = request)
+    rating = BeneficiaryRating(feedback_message = feedback_message, beneficiary = beneficiary, request = request)
 
     db.session.add(rating)
     db.session.commit()

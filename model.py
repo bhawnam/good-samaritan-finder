@@ -86,6 +86,7 @@ class BeneficiaryRating(db.Model):
 
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     rating = db.Column(db.Integer)
+    feedback_message = db.Column(db.Text)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     request_id =  db.Column(db.Integer, db.ForeignKey('requests.request_id'))
 
@@ -94,7 +95,7 @@ class BeneficiaryRating(db.Model):
 
     def __repr__(self):
         """ """
-        return f'<BeneficiaryRating beneficiary_id={self.beneficiary_id} rating={self.rating}>'
+        return f'<BeneficiaryRating beneficiary_id={self.beneficiary_id} feedback_message={self.feedback_message}>'
 
 
 class VolunteerRating(db.Model):

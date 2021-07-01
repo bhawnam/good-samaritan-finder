@@ -3,6 +3,7 @@ function App() {
   const [requests, setRequests] = React.useState({});
   const [offerings, setOfferings] = React.useState({});
   const [matchedRequests, setMatchedRequests] = React.useState({});
+  const [fulfilledRequests, setFulfilledRequests] = React.useState({});
   
   const[loggedUser, setloggedUser] = React.useState("");
 
@@ -53,6 +54,21 @@ function App() {
   }, [loggedUser]);
 
   React.useEffect(() => {
+    fetch("api/show-feedback-requests",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({loggedUser}),
+    })
+    .then((response) => response.json())
+    .then((setFulfilledRequestsData) => {
+      setFulfilledRequests(setFulfilledRequestsData);
+    });
+  }, [loggedUser]);
+
+  React.useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
       setloggedUser(JSON.parse(user));
@@ -78,7 +94,7 @@ function App() {
                 <Register />
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/welcome-user">
-                <UserProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests}/>
+                <UserProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests} fulfilledRequests={fulfilledRequests}/>
               </ReactRouterDOM.Route>
               <div> Sorry Page Not found </div>
             </ReactRouterDOM.Switch>
