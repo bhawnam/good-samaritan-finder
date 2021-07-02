@@ -37,7 +37,6 @@ function App() {
     });
   }, [loggedUser]);
 
-
   React.useEffect(() => {
     fetch("api/matched-requests",
     {

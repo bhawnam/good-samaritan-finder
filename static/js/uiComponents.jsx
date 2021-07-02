@@ -202,6 +202,7 @@ function Register(){
       });
     });
   }
+
   return (
     <React.Fragment>
     <form onSubmit={registerUser}>
@@ -251,7 +252,7 @@ function Register(){
       <p className="forgot-password">
         <a href="#"> Already registered? </a>
       </p>
-  </form>
+    </form>
       {errormessage && <form onSubmit={() => setErrormessage(true)}> 
       <h6> Sorry the username is already registered with us.
             Please sign in. </h6> 
@@ -259,6 +260,7 @@ function Register(){
     </React.Fragment>
   );
 }
+
 
 function Footer() {
 
@@ -297,6 +299,7 @@ function Footer() {
     </div>
   );
 }
+
 
 function UserProfile(props){
 
@@ -612,6 +615,7 @@ function UserProfile(props){
     </React.Fragment>
   );
 }
+
 
 function RequestAccept(props){
 

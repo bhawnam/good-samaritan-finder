@@ -240,7 +240,7 @@ def process_accepted_requests():
 
     for destination in destination_list:
         if destination == beneficiary_email:
-    # Create SMTP session
+            # Create SMTP session
             s = smtplib.SMTP('smtp.gmail.com', 587) 
             # Start TLS for security
             s.starttls() 
@@ -254,6 +254,7 @@ def process_accepted_requests():
             s.quit()
 
         else:
+            # Create SMTP session
             s = smtplib.SMTP('smtp.gmail.com', 587) 
             # Start TLS for security
             s.starttls() 

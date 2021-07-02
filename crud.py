@@ -195,19 +195,6 @@ def create_volunteer_rating(rating, volunteer, response):
     return rating
 
 
-# def create_service_request(date_request, date_fulfilled, beneficiary, volunteer, service_type):
-#     """Create a service request by a beneficiary. """
-
-#     request = ServiceRequest(date_of_request = date_request, 
-#                             date_of_fulfillment = date_fulfilled, 
-#                             beneficiary = beneficiary, 
-#                             volunteer = volunteer, 
-#                             service_type = service_type)
-
-#     db.session.add(request)
-#     db.session.commit()
-
-#     return request
 def create_service_request(date_request, beneficiary, service_type):
     """Create a service request by a beneficiary. """
 

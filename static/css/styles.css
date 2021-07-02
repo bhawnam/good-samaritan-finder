@@ -4,8 +4,8 @@
     display: inline;
     margin: 1px 10px;
     float: right;
-
 }
+
 a:link{
     text-decoration: none;
 }
@@ -21,7 +21,6 @@ a:link{
   margin: 5px 10px;
   padding-bottom:30px;
   float: left;
-
 }
 
 .footer{
@@ -45,7 +44,6 @@ a:link{
     height: 100%;
     background-color: floralwhite;
   }
-  
   
   .outer {
     display: flex;
