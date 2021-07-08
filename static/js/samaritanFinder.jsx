@@ -5,7 +5,21 @@ function App() {
   const [matchedRequests, setMatchedRequests] = React.useState({});
   const [fulfilledRequests, setFulfilledRequests] = React.useState({});
   
-  const[loggedUser, setloggedUser] = React.useState("");
+  // const[loggedUser, setloggedUser] = React.useState("");
+  const [username, setUsername] = React.useState("");
+
+  React.useEffect(() => {
+    if (username){
+    localStorage.setItem("user", JSON.stringify(username));
+  }}, [username]);
+
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      // setloggedUser(JSON.parse(user));
+      setUsername(JSON.parse(user));
+    }
+  }, []);
 
   React.useEffect(() => {
     fetch("api/requests",
@@ -14,13 +28,13 @@ function App() {
       headers: {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({loggedUser}),
+      body: JSON.stringify({username}),
     })
     .then((response) => response.json())
     .then((requestsData) => {
       setRequests(requestsData);
     });
-  }, [loggedUser]);
+  }, [username]);
 
   React.useEffect(() => {
     fetch("api/offerings",
@@ -29,13 +43,13 @@ function App() {
       headers: {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({loggedUser}),
+      body: JSON.stringify({username}),
     })
     .then((response) => response.json())
     .then((offeringsData) => {
       setOfferings(offeringsData);
     });
-  }, [loggedUser]);
+  }, [username]);
 
   React.useEffect(() => {
     fetch("api/matched-requests",
@@ -44,13 +58,13 @@ function App() {
       headers: {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({loggedUser}),
+      body: JSON.stringify({username}),
     })
     .then((response) => response.json())
     .then((setMatchedRequestsData) => {
       setMatchedRequests(setMatchedRequestsData);
     });
-  }, [loggedUser]);
+  }, [username]);
 
   React.useEffect(() => {
     fetch("api/show-feedback-requests",
@@ -59,20 +73,13 @@ function App() {
       headers: {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({loggedUser}),
+      body: JSON.stringify({username}),
     })
     .then((response) => response.json())
     .then((setFulfilledRequestsData) => {
       setFulfilledRequests(setFulfilledRequestsData);
     });
-  }, [loggedUser]);
-
-  React.useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setloggedUser(JSON.parse(user));
-    }
-  }, []);
+  }, [username]);
 
   return (
       <ReactRouterDOM.BrowserRouter>
@@ -84,7 +91,7 @@ function App() {
                 <Homepage />
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/login">
-                <Login />
+                <Login username={username} setUsername={setUsername}/>
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/be-a-volunteer">
                 <Register />
@@ -93,7 +100,7 @@ function App() {
                 <Register />
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/welcome-user">
-                <UserProfile user={loggedUser} requests={requests} offerings={offerings} matchedRequests={matchedRequests} fulfilledRequests={fulfilledRequests}/>
+                <UserProfile username={username} requests={requests} offerings={offerings} matchedRequests={matchedRequests} fulfilledRequests={fulfilledRequests}/>
               </ReactRouterDOM.Route>
               <div> Sorry Page Not found </div>
             </ReactRouterDOM.Switch>

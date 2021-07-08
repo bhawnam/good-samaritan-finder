@@ -90,10 +90,10 @@ function Navbar(props) {
 }
 
 
-function Login(){
+function Login(props){
 
   const [username_or_email, setUsernameOrEmail] = React.useState("");
-  const [username, setUsername] = React.useState("");
+  // const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   
@@ -101,9 +101,10 @@ function Login(){
 
   let history  = ReactRouterDOM.useHistory();
 
-  React.useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(username));
-  }, [username]);
+  const {username, setUsername} = props;
+  // React.useEffect(() => {
+  //   localStorage.setItem("user", JSON.stringify(username));
+  // }, [username]);
 
   function processUserLogin(event){ 
     event.preventDefault();
@@ -318,7 +319,7 @@ function UserProfile(props){
 
   const [disable, setDisable] = React.useState(false);
 
-  const {user, requests, offerings, matchedRequests, fulfilledRequests} = props
+  const {username, requests, offerings, matchedRequests, fulfilledRequests} = props
 
   const requestsTableData = [];
   for (const request_id in requests){
@@ -492,7 +493,7 @@ function UserProfile(props){
 
   return (
     <React.Fragment>
-    <h3> Welcome {user}</h3>
+    <h3> Welcome {username}</h3>
     <div className="services">
     <div className="userservices">
       <h6> Your requests: </h6>

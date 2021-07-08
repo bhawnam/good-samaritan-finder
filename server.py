@@ -97,7 +97,7 @@ def user_registration():
 def get_beneficiary_requests():
     """Get a list of the beneficiary requests. """
 
-    logged_user = request.get_json().get("loggedUser")
+    logged_user = request.get_json().get("username")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
     # For user(ben) in beneficiaries table, get all requests
@@ -112,7 +112,7 @@ def get_beneficiary_requests():
 def get_beneficiary_offerings():
     """Get a list of the beneficiary offerings. """
 
-    logged_user = request.get_json().get("loggedUser")
+    logged_user = request.get_json().get("username")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
     # For user(vol) in volunteers table, get all offerings
@@ -131,7 +131,7 @@ def add_user_request():
     print(f"Service type {service_name}" )
     for_num_persons = request.get_json().get("requestfornumpersons")
     print(f"Number {for_num_persons}" )
-    logged_user = request.get_json().get("user")
+    logged_user = request.get_json().get("username")
     print(f"User {logged_user}")
     # Get user object by displayname  
     user_in_db = crud.get_user_by_displayname(logged_user)
@@ -164,7 +164,7 @@ def add_user_offering():
     print(f"Number {for_num_persons}" )
     available_date = request.get_json().get("availabledate")
     print(f"Date {available_date}")
-    logged_user = request.get_json().get("user")
+    logged_user = request.get_json().get("username")
     print(f"User {logged_user}")
     # Get user object by displayname  
     user_in_db = crud.get_user_by_displayname(logged_user)
@@ -198,7 +198,7 @@ def add_user_offering():
 def show_matched_requests():
     """Display the matched requests to the volunteer for approval. """
 
-    logged_user = request.get_json().get("loggedUser")
+    logged_user = request.get_json().get("username")
     print(f"Logged user: {logged_user}")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
@@ -213,7 +213,7 @@ def show_matched_requests():
 def process_accepted_requests():
     """Process the request accepted by the volunteer. """
 
-    logged_user = request.get_json().get("user")
+    logged_user = request.get_json().get("username")
     request_id = request.get_json().get("request_id")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
@@ -274,7 +274,7 @@ def process_accepted_requests():
 def display_beneficiary_feedback_options():
     """Display the option to provide feedback message for the offered service. """
 
-    logged_user = request.get_json().get("loggedUser")
+    logged_user = request.get_json().get("username")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
     # For user(ben) in beneficiaries table, get all ben object
@@ -289,7 +289,7 @@ def display_beneficiary_feedback_options():
 def process_beneficiary_feedback():
     """Process the feedback message by the beneficiary for the offered service. """
 
-    logged_user = request.get_json().get("user")
+    logged_user = request.get_json().get("username")
     print(f"User {logged_user}")
     request_id = request.get_json().get("feedbackRequestID")
     feedback_message = request.get_json().get("feedbackMessage")
