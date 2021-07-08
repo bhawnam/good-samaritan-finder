@@ -372,6 +372,10 @@ function UserProfile(props){
       fulfilledRequestsTableData.push(requestFeedbackCard);
   }  
 
+  function refreshPage(){
+    window.location.reload(false);
+  }
+
   function handleAcceptBtn(request_id){
     console.log(request_id)
     fetch("/accept-request",
@@ -447,11 +451,13 @@ function UserProfile(props){
           setRequestServiceType("");
           setRequestForNumPersons("");
           setRequestForm(false);
+          refreshPage();
         } else if ((result.success == false)){
           alert("Thank you for your request! We will find a matching volunteer")
           setRequestServiceType("");
           setRequestForNumPersons("");
           setRequestForm(false);
+          refreshPage();
         } else {
           alert("Sorry there was an error!");
           }
@@ -483,6 +489,7 @@ function UserProfile(props){
         setOfferinForNumPersons("");
         setAvailableDate("");
         setOfferingForm(false);
+        refreshPage();
       }
       else if ((result.success) == false){
         alert("Thank you for your offering! We will find a matching request")
@@ -490,6 +497,7 @@ function UserProfile(props){
         setOfferinForNumPersons("");
         setAvailableDate("");
         setOfferingForm(false);
+        refreshPage();
       }
       else {
         alert("Sorry there was an error!")
