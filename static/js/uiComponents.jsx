@@ -381,7 +381,7 @@ function UserProfile(props){
       {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({user, request_id}),
+      body: JSON.stringify({username, request_id}),
       })
       .then((response) => {
         response.json()
@@ -409,7 +409,7 @@ function UserProfile(props){
       {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({user, feedbackRequestID, feedbackMessage}),
+      body: JSON.stringify({username, feedbackRequestID, feedbackMessage}),
       })
       .then((response) => {
         response.json()
@@ -437,7 +437,7 @@ function UserProfile(props){
       {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({user, requestservicetype, requestfornumpersons}),
+      body: JSON.stringify({username, requestservicetype, requestfornumpersons}),
       })
       .then((response) => {
       response.json()
@@ -449,6 +449,9 @@ function UserProfile(props){
           setRequestForm(false);
         } else if ((result.success == false)){
           alert("Thank you for your request! We will find a matching volunteer")
+          setRequestServiceType("");
+          setRequestForNumPersons("");
+          setRequestForm(false);
         } else {
           alert("Sorry there was an error!");
           }
@@ -469,7 +472,7 @@ function UserProfile(props){
       {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({user, offeringservicetype, offeringfornumpersons, availabledate}),
+      body: JSON.stringify({username, offeringservicetype, offeringfornumpersons, availabledate}),
     })
     .then((response) => {
     response.json()
@@ -483,6 +486,10 @@ function UserProfile(props){
       }
       else if ((result.success) == false){
         alert("Thank you for your offering! We will find a matching request")
+        setOfferingServiceType("");
+        setOfferinForNumPersons("");
+        setAvailableDate("");
+        setOfferingForm(false);
       }
       else {
         alert("Sorry there was an error!")
