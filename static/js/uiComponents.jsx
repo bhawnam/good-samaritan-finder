@@ -30,16 +30,16 @@ function Homepage() {
 
 
 function Navbar(props) {
-  const { logo, brand } = props;
+  const { logo, brand, isLogged, setisLogged} = props;
 
-  const [isLogged, setisLogged] = React.useState(false);
+  // const [isLogged, setisLogged] = React.useState(false);
 
-  React.useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-      setisLogged(true);
-    }
-  }, [isLogged]);
+  // React.useEffect(() => {
+  //   const user = localStorage.getItem("user");
+  //   if (user) {
+  //     setisLogged(true);
+  //   }
+  // }, [isLogged]);
 
   let history = ReactRouterDOM.useHistory();
 
