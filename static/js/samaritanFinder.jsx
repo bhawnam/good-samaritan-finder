@@ -99,6 +99,7 @@ function App() {
                 <Register />
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/be-a-beneficiary">
+                <MapExample />
                 <Register />
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/welcome-user">
