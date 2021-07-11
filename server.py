@@ -147,7 +147,7 @@ def add_user_request():
     service_request = crud.create_service_request(date_of_request, beneficiary, service_type)
     # Check if there is a volunteer offering (with service) available for the desired request
     is_offering_volunteer = crud.look_for_offering(service_name, for_num_persons, date_of_request)
-    # return jsonify({service_request.request_id: service_request.to_dict()})
+
     if is_offering_volunteer:
         return jsonify({"success": True})
     else:
@@ -187,7 +187,7 @@ def add_user_offering():
         service_offering = crud.create_service_offered(volunteer, service_type)
     
     is_request_beneficiary = crud.look_for_request(service_name, for_num_persons)
-    # return jsonify({service_request.request_id: service_request.to_dict()})
+
     if is_request_beneficiary:
         return jsonify({"success": True})
     else:
@@ -222,7 +222,7 @@ def process_accepted_requests():
     beneficiary_request = crud.get_beneficiary_request_by_id(request_id)
     # Update request to not active, add volunteer_id to it
     beneficiary_request = crud.update_beneficiary_request(volunteer, beneficiary_request)
-    # Update volunteer offering by updating the servicy type values
+    # Update volunteer offering by updating the service type values
     volunteer_offering = crud.update_volunteer_offering(beneficiary_request, volunteer)
 
     #Get the email address and names of volunteers and beneficiaries and send them confirmation emails.    
@@ -277,7 +277,7 @@ def display_beneficiary_feedback_options():
     logged_user = request.get_json().get("username")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
-    # For user(ben) in beneficiaries table, get all ben object
+    # For user(ben) in beneficiaries table, get the ben object
     beneficiary = crud.get_beneficiary_by_user(user_in_db)
     # Get all the fulfilled service requests of this beneficiary
     fulfilled_requests = crud.get_fulfilled_requests_of_beneficiary(beneficiary)
@@ -296,7 +296,7 @@ def process_beneficiary_feedback():
     print(f"Msg {feedback_message}")
     # Get user object by displayname  
     user_in_db = crud.get_user_by_displayname(logged_user)
-    # For user(ben)in beneficiaries table, set onboarded to True
+    # For user(ben)in beneficiaries table, get the ben object
     beneficiary = crud.get_beneficiary_by_user(user_in_db)
     # Search the request by the id in the requests table
     beneficiary_request = crud.get_beneficiary_request_by_id(request_id)

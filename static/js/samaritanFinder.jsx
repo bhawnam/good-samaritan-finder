@@ -5,7 +5,6 @@ function App() {
   const [matchedRequests, setMatchedRequests] = React.useState({});
   const [fulfilledRequests, setFulfilledRequests] = React.useState({});
   
-  // const[loggedUser, setloggedUser] = React.useState("");
   const [username, setUsername] = React.useState("");
   const [isLogged, setisLogged] = React.useState(false);
 
@@ -18,7 +17,6 @@ function App() {
   React.useEffect(() => {
     const user = localStorage.getItem("user");
     if (user) {
-      // setloggedUser(JSON.parse(user));
       setUsername(JSON.parse(user));
     }
   }, []);

@@ -32,15 +32,6 @@ function Homepage() {
 function Navbar(props) {
   const { logo, brand, isLogged, setisLogged} = props;
 
-  // const [isLogged, setisLogged] = React.useState(false);
-
-  // React.useEffect(() => {
-  //   const user = localStorage.getItem("user");
-  //   if (user) {
-  //     setisLogged(true);
-  //   }
-  // }, [isLogged]);
-
   let history = ReactRouterDOM.useHistory();
 
   function handleLogout(){
@@ -93,7 +84,6 @@ function Navbar(props) {
 function Login(props){
 
   const [username_or_email, setUsernameOrEmail] = React.useState("");
-  // const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   
@@ -102,9 +92,6 @@ function Login(props){
   let history  = ReactRouterDOM.useHistory();
 
   const {username, setUsername} = props;
-  // React.useEffect(() => {
-  //   localStorage.setItem("user", JSON.stringify(username));
-  // }, [username]);
 
   function processUserLogin(event){ 
     event.preventDefault();
