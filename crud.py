@@ -264,8 +264,8 @@ def check_existing_service(volunteer, service_name):
     for volunteer_offering in volunteer_offerings:
         if volunteer_offering.service_type.service_name == service.service_name:
             return True
-        else:
-            return False
+
+    return False
 
 
 def update_service_offering(volunteer, service_name, for_num_persons):
