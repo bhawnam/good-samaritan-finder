@@ -6,12 +6,12 @@ function App() {
   const [fulfilledRequests, setFulfilledRequests] = React.useState({});
   
   const [username, setUsername] = React.useState("");
-  const [isLogged, setisLogged] = React.useState(false);
+  const [isLogged, setIsLogged] = React.useState(false);
 
   React.useEffect(() => {
     if (username){
     localStorage.setItem("user", JSON.stringify(username));
-    setisLogged(true);
+    setIsLogged(true);
   }}, [username]);
 
   React.useEffect(() => {
@@ -83,7 +83,7 @@ function App() {
 
   return (
       <ReactRouterDOM.BrowserRouter>
-        <Navbar logo="/static/img/logo.png" brand="Good Samaritan Finder" isLogged={isLogged} setisLogged={setisLogged}/>
+        <Navbar logo="/static/img/logo.png" brand="Good Samaritan Finder" isLogged={isLogged} setIsLogged={setIsLogged}/>
         <div>
           <div>
             <ReactRouterDOM.Switch>

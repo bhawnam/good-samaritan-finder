@@ -10,6 +10,7 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
+
 class User(db.Model):
     """A user. """
 
@@ -88,7 +89,7 @@ class BeneficiaryRating(db.Model):
     rating = db.Column(db.Integer)
     feedback_message = db.Column(db.Text)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
-    request_id =  db.Column(db.Integer, db.ForeignKey('requests.request_id'))
+    request_id = db.Column(db.Integer, db.ForeignKey('requests.request_id'))
 
     beneficiary = db.relationship('Beneficiary', backref='beneficiary_ratings')
     request = db.relationship('ServiceRequest', backref='beneficiary_ratings')
@@ -106,7 +107,7 @@ class VolunteerRating(db.Model):
     rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     rating = db.Column(db.Integer)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    response_id =  db.Column(db.Integer, db.ForeignKey('offerings.offered_id'))
+    response_id = db.Column(db.Integer, db.ForeignKey('offerings.offered_id'))
 
     volunteer = db.relationship('Volunteer', backref='volunteer_ratings')
     response = db.relationship('ServiceOffered', backref='volunteer_ratings')
@@ -127,7 +128,7 @@ class ServiceRequest(db.Model):
     request_active = db.Column(db.Boolean, default=True)
     beneficiary_id = db.Column(db.Integer, db.ForeignKey('beneficiaries.beneficiary_id'))
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
+    service_type_id = db.Column(db.Integer, db.ForeignKey('services.type_id'))
 
     volunteer = db.relationship('Volunteer', backref='requests')
     beneficiary = db.relationship('Beneficiary', backref='requests')
@@ -139,7 +140,7 @@ class ServiceRequest(db.Model):
 
     def to_dict(self):
         return {
-            'request_id' : self.request_id,
+            'request_id': self.request_id,
             'date_of_request': self.date_of_request,
             'date_of_fulfillment': self.date_of_fulfillment,
             'request_active': self.request_active,
@@ -157,7 +158,7 @@ class ServiceOffered(db.Model):
 
     offered_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     volunteer_id = db.Column(db.Integer, db.ForeignKey('volunteers.volunteer_id'))
-    service_type_id =  db.Column(db.Integer, db.ForeignKey('services.type_id'))
+    service_type_id = db.Column(db.Integer, db.ForeignKey('services.type_id'))
  
     volunteer = db.relationship('Volunteer', backref='offerings')
     service_type = db.relationship('ServiceType', backref='offerings')
@@ -173,6 +174,7 @@ class ServiceOffered(db.Model):
             'service_type': self.service_type.service_name.name,
             'for_num_persons': self.service_type.for_num_persons
         }
+
 
 class ServiceName(enum.Enum):
     """Name of the service. """
@@ -210,7 +212,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///samaritan-finder', echo=True)
     print('Connected to the database!')
 
 
-if __name__== '__main__':
+if __name__ == '__main__':
     from server import app 
 
-    connect_to_db(app)  
+    connect_to_db(app)

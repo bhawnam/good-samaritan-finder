@@ -2,14 +2,15 @@ from faker import Faker
 import json
 import random
 
-fake =  Faker()
+fake = Faker()
+
 
 def create_user_profile():
 
     user_profile = {}
 
     for i in range(0, 25):
-        user_profile[i]={} 
+        user_profile[i] = {} 
         first_name = fake.unique.first_name()
         user_profile[i]['first_name'] = first_name
         last_name = fake.last_name()
@@ -36,4 +37,3 @@ def generate_display_name(name):
 
     display_name = f'{name}{random.randint(1,10)}'
     return display_name
-

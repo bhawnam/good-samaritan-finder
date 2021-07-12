@@ -1,6 +1,5 @@
 """ CRUD operations on good-samaritan-finder database."""
 
-from flask.globals import request
 from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
 
@@ -8,14 +7,14 @@ from model import User, Beneficiary, Volunteer, VolunteerAvailability, Beneficia
 def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number):
     """Create and return a new user."""
 
-    user = User(first_name = first_name,
-                last_name = last_name,
-                display_name = display_name,
-                email = email,
-                password = password,
-                street = street,
-                zipcode = zipcode,
-                phone_number = phone_number)
+    user = User(first_name=first_name,
+                last_name=last_name,
+                display_name=display_name,
+                email=email,
+                password=password,
+                street=street,
+                zipcode=zipcode,
+                phone_number=phone_number)
 
     db.session.add(user)
     db.session.commit()
@@ -40,7 +39,7 @@ def get_user_by_email(email):
 def create_beneficiary(is_b_onboarded, user):
     """Create a beneficiary. """
 
-    beneficiary = Beneficiary(is_b_onboarded = is_b_onboarded, user = user)
+    beneficiary = Beneficiary(is_b_onboarded=is_b_onboarded, user=user)
 
     db.session.add(beneficiary)
     db.session.commit()
@@ -82,7 +81,7 @@ def get_beneficiary_request_by_id(request_id):
 def get_fulfilled_requests_of_beneficiary(beneficiary):
     """Get all requests by a beneficiary user from DB. """
 
-    req = ServiceRequest.query.filter((ServiceRequest.beneficiary==beneficiary) & (ServiceRequest.request_active == 'f')).all()
+    req = ServiceRequest.query.filter((ServiceRequest.beneficiary == beneficiary) & (ServiceRequest.request_active == 'f')).all()
     return req
 
 
@@ -100,7 +99,7 @@ def update_beneficiary_request(volunteer, beneficiary_request):
 def create_volunteer(is_v_onboarded, user):    
     """Create a volunteer. """
 
-    volunteer = Volunteer(is_v_onboarded = is_v_onboarded, user = user)
+    volunteer = Volunteer(is_v_onboarded=is_v_onboarded, user=user)
 
     db.session.add(volunteer)
     db.session.commit()
@@ -139,10 +138,10 @@ def get_matching_requests_for_volunteer(volunteer):
     requests = ServiceRequest.query.filter(ServiceRequest.request_active == 't').all()
     offerings = get_offerings_by_volunteer(volunteer)
     for offering in offerings:
-        for request in requests:
-            if ((request.service_type.service_name == offering.service_type.service_name) and 
-            (request.service_type.for_num_persons < offering.service_type.for_num_persons)):
-                matching_requests.append(request)
+        for req in requests:
+            if ((req.service_type.service_name == offering.service_type.service_name) and 
+                    (req.service_type.for_num_persons < offering.service_type.for_num_persons)):
+                matching_requests.append(req)
 
     return matching_requests            
     
@@ -150,11 +149,11 @@ def get_matching_requests_for_volunteer(volunteer):
 def update_volunteer_offering(beneficiary_request, volunteer):
     """Based on fulfilled request update volunteer's offering for num persons. """
 
-    volunteer_offerings = ServiceOffered.query.filter_by(volunteer = volunteer).all() 
+    volunteer_offerings = ServiceOffered.query.filter_by(volunteer=volunteer).all() 
 
     for volunteer_offering in volunteer_offerings:
         if volunteer_offering.service_type.service_name == beneficiary_request.service_type.service_name:
-            for_num_persons  = volunteer_offering.service_type.for_num_persons - beneficiary_request.service_type.for_num_persons
+            for_num_persons = volunteer_offering.service_type.for_num_persons - beneficiary_request.service_type.for_num_persons
             volunteer_offering.service_type.for_num_persons = for_num_persons
 
             db.session.add(volunteer_offering)
@@ -165,7 +164,7 @@ def update_volunteer_offering(beneficiary_request, volunteer):
 def create_volunteer_availability(availability, volunteer):
     """Create a volunteer timing availability. """
 
-    timing = VolunteerAvailability(availability = availability, volunteer = volunteer)
+    timing = VolunteerAvailability(availability=availability, volunteer=volunteer)
 
     db.session.add(timing)
     db.session.commit()
@@ -173,10 +172,10 @@ def create_volunteer_availability(availability, volunteer):
     return timing
 
 
-def create_beneficiary_rating(feedback_message, beneficiary, request):
+def create_beneficiary_rating(feedback_message, beneficiary, req):
     """Create a rating on a request by a beneficiary."""
 
-    rating = BeneficiaryRating(feedback_message = feedback_message, beneficiary = beneficiary, request = request)
+    rating = BeneficiaryRating(feedback_message=feedback_message, beneficiary=beneficiary, request=req)
 
     db.session.add(rating)
     db.session.commit()
@@ -187,7 +186,7 @@ def create_beneficiary_rating(feedback_message, beneficiary, request):
 def create_volunteer_rating(rating, volunteer, response):
     """Create a rating on a response by a volunteer."""
 
-    rating = VolunteerRating(rating = rating, volunteer = volunteer, response = response)
+    rating = VolunteerRating(rating=rating, volunteer=volunteer, response=response)
 
     db.session.add(rating)
     db.session.commit()
@@ -198,9 +197,9 @@ def create_volunteer_rating(rating, volunteer, response):
 def create_service_request(date_request, beneficiary, service_type):
     """Create a service request by a beneficiary. """
 
-    request = ServiceRequest(date_of_request = date_request, 
-                            beneficiary = beneficiary, 
-                            service_type = service_type)
+    request = ServiceRequest(date_of_request=date_request, 
+                             beneficiary=beneficiary, 
+                             service_type=service_type)
 
     db.session.add(request)
     db.session.commit()
@@ -213,7 +212,7 @@ def look_for_request(service_name, for_num_persons):
 
     service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons < for_num_persons) & (ServiceType.is_offered == "false")).first()
     if service:
-        request = ServiceRequest.query.filter((ServiceRequest.service_type == service) & (ServiceRequest.request_active== 't')).first()
+        request = ServiceRequest.query.filter((ServiceRequest.service_type == service) & (ServiceRequest.request_active == 't')).first()
         if request:
             request_beneficiary = request.beneficiary
             return request_beneficiary
@@ -224,7 +223,7 @@ def look_for_request(service_name, for_num_persons):
 def create_service_offered(volunteer, service_type):
     """Create a service offered by a volunteer user. """
 
-    offering = ServiceOffered(volunteer= volunteer, service_type = service_type)
+    offering = ServiceOffered(volunteer=volunteer, service_type=service_type)
 
     db.session.add(offering)
     db.session.commit()
@@ -249,7 +248,7 @@ def look_for_offering(service_name, for_num_persons, date_of_request):
 def create_service_type(service_name, for_num_persons, is_offered):
     """Create a type of service. """
 
-    service_type = ServiceType(service_name = service_name, for_num_persons = for_num_persons, is_offered=is_offered)
+    service_type = ServiceType(service_name=service_name, for_num_persons=for_num_persons, is_offered=is_offered)
 
     db.session.add(service_type)
     db.session.commit()
@@ -261,7 +260,7 @@ def check_existing_service(volunteer, service_name):
     """Check if the service is already being offered by the volunteer. """
 
     service = ServiceType.query.filter(ServiceType.service_name == service_name).first()
-    volunteer_offerings = ServiceOffered.query.filter_by(volunteer= volunteer).all()
+    volunteer_offerings = ServiceOffered.query.filter_by(volunteer=volunteer).all()
     for volunteer_offering in volunteer_offerings:
         if volunteer_offering.service_type.service_name == service.service_name:
             return True
@@ -272,7 +271,7 @@ def check_existing_service(volunteer, service_name):
 def update_service_offering(volunteer, service_name, for_num_persons):
     """ Update the num persons value for the offering by that volunteer. """
 
-    offerings = ServiceOffered.query.filter_by(volunteer= volunteer).all()
+    offerings = ServiceOffered.query.filter_by(volunteer=volunteer).all()
     for offering in offerings:
         print(f"{offering.service_type.service_name.name} == {service_name} {offering.service_type.service_name.name == service_name}")
         if offering.service_type.service_name.name == service_name:
@@ -285,4 +284,5 @@ def update_service_offering(volunteer, service_name, for_num_persons):
 
 if __name__ == '__main__':
     from server import app
-    connect_to_db(app)    
+    connect_to_db(app)
+    

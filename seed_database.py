@@ -37,18 +37,18 @@ for user_key in user_data.keys():
     availability = user_data[user_key]['datetime_availability']
     
     user = crud.create_user(first_name, 
-                                last_name, 
-                                display_name, 
-                                email,
-                                password,
-                                street,
-                                zipcode,
-                                phone_number)    
+                            last_name, 
+                            display_name, 
+                            email,
+                            password,
+                            street,
+                            zipcode,
+                            phone_number)    
 
     users_in_db.append(user)  
 
     # Creating beneficiary entries in beneficiaries table in the database
-    if (user_key % 2 == 0):
+    if user_key % 2 == 0:
         is_b_onboarded = True
         beneficiary = crud.create_beneficiary(is_b_onboarded, user)
         beneficiaries_in_db.append(beneficiary)
@@ -67,7 +67,7 @@ service_type_in_db = []
 service_name = ["PACKAGED_MEAL_KIT", "WATER", "FIRST_AID_KIT", "BLANKET", "PET_FOOD"]
 
 for name in service_name:
-    for_num_persons = randint(1,10)
+    for_num_persons = randint(1, 10)
     is_offered = False
     service_type = crud.create_service_type(name, for_num_persons, is_offered)
     service_type_in_db.append(service_type)
@@ -77,7 +77,7 @@ service_offered_in_db = []
 for _ in range(5):
     service_type = choice(service_type_in_db)
     volunteer = choice(volunteers_in_db)
-    rating = randint(1,5)
+    rating = randint(1, 5)
 
     service_offered = crud.create_service_offered(volunteer, service_type)
     service_offered_in_db.append(service_offered)
@@ -93,13 +93,8 @@ for _ in range(7):
     # rating = randint(1,5)
     feedback_message = f"Thank you for helping us in need."
 
-    # service_request = crud.create_service_request( datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
-    service_request = crud.create_service_request( datetime.now(), beneficiary, service_type)
+    # service_request = crud.create_service_request(datetime.now(), datetime.now(), beneficiary, volunteer, service_type)
+    service_request = crud.create_service_request(datetime.now(), beneficiary, service_type)
     service_request_in_db.append(service_request)
-    # Creating a rating entry for beneficiry for each service request         
+    # Creating a rating entry for beneficiary for each service request         
     beneficiary_rating = crud.create_beneficiary_rating(feedback_message, beneficiary, service_request)
-
-
-
-
-

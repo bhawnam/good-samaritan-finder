@@ -30,13 +30,13 @@ function Homepage() {
 
 
 function Navbar(props) {
-  const { logo, brand, isLogged, setisLogged} = props;
+  const { logo, brand, isLogged, setIsLogged} = props;
 
   let history = ReactRouterDOM.useHistory();
 
   function handleLogout(){
     localStorage.removeItem("user")
-    setisLogged(false);
+    setIsLogged(false);
     history.push("/");
   }
 
@@ -292,13 +292,13 @@ function Footer() {
 function UserProfile(props){
 
   const [requestForm, setRequestForm] = React.useState(false);
-  const [requestservicetype, setRequestServiceType] = React.useState("");
-  const [requestfornumpersons, setRequestForNumPersons] = React.useState("");
+  const [requestServiceType, setRequestServiceType] = React.useState("");
+  const [requestForNumPersons, setRequestForNumPersons] = React.useState("");
  
   const [offeringForm, setOfferingForm] = React.useState(false);
-  const [offeringservicetype, setOfferingServiceType] = React.useState("");
-  const [offeringfornumpersons, setOfferinForNumPersons] = React.useState("");
-  const [availabledate, setAvailableDate] = React.useState("");
+  const [offeringServiceType, setOfferingServiceType] = React.useState("");
+  const [offeringForNumPersons, setOfferingForNumPersons] = React.useState("");
+  const [availableDate, setAvailableDate] = React.useState("");
 
   const [feedbackForm, setFeedbackForm] = React.useState(false);
   const [feedbackMessage, setFeedbackMessage] = React.useState("");
@@ -428,7 +428,7 @@ function UserProfile(props){
       {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({username, requestservicetype, requestfornumpersons}),
+      body: JSON.stringify({username, requestServiceType, requestForNumPersons}),
       })
       .then((response) => {
       response.json()
@@ -465,7 +465,7 @@ function UserProfile(props){
       {
         "Content-Type" : "application/json",
       },
-      body: JSON.stringify({username, offeringservicetype, offeringfornumpersons, availabledate}),
+      body: JSON.stringify({username, offeringServiceType, offeringForNumPersons, availableDate}),
     })
     .then((response) => {
     response.json()
@@ -473,7 +473,7 @@ function UserProfile(props){
       if((result.success) == true){
         alert("Thank you for your offering! We found a matching beneficiary request. You will be connected to them shortly")
         setOfferingServiceType("");
-        setOfferinForNumPersons("");
+        setOfferingForNumPersons("");
         setAvailableDate("");
         setOfferingForm(false);
         refreshPage();
@@ -481,7 +481,7 @@ function UserProfile(props){
       else if ((result.success) == false){
         alert("Thank you for your offering! We will find a matching request")
         setOfferingServiceType("");
-        setOfferinForNumPersons("");
+        setOfferingForNumPersons("");
         setAvailableDate("");
         setOfferingForm(false);
         refreshPage();
@@ -517,7 +517,7 @@ function UserProfile(props){
         <br/>
         <div className="form-request">
         <label> Service Type </label>
-        <select className="form-input" value={requestservicetype} onChange={(event) => setRequestServiceType(event.target.value)}>  
+        <select className="form-input" value={requestServiceType} onChange={(event) => setRequestServiceType(event.target.value)}>  
         <option value="">Select a service</option>
         <option value="PACKAGED_MEAL_KIT"> Packaged Meal Kit</option>
         <option value="WATER"> Water </option>
@@ -529,7 +529,7 @@ function UserProfile(props){
       <br/>
       <div className="form-request">
         <label>For number of people </label>
-        <input type="text" className="form-input" value={requestfornumpersons} onChange={(event) => setRequestForNumPersons(event.target.value)} required/>
+        <input type="text" className="form-input" value={requestForNumPersons} onChange={(event) => setRequestForNumPersons(event.target.value)} required/>
       </div>
       <button type="submit" className="btn"> Add </button>
       </form>
@@ -556,7 +556,7 @@ function UserProfile(props){
         <br/>
         <div className="form-offering">
         <label> Service Type </label>
-        <select className="form-input" value={offeringservicetype} onChange={(event) => setOfferingServiceType(event.target.value)}>  
+        <select className="form-input" value={offeringServiceType} onChange={(event) => setOfferingServiceType(event.target.value)}>  
         <option value="">Select a service</option>
         <option value="PACKAGED_MEAL_KIT"> Packaged Meal Kit</option>
         <option value="WATER"> Water </option>
@@ -568,12 +568,12 @@ function UserProfile(props){
       <br/>
       <div className="form-offering">
         <label>For number of people </label>
-        <input type="text" className="form-input" value={offeringfornumpersons} onChange={(event) => setOfferinForNumPersons(event.target.value)} required/>
+        <input type="text" className="form-input" value={offeringForNumPersons} onChange={(event) => setOfferingForNumPersons(event.target.value)} required/>
       </div>
       <br/>
       <div className="form-offering">
         <label> Date of availability </label>
-        <input type="date" min="2021-01-01" max="2021-12-31" className="form-input" value={availabledate} onChange={(event) => setAvailableDate(event.target.value)} required/>
+        <input type="date" min="2021-01-01" max="2021-12-31" className="form-input" value={availableDate} onChange={(event) => setAvailableDate(event.target.value)} required/>
       </div>
       <button type="submit" className="btn"> Add </button>
       </form>

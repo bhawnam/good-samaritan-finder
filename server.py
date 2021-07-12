@@ -14,13 +14,13 @@ import smtplib
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
-app.secret_key="dev"
+app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
 
 @app.route('/')
 def homepage():
-    """Homepage for the good-samritan-finder app. """
+    """Homepage for the good-samaritan-finder app. """
 
     return render_template('index.html')
 
@@ -63,7 +63,7 @@ def user_login():
             return jsonify({"success": True, "username": username, "email": email})
 
         else:  
-            return jsonify({"success":False})
+            return jsonify({"success": False})
 
 
 @app.route('/register-user', methods=["POST"])
@@ -90,7 +90,7 @@ def user_registration():
         # Add user in beneficiaries and volunteers table in the DB 
         beneficiary = crud.create_beneficiary(False, register_user)
         volunteer = crud.create_volunteer(False, register_user)
-        return jsonify({"success":True})    
+        return jsonify({"success": True})    
 
 
 @app.route('/api/requests', methods=["POST"])
@@ -105,7 +105,7 @@ def get_beneficiary_requests():
     # Get all the service requests from this beneficiary
     beneficiary_requests = crud.get_requests_by_beneficiary(beneficiary)
 
-    return jsonify({request.request_id: request.to_dict() for request in beneficiary_requests})
+    return jsonify({req.request_id: req.to_dict() for req in beneficiary_requests})
 
 
 @app.route('/api/offerings', methods=["POST"])
@@ -127,10 +127,10 @@ def get_beneficiary_offerings():
 def add_user_request():
     """Process the request added by the user. """
 
-    service_name = request.get_json().get("requestservicetype")
-    print(f"Service type {service_name}" )
-    for_num_persons = request.get_json().get("requestfornumpersons")
-    print(f"Number {for_num_persons}" )
+    service_name = request.get_json().get("requestServiceType")
+    print(f"Service type {service_name}")
+    for_num_persons = request.get_json().get("requestForNumPersons")
+    print(f"Number {for_num_persons}")
     logged_user = request.get_json().get("username")
     print(f"User {logged_user}")
     # Get user object by displayname  
@@ -158,11 +158,11 @@ def add_user_request():
 def add_user_offering():
     """Process the offering added by the user. """
 
-    service_name = request.get_json().get("offeringservicetype")
-    print(f"Service type {service_name}" )
-    for_num_persons = request.get_json().get("offeringfornumpersons")
-    print(f"Number {for_num_persons}" )
-    available_date = request.get_json().get("availabledate")
+    service_name = request.get_json().get("offeringServiceType")
+    print(f"Service type {service_name}")
+    for_num_persons = request.get_json().get("offeringForNumPersons")
+    print(f"Number {for_num_persons}")
+    available_date = request.get_json().get("availableDate")
     print(f"Date {available_date}")
     logged_user = request.get_json().get("username")
     print(f"User {logged_user}")
@@ -191,7 +191,7 @@ def add_user_offering():
     if is_request_beneficiary:
         return jsonify({"success": True})
     else:
-        return jsonify({"success" : False})    
+        return jsonify({"success": False})    
 
 
 @app.route("/api/matched-requests", methods=["POST"])
@@ -225,7 +225,7 @@ def process_accepted_requests():
     # Update volunteer offering by updating the service type values
     volunteer_offering = crud.update_volunteer_offering(beneficiary_request, volunteer)
 
-    #Get the email address and names of volunteers and beneficiaries and send them confirmation emails.    
+    # Get the email address and names of volunteers and beneficiaries and send them confirmation emails.
     beneficiary_name = beneficiary_request.beneficiary.user.first_name
     print(f"name {beneficiary_name}")
     beneficiary_email = beneficiary_request.beneficiary.user.email
@@ -247,7 +247,8 @@ def process_accepted_requests():
             # Authentication with sender email account
             s.login("goodsamaritanfinder@gmail.com", os.environ['LOGIN_PASSWORD'])
             # Message to be sent to the users
-            message = f"Hello {beneficiary_name}. Thank you for your request. We have found a volunteer to help you out. You will be recieving your requested item tomorrow."
+            message = f"Hello {beneficiary_name}. Thank you for your request. We have found a volunteer to help you " \
+                      f"out. You will be receiving your requested item tomorrow." 
             # Sending the mail
             s.sendmail("goodsamaritanfinder@gmail.com", beneficiary_email, message)
             # Terminating the session
@@ -261,7 +262,8 @@ def process_accepted_requests():
             # Authentication with sender email account
             s.login("goodsamaritanfinder@gmail.com", os.environ['LOGIN_PASSWORD'])
             # Message to be sent to the users
-            message = f"Hello {volunteer_name}. Thank you for helping out with a request. Here are the beneficiary details for your drop-off tomorrow."
+            message = f"Hello {volunteer_name}. Thank you for helping out with a request. Here are the beneficiary " \
+                      f"details for your drop-off tomorrow."
             # Sending the mail
             s.sendmail("goodsamaritanfinder@gmail.com", volunteer_email, message)
             # Terminating the session
