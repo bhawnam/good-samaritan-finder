@@ -4,6 +4,8 @@ from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
 from flask.json import jsonify
 
+import googlemaps
+
 import model
 import crud
 import time
@@ -305,6 +307,21 @@ def process_beneficiary_feedback():
     # Create the beneficiary rating with the feedback message
     beneficiary_rating = crud.create_beneficiary_rating(feedback_message, beneficiary, beneficiary_request)
 
+    return jsonify({"success": True})
+
+
+@app.route("/accept-user-address", methods=["POST"])
+def process_user_address():
+    """Process the address entered by the user and find its corresponding latitute and longitude coordinates. """
+
+    user_address = request.get_json().get("address")
+    print(f"User {user_address}")
+    # Convert this address using Geocoding into lat lng co-ordinates
+    gmaps = googlemaps.Client(key='AIzaSyBovLMDLdlFjnutFmK7SgE9j87MzDmr3rE')
+    geocode_result = gmaps.geocode(user_address)
+    user_location = geocode_result[0]['geometry']['location']
+    lat = user_location['lat']
+    lng = user_location['lng']
     return jsonify({"success": True})
 
 

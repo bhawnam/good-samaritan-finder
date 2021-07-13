@@ -653,16 +653,20 @@ function RequestFeedback(props){
   );
 }
 
+
 function Loading() {
+
   return (
     <div className="loading-box">
-      <img src="static/img/watermelon-loading.png" alt="" />
+      <img src="/static/img/logo.png" alt="Good Samaritan Finder" />
       <div>Loading...</div>
     </div>
   );
 }
 
+
 function MapExample() {
+
   const [mapData, setMapData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
@@ -718,6 +722,24 @@ function MapExample() {
 
   function submitAddress(event){
     event.preventDefault();
+    fetch("/accept-user-address", 
+    {
+      method : "POST",
+      headers : 
+      {
+        "Content-Type" : "application/json",
+      },
+      body: JSON.stringify({address}),
+      }).then((response) => {
+      response.json().then((result) => {
+        if ((result.success) == false){
+          setAddress("");
+          alert("Oops! Something went wrong!")
+        } else {
+          alert("Here are the volunteers offering services near you.")
+        }
+      });
+    });
   }
 
   React.useEffect(() => {
@@ -734,7 +756,7 @@ function MapExample() {
         googleMapRef.current = new window.google.maps.Map(
           mapElementRef.current,
           {
-            center: { lat: 37.601773, lng: -122.20287 },
+            center: { lat: 37.3382, lng: -121.8863 },
             zoom: 11,
           }
         );
@@ -744,7 +766,7 @@ function MapExample() {
     } else {
       // Initialize the map if a script element with google url is found
       googleMapRef.current = new window.google.maps.Map(mapElementRef.current, {
-        center: { lat: 37.601773, lng: -122.20287 },
+        center: { lat: 37.3382, lng: -121.8863 },
         zoom: 11,
       });
     }
@@ -759,7 +781,7 @@ function MapExample() {
         height: 800,
         margin: "1em 0",
         borderRadius: "0.5em",
-        width: 500,
+        width: 800,
       }}
       ref={mapElementRef}
     ></div>
