@@ -25,6 +25,8 @@ class User(db.Model):
     street = db.Column(db.String)
     zipcode = db.Column(db.String(10), nullable=False)
     phone_number = db.Column(db.String(25), nullable=False)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
     is_active = db.Column(db.Boolean, default=True)
 
     def __repr__(self):

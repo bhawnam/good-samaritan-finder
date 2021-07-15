@@ -4,7 +4,7 @@ from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
 
 
-def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number):
+def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number, latitude, longitude):
     """Create and return a new user."""
 
     user = User(first_name=first_name,
@@ -14,7 +14,9 @@ def create_user(first_name, last_name, display_name, email, password, street, zi
                 password=password,
                 street=street,
                 zipcode=zipcode,
-                phone_number=phone_number)
+                phone_number=phone_number,
+                latitude=latitude,
+                longitude=longitude)
 
     db.session.add(user)
     db.session.commit()

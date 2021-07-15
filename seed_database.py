@@ -35,7 +35,9 @@ for user_key in user_data.keys():
     zipcode = user_data[user_key]['zipcode']
     phone_number = user_data[user_key]['phone_number']
     availability = user_data[user_key]['datetime_availability']
-    
+    latitude = user_data[user_key]['latitude']
+    longitude = user_data[user_key]['longitude']
+
     user = crud.create_user(first_name, 
                             last_name, 
                             display_name, 
@@ -43,7 +45,9 @@ for user_key in user_data.keys():
                             password,
                             street,
                             zipcode,
-                            phone_number)    
+                            phone_number,
+                            latitude,
+                            longitude)    
 
     users_in_db.append(user)  
 

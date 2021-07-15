@@ -8,7 +8,7 @@ fake = Faker()
 def create_user_profile():
 
     user_profile = {}
-    user_address = get_user_address("mlsListings.csv")
+    user_address = get_user_address("data/mlsListings.csv")
 
     for i in range(0, 25):
         user_profile[i] = {} 
@@ -58,9 +58,9 @@ def get_user_address(filename):
         address_dict[idx]['street_address'] = street_address
         zipcode = line.rstrip().split(',')[6]
         address_dict[idx]['zipcode'] = zipcode
-        latitude = line.rstrip().split(',')[25]
+        latitude = line.rstrip().split(',')[-2]
         address_dict[idx]['latitude'] = latitude
-        longitude = line.rstrip().split(',')[26]
+        longitude = line.rstrip().split(',')[-1]
         address_dict[idx]['longitude'] = longitude
         idx = idx + 1
     return address_dict
