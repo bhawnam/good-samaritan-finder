@@ -2,7 +2,7 @@
 
 from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
-
+import googlemaps
 
 def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number, latitude, longitude):
     """Create and return a new user."""
@@ -271,7 +271,7 @@ def check_existing_service(volunteer, service_name):
 
 
 def update_service_offering(volunteer, service_name, for_num_persons):
-    """ Update the num persons value for the offering by that volunteer. """
+    """Update the num persons value for the offering by that volunteer. """
 
     offerings = ServiceOffered.query.filter_by(volunteer=volunteer).all()
     for offering in offerings:
@@ -282,6 +282,16 @@ def update_service_offering(volunteer, service_name, for_num_persons):
             db.session.commit()
 
             return offering
+
+
+def convert_user_address(user_address):
+    """Convert the user entered address to its corresponding latitude and longitude. """
+    
+    gmaps = googlemaps.Client(key='AIzaSyBovLMDLdlFjnutFmK7SgE9j87MzDmr3rE')
+    geocode_result = gmaps.geocode(user_address)
+    user_location = geocode_result[0]['geometry']['location']
+
+    return user_location
 
 
 if __name__ == '__main__':

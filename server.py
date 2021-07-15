@@ -87,8 +87,12 @@ def user_registration():
         return jsonify({"success": False})
     
     else:
+        # Convert the user address using Geocoding into lat lng co-ordinates
+        user_location = crud.convert_user_address(street)
+        lat = user_location['lat']
+        lng = user_location['lng']
         # Register the user in the users table in the DB 
-        register_user = crud.create_user(first_name, last_name, username, email, password, street, zipcode, phone_number)
+        register_user = crud.create_user(first_name, last_name, username, email, password, street, zipcode, phone_number, lat, lng)
         # Add user in beneficiaries and volunteers table in the DB 
         beneficiary = crud.create_beneficiary(False, register_user)
         volunteer = crud.create_volunteer(False, register_user)
@@ -317,9 +321,7 @@ def process_user_address():
     user_address = request.get_json().get("address")
     print(f"User {user_address}")
     # Convert this address using Geocoding into lat lng co-ordinates
-    gmaps = googlemaps.Client(key='AIzaSyBovLMDLdlFjnutFmK7SgE9j87MzDmr3rE')
-    geocode_result = gmaps.geocode(user_address)
-    user_location = geocode_result[0]['geometry']['location']
+    user_location = crud.convert_user_address(user_address)
     lat = user_location['lat']
     lng = user_location['lng']
     print(f"Lat {lat} Lng {lng}")
