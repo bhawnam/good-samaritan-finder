@@ -671,7 +671,9 @@ function MapExample() {
   const [loading, setLoading] = React.useState(false);
 
   const [address, setAddress] = React.useState("");
-
+  const [lat, setLat] = React.useState("");
+  const [lng, setLng] = React.useState("");
+ 
   const mapElementRef = React.useRef();
   const googleMapRef = React.useRef();
 
@@ -736,6 +738,9 @@ function MapExample() {
           setAddress("");
           alert("Oops! Something went wrong!")
         } else {
+          setAddress("");
+          setLat(result.lat);
+          setLng(result.lng);
           alert("Here are the volunteers offering services near you.")
         }
       });

@@ -322,7 +322,9 @@ def process_user_address():
     user_location = geocode_result[0]['geometry']['location']
     lat = user_location['lat']
     lng = user_location['lng']
-    return jsonify({"success": True})
+    print(f"Lat {lat} Lng {lng}")
+
+    return jsonify({"success": True, "lat": lat, "lng": lng})
 
 
 if __name__ == "__main__":
