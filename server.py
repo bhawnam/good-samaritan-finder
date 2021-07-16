@@ -4,12 +4,10 @@ from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect)
 from flask.json import jsonify
 
-import googlemaps
-
 import model
 import crud
-import time
 
+import time
 import os
 import smtplib
 
@@ -327,6 +325,21 @@ def process_user_address():
     print(f"Lat {lat} Lng {lng}")
 
     return jsonify({"success": True, "lat": lat, "lng": lng})
+
+
+@app.route("/api/volunteer_map_data")
+def get_volunteer_map_data():
+    """Show all the service requests as markers on the map. """
+    
+    time.sleep(2)
+    map_data = []
+    user_requests = crud.get_all_requests()
+    for user_request in user_requests:
+        latitude = user_request.beneficiary.user.latitude
+        longitude = user_request.beneficiary.user.longitude
+        map_data.append({"coords": {"lat": latitude, "lng": longitude}})
+
+    return jsonify(map_data)
 
 
 if __name__ == "__main__":

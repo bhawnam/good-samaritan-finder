@@ -677,50 +677,49 @@ function MapExample() {
   const mapElementRef = React.useRef();
   const googleMapRef = React.useRef();
 
-  // React.useEffect(() => {
-  //   setLoading(true);
-  //   fetch("/api/map_data")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setMapData(data);
-  //       setLoading(false);
-  //     });
-  // }, []);
+  React.useEffect(() => {
+    setLoading(true);
+    fetch("/api/volunteer_map_data")
+      .then((response) => response.json())
+      .then((data) => {
+        setMapData(data);
+        setLoading(false);
+      });
+  }, []);
 
-  // React.useEffect(addMarkers, [mapData]);
-  // React.useEffect(addMarkers, []);
+  React.useEffect(addMarkers, [mapData]);
 
-  // function addMarkers() {
-  //   const markers = [];
-  //   for (const location of mapData) {
-  //     markers.push(
-  //       new google.maps.Marker({
-  //         position: location.coords,
-  //         title: location.name,
-  //         map: googleMapRef.current,
-  //       })
-  //     );
-  //   }
+  function addMarkers() {
+    const markers = [];
+    for (const location of mapData) {
+      markers.push(
+        new google.maps.Marker({
+          position: location.coords,
+          title: location.name,
+          map: googleMapRef.current,
+        })
+      );
+    }
 
-  //   for (const marker of markers) {
-  //     const markerInfo = `
-  //       <h1>${marker.title}</h1>
-  //       <p>
-  //         Located at: <code>${marker.position.lat()}</code>,
-  //         <code>${marker.position.lng()}</code>
-  //       </p>
-  //     `;
+    for (const marker of markers) {
+      const markerInfo = `
+        <h1>${marker.title}</h1>
+        <p>
+          Located at: <code>${marker.position.lat()}</code>,
+          <code>${marker.position.lng()}</code>
+        </p>
+      `;
 
-  //     const infoWindow = new google.maps.InfoWindow({
-  //       content: markerInfo,
-  //       maxWidth: 200,
-  //     });
+      const infoWindow = new google.maps.InfoWindow({
+        content: markerInfo,
+        maxWidth: 200,
+      });
 
-  //     marker.addListener("click", () => {
-  //       infoWindow.open(googleMapRef.current, marker);
-  //     });
-  //   }
-  // }
+      marker.addListener("click", () => {
+        infoWindow.open(googleMapRef.current, marker);
+      });
+    }
+  }
 
   function submitAddress(event){
     event.preventDefault();
@@ -767,7 +766,7 @@ function MapExample() {
         );
         return googleMapRef.current;
       });
-      return () => script.removeEventListener("load");
+      // return () => script.removeEventListener("load");
     } else {
       // Initialize the map if a script element with google url is found
       googleMapRef.current = new window.google.maps.Map(mapElementRef.current, {

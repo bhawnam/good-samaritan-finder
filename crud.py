@@ -3,6 +3,7 @@
 from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
 import googlemaps
+import os
 
 def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number, latitude, longitude):
     """Create and return a new user."""
@@ -64,6 +65,13 @@ def onboard_beneficiary(beneficiary):
     db.session.commit()
 
     return beneficiary
+
+
+def get_all_requests():
+    """Get all requests by users from requests table in the DB. """
+
+    reqs = ServiceRequest.query.all()
+    return reqs
 
 
 def get_requests_by_beneficiary(beneficiary):
@@ -287,7 +295,7 @@ def update_service_offering(volunteer, service_name, for_num_persons):
 def convert_user_address(user_address):
     """Convert the user entered address to its corresponding latitude and longitude. """
     
-    gmaps = googlemaps.Client(key='AIzaSyBovLMDLdlFjnutFmK7SgE9j87MzDmr3rE')
+    gmaps = googlemaps.Client(key=os.environ['API_KEY'])
     geocode_result = gmaps.geocode(user_address)
     user_location = geocode_result[0]['geometry']['location']
 
