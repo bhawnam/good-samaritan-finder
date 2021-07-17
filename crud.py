@@ -203,7 +203,7 @@ def create_beneficiary_rating(feedback_message, beneficiary, req):
 def check_for_rating(beneficiary_request):
     """Check if a beneficiary rating already exists for the request. """
 
-    rating = BeneficiaryRating.query.filter_by(request=beneficiary_request)
+    rating = BeneficiaryRating.query.filter_by(request=beneficiary_request).first()
     if rating:
         return True
     else:
