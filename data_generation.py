@@ -18,7 +18,7 @@ def create_user_profile():
         user_profile[i]['last_name'] = last_name
         display_name = generate_display_name(first_name)
         user_profile[i]['display_name'] = display_name
-        email = fake.email()
+        email = f'{display_name}@mailsac.com'
         user_profile[i]['email'] = email
         password = fake.password()
         user_profile[i]['password'] = password
