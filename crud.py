@@ -92,8 +92,14 @@ def get_beneficiary_request_by_id(request_id):
 def get_fulfilled_requests_of_beneficiary(beneficiary):
     """Get all requests by a beneficiary user from DB. """
 
-    req = ServiceRequest.query.filter((ServiceRequest.beneficiary == beneficiary) & (ServiceRequest.request_active == 'f')).all()
-    return req
+    fulfilled_requests = []
+    reqs = ServiceRequest.query.filter((ServiceRequest.beneficiary == beneficiary) & (ServiceRequest.request_active == 'f')).all()
+    for req in reqs:
+        is_rating = check_for_rating(req)
+        if not is_rating:
+           fulfilled_requests.append(req) 
+
+    return fulfilled_requests
 
 
 def update_beneficiary_request(volunteer, beneficiary_request):
@@ -202,7 +208,7 @@ def check_for_rating(beneficiary_request):
         return True
     else:
         return False
-            
+
 
 def create_volunteer_rating(rating, volunteer, response):
     """Create a rating on a response by a volunteer."""
