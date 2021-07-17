@@ -103,6 +103,9 @@ function App() {
               <ReactRouterDOM.Route exact path="/welcome-user">
                 <UserProfile username={username} requests={requests} offerings={offerings} matchedRequests={matchedRequests} fulfilledRequests={fulfilledRequests}/>
               </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/terms-of-service">
+                <TermsAndConditions />
+              </ReactRouterDOM.Route>
               <div> Sorry Page Not found </div>
             </ReactRouterDOM.Switch>
           </div>
