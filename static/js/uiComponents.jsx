@@ -695,7 +695,7 @@ function MapExample() {
       markers.push(
         new google.maps.Marker({
           position: location.coords,
-          title: location.name,
+          title: "Volunteer",
           map: googleMapRef.current,
         })
       );
@@ -703,7 +703,7 @@ function MapExample() {
 
     for (const marker of markers) {
       const markerInfo = `
-        <h1>${marker.title}</h1>
+        <h3>${marker.title}</h3>
         <p>
           Located at: <code>${marker.position.lat()}</code>,
           <code>${marker.position.lng()}</code>
@@ -712,7 +712,7 @@ function MapExample() {
 
       const infoWindow = new google.maps.InfoWindow({
         content: markerInfo,
-        maxWidth: 200,
+        maxWidth: 150,
       });
 
       marker.addListener("click", () => {
