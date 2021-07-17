@@ -392,7 +392,8 @@ function UserProfile(props){
     setDisable(true);
   }
 
-  function handleFeedbackResponse(){
+  function handleFeedbackResponse(event){
+    event.preventDefault();
     fetch("/accept-feedback",
     {
       method : "POST",
@@ -407,7 +408,8 @@ function UserProfile(props){
       .then((result) => {
         if ((result.success) == true){
           setFeedbackForm(false);
-          alert("Thank you");
+          alert("Your feedback has been registered");
+          setDisable(true);
       } else {
         alert("Sorry something went wrong!");
       }

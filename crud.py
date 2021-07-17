@@ -1,5 +1,6 @@
 """ CRUD operations on good-samaritan-finder database."""
 
+from flask.globals import request
 from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
 import googlemaps
@@ -192,6 +193,16 @@ def create_beneficiary_rating(feedback_message, beneficiary, req):
 
     return rating
 
+
+def check_for_rating(beneficiary_request):
+    """Check if a beneficiary rating already exists for the request. """
+
+    rating = BeneficiaryRating.query.filter_by(request=beneficiary_request)
+    if rating:
+        return True
+    else:
+        return False
+            
 
 def create_volunteer_rating(rating, volunteer, response):
     """Create a rating on a response by a volunteer."""
