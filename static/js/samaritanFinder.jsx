@@ -101,10 +101,23 @@ function App() {
                 <Register />
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/welcome-user">
+                <SideBar />
                 <UserProfile username={username} requests={requests} offerings={offerings} matchedRequests={matchedRequests} fulfilledRequests={fulfilledRequests}/>
               </ReactRouterDOM.Route>
               <ReactRouterDOM.Route exact path="/terms-of-service">
                 <TermsAndConditions />
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/requests">
+                  <Requests username={username} requests={requests} />
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/offerings">
+                  <Requests/>
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/matched-requests">
+                  <Requests />
+              </ReactRouterDOM.Route>
+              <ReactRouterDOM.Route exact path="/fulfilled-requests">
+                  <Requests />
               </ReactRouterDOM.Route>
               <div> Sorry Page Not found </div>
             </ReactRouterDOM.Switch>
