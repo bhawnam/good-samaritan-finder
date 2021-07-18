@@ -1,13 +1,8 @@
-.melon-card {
-  max-width: 23%;
-  margin: 0.5rem;
-}
-
-.melon-card h5 {
+h5 {
   font-size: 1rem;
 }
 
-#shopping .filters {
+.filters {
   min-width: 20%;
 }
 
@@ -42,4 +37,10 @@
   to {
     transform: scale(1);
   }
+}
+
+html, .App, #root, .outer {
+  width: 100%;
+  height: 100%;
+  background-color: floralwhite;
 }

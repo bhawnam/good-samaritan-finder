@@ -12,12 +12,12 @@ export default function MapExample() {
   const [mapData, setMapData] = useState([]);
   const [loading, setLoading] = useState(false);
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyBovLMDLdlFjnutFmK7SgE9j87MzDmr3rE",
   });
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/map_data")
+    fetch("/api/volunteer_map_data")
       .then((response) => response.json())
       .then((data) => {
         setMapData(data);
@@ -35,14 +35,14 @@ export default function MapExample() {
 
   return (
     <GoogleMap
-      center={{ lat: 72, lng: -140 }}
+      center={{ lat: 37.2356033, lng: -121.8759623 }}
       mapContainerStyle={{ width: "400px", height: "400px" }}
       zoom={5}
     >
       {mapData.map((dataPoint) => (
         <Marker
           key={dataPoint.id}
-          position={{ lat: dataPoint.cap_lat, lng: dataPoint.cap_long }}
+          position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
         />
       ))}
     </GoogleMap>
