@@ -4,8 +4,6 @@ from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect, send_from_directory)
 from flask.json import jsonify
 
-from data import DATA
-
 import model
 import crud
 
@@ -322,18 +320,9 @@ def get_volunteer_map_data():
     for user_request in user_requests:
         latitude = user_request.beneficiary.user.latitude
         longitude = user_request.beneficiary.user.longitude
-        map_data.append({"user_id": user_request.beneficiary.user_id, "lat": latitude, "lng": longitude})
+        map_data.append({"request_id": user_request.request_id, "lat": latitude, "lng": longitude})
     print(map_data)
     return jsonify(map_data)
-
-
-@app.route("/api/map_data")
-def get_map_data():
-    time.sleep(2)  # simulate slow connections
-
-    # return get_volunteer_map_data()
-    print(DATA)
-    return jsonify(DATA)
 
 
 if __name__ == "__main__":

@@ -41,7 +41,7 @@ export default function MapExample() {
     >
       {mapData.map((dataPoint) => (
         <Marker
-          key={dataPoint.id}
+          key={dataPoint.request_id}
           position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
         />
       ))}

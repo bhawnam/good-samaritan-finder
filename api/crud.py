@@ -1,6 +1,5 @@
 """ CRUD operations on good-samaritan-finder database."""
 
-from flask.globals import request
 from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
 import googlemaps
