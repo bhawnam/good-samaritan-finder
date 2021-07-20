@@ -5,6 +5,7 @@ export default function Login(props) {
   const [username_or_email, setUsernameOrEmail] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const[errormessage, setErrormessage] = useState(false);
 
   let history = useHistory();
@@ -34,7 +35,6 @@ export default function Login(props) {
   }
 
   return (
-    <div id="home-banner" className="row">
       <React.Fragment>
         <form onSubmit={processUserLogin}>
           <h3>Log in</h3>
@@ -57,6 +57,5 @@ export default function Login(props) {
           <h6> Sorry the email and password do not match our records! </h6>
         </form>}
       </React.Fragment>
-    </div>
   );
 }
