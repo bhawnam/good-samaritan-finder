@@ -109,7 +109,7 @@ def get_beneficiary_offerings():
     return jsonify({offering.offered_id: offering.to_dict() for offering in volunteer_offerings})
 
 
-@app.route('/add-request', methods=["POST"])
+@app.route('/api/add-request', methods=["POST"])
 def add_user_request():
     """Process the request added by the user. """
 
@@ -140,7 +140,7 @@ def add_user_request():
         return jsonify({"success": False})
 
 
-@app.route('/add-offering', methods=["POST"])
+@app.route('/api/add-offering', methods=["POST"])
 def add_user_offering():
     """Process the offering added by the user. """
 
@@ -195,7 +195,7 @@ def show_matched_requests():
     return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
 
 
-@app.route("/accept-request", methods=["POST"])
+@app.route("/api/accept-request", methods=["POST"])
 def process_accepted_requests():
     """Process the request accepted by the volunteer. """
 
@@ -274,7 +274,7 @@ def display_beneficiary_feedback_options():
         {fulfilled_request.request_id: fulfilled_request.to_dict() for fulfilled_request in fulfilled_requests})
 
 
-@app.route("/accept-feedback", methods=["POST"])
+@app.route("/api/accept-feedback", methods=["POST"])
 def process_beneficiary_feedback():
     """Process the feedback message by the beneficiary for the offered service. """
 
@@ -295,7 +295,7 @@ def process_beneficiary_feedback():
     return jsonify({"success": True})
 
 
-@app.route("/accept-user-address", methods=["POST"])
+@app.route("/api/accept-user-address", methods=["POST"])
 def process_user_address():
     """Process the address entered by the user and find its corresponding latitute and longitude coordinates. """
 
