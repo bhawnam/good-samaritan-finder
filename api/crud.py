@@ -140,6 +140,13 @@ def onboard_volunteer(volunteer):
     return volunteer
 
 
+def get_all_offerings():
+    """Get all offerings by users from offerings table in the DB. """
+
+    offerings = ServiceOffered.query.all()
+    return offerings
+
+
 def get_offerings_by_volunteer(volunteer):
     """Get all offerings by a volunteer user from DB. """
 

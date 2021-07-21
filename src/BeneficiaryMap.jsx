@@ -17,7 +17,7 @@ export default function MapExample() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("/api/volunteer_map_data")
+    fetch("/api/show_map_offerings_data")
       .then((response) => response.json())
       .then((data) => {
         setMapData(data);

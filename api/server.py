@@ -310,21 +310,36 @@ def process_user_address():
     return jsonify({"success": True, "lat": lat, "lng": lng})
 
 
-@app.route("/api/volunteer_map_data")
-def get_volunteer_map_data():
-    """Show all the service requests as markers on the map. """
+@app.route("/api/show_map_requests_data")
+def get_map_requests_data():
+    """Show all the nearby service requests as markers on the map for a Volunteer. """
 
     time.sleep(2)
-    map_data = []
+    map_request_data = []
     user_requests = crud.get_all_requests()
     for user_request in user_requests:
         latitude = user_request.beneficiary.user.latitude
         longitude = user_request.beneficiary.user.longitude
-        map_data.append({"request_id": user_request.request_id, "lat": latitude, "lng": longitude})
-    print(map_data)
-    return jsonify(map_data)
+        map_request_data.append({"request_id": user_request.request_id, "lat": latitude, "lng": longitude})
+
+    return jsonify(map_request_data)
 
 
+@app.route("/api/show_map_offerings_data")
+def get_map_offerings_data():
+    """Show all the nearby service offerings as markers on the map for a Beneficiary. """
+
+    time.sleep(2)
+    map_offerings_data = []
+    user_offerings = crud.get_all_offerings()
+    for user_offering in user_offerings:
+        latitude = user_offering.volunteer.user.latitude
+        longitude = user_offering.volunteer.user.longitude
+        map_offerings_data.append({"request_id": user_offering.offered_id, "lat": latitude, "lng": longitude})
+
+    return jsonify(map_offerings_data)
+
+    
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)

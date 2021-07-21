@@ -4,3 +4,4 @@ __pycache__/
 secrets.sh
 node_modules
 dist
+.vscode/

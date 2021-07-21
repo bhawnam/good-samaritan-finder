@@ -10,7 +10,8 @@ import SideBar from "./SideBar";
 import Footer from "./Footer";
 import TermsOfService from "./TermsOfService";
 // from the current folder (.) import MapExample
-import MapExample from "./MapExample";
+import VolunteerMap from "./VolunteerMap";
+import BeneficiaryMap from "./BeneficiaryMap"
 import Requests from "./Requests";
 import Offerings from "./Offerings";
 import MatchedRequests from "./MatchedRequests";
@@ -108,10 +109,11 @@ export default function App() {
             <Login username={username} setUsername={setUsername} />
           </Route>
           <Route exact path="/be-a-volunteer">
+            <VolunteerMap />
             <Register />
           </Route>
           <Route exact path="/be-a-beneficiary">
-            <MapExample />
+            <BeneficiaryMap />
             <Register />
           </Route>
           <Route exact path="/welcome-user">
