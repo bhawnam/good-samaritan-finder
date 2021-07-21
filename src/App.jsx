@@ -6,10 +6,15 @@ import Homepage from "./Homepage";
 import Login from "./Login";
 import Register from "./Register";
 import UserProfile from "./UserProfile";
+import SideBar from "./SideBar";
 import Footer from "./Footer";
 import TermsOfService from "./TermsOfService";
 // from the current folder (.) import MapExample
 import MapExample from "./MapExample";
+import Requests from "./Requests";
+import Offerings from "./Offerings";
+import MatchedRequests from "./MatchedRequests";
+import FulfilledRequests from "./FulfilledRequests";
 import "./App.css";
 
 export default function App() {
@@ -110,24 +115,24 @@ export default function App() {
             <Register />
           </Route>
           <Route exact path="/welcome-user">
-            {/* <SideBar /> */}
+            <SideBar />
             <UserProfile username={username} requests={requests} offerings={offerings} matchedRequests={matchedRequests} fulfilledRequests={fulfilledRequests}/>
           </Route>
           <Route exact path="/terms-of-service">
             <TermsOfService />
           </Route>
-          {/* <Route exact path="/requests">
+          <Route exact path="/requests">
             <Requests username={username} requests={requests} />
           </Route>
           <Route exact path="/offerings">
-            <Requests/>
+            <Offerings username={username} offerings={offerings} />
           </Route>
           <Route exact path="/matched-requests">
-            <Requests />
+            <MatchedRequests username={username} matchedRequests={matchedRequests} />
           </Route>
           <Route exact path="/fulfilled-requests">
-            <Requests />
-          </Route> */}
+            <FulfilledRequests username={username} fulfilledRequests={fulfilledRequests} />
+          </Route>
           <div> Sorry Page Not found </div>
         </Switch>
       </div>
