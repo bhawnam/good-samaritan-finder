@@ -14,7 +14,7 @@ export default function Login(props) {
 
   function processUserLogin(event){
     event.preventDefault();
-    fetch("/api/login-user", {
+    fetch("api/login-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

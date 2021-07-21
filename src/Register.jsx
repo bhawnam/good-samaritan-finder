@@ -18,7 +18,7 @@ export default function Register(){
   
     function registerUser(event){
       event.preventDefault();
-      fetch("/register-user",
+      fetch("api/register-user",
       {
         method: "POST",
         headers: {

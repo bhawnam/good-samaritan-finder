@@ -51,22 +51,22 @@ export default function Navbar(props) {
           About Us
         </NavLink>
         {isLogged ? (
-          <NavLink
+          <Link
           to="#" 
           onClick = {handleLogout}
           activeClassName="navlink-active"
           className="nav-link nav-item"
         >
           Log Out
-        </NavLink>
+        </Link>
         ) : (
-        <NavLink
+        <Link
           to="/login"
           activeClassName="navlink-active"
           className="nav-link nav-item"
         >
           Log In
-        </NavLink>
+        </Link>
         )}
       </section>
     </nav>

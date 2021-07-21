@@ -47,7 +47,7 @@ def user_login():
             return jsonify({"success": False})
 
 
-@app.route('/register-user', methods=["POST"])
+@app.route('/api/register-user', methods=["POST"])
 def user_registration():
     """Process user registration. """
 
