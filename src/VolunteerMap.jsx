@@ -35,7 +35,7 @@ export default function MapExample() {
 
   return (
     <GoogleMap
-      center={{ lat: 37.2356033, lng: -121.8759623 }}
+      center={{ lat: 37.8272, lng: -122.2913  }}
       mapContainerStyle={{ width: "400px", height: "400px" }}
       zoom={5}
     >
