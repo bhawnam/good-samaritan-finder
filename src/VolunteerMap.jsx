@@ -60,7 +60,7 @@ export default function MapExample() {
         }}
         > 
         <div>
-          <h4> Volunteer </h4>  
+          <h4> Request </h4>  
         </div>  
       </InfoWindow>
   )}
