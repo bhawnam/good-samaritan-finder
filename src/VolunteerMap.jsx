@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   GoogleMap,
   useJsApiLoader,
-  // InfoWindow,
+  InfoWindow,
   Marker,
 } from "@react-google-maps/api";
 import Loading from "./Loading";
@@ -14,6 +14,7 @@ export default function MapExample() {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyBovLMDLdlFjnutFmK7SgE9j87MzDmr3rE",
   });
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -34,6 +35,7 @@ export default function MapExample() {
   }
 
   return (
+    <React.Fragment>
     <GoogleMap
       center={{ lat: 37.8272, lng: -122.2913  }}
       mapContainerStyle={{ width: "400px", height: "400px" }}
@@ -43,8 +45,26 @@ export default function MapExample() {
         <Marker
           key={dataPoint.request_id}
           position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
+          onClick={() => { setSelectedMarker(dataPoint);
+          }}
         />
-      ))}
+        ))}
+        {selectedMarker &&  (
+        <InfoWindow 
+        onCloseClick={() => {
+          setSelectedMarker(null);
+        }}
+        position={{
+          lat: selectedMarker.lat,
+          lng: selectedMarker.lng
+        }}
+        > 
+        <div>
+          <h4> Volunteer </h4>  
+        </div>  
+      </InfoWindow>
+  )}
     </GoogleMap>
+    </React.Fragment>
   );
 }
