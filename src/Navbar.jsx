@@ -56,7 +56,7 @@ export default function Navbar(props) {
             to="/welcome-user"
             className="nav-link nav-item"
           > 
-          My Profile   
+          My Dashboard   
           </NavLink>
         }
         {isLogged ? (
