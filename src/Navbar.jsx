@@ -1,4 +1,5 @@
 import React from "react";
+import { Nav } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import logoPath from "./images/logo.png";
@@ -50,6 +51,14 @@ export default function Navbar(props) {
         >
           About Us
         </NavLink>
+        {isLogged && 
+          <NavLink
+            to="/welcome-user"
+            className="nav-link nav-item"
+          > 
+          My Profile   
+          </NavLink>
+        }
         {isLogged ? (
           <Link
           to="#" 
