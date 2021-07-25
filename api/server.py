@@ -239,6 +239,25 @@ def process_accepted_requests():
             # Sending the mail
             crud.email_handler(volunteer_email, message)
 
+    # Get the phone numbers of volunteers and beneficiaries and send them confirmation text message.
+    beneficiary_phone_number = beneficiary_request.beneficiary.user.phone_number
+    print(f"number {beneficiary_phone_number}")    
+    volunteer_phone_number = beneficiary_request.volunteer.user.phone_number
+    print(f"number {volunteer_phone_number}")
+
+    destination_number_list = [beneficiary_phone_number, volunteer_phone_number]
+
+    for destination_number in destination_number_list:
+        if destination_number == beneficiary_phone_number:
+            message_body = f"Hello {beneficiary_name}. Thank you for your request. We have found a volunteer to help you " \
+                      f"out. You will be receiving your requested item tomorrow."
+            crud.sms_handler(message_body, beneficiary_phone_number)
+
+        else:
+            message_body = f"Hello {volunteer_name}. Thank you for helping out with a request. Here are the beneficiary " \
+                      f"details for your drop-off tomorrow."
+            crud.sms_handler(message_body, volunteer_phone_number)          
+
     return jsonify({"success": True})
 
 

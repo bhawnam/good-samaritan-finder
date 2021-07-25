@@ -5,6 +5,7 @@ from model import User, Beneficiary, Volunteer, VolunteerAvailability, Beneficia
 import googlemaps
 import os
 import smtplib
+from twilio.rest import Client
 
 
 def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number, latitude, longitude):
@@ -328,6 +329,8 @@ def convert_user_address(user_address):
 
 
 def email_handler(recipient_address, message):
+    """Send an email to the recipient address using smtp library. """
+
     s = smtplib.SMTP('smtp.gmail.com', 587)
     # Start TLS for security
     s.starttls()
@@ -337,6 +340,21 @@ def email_handler(recipient_address, message):
     s.sendmail(os.environ['ADMIN_EMAIL'], recipient_address, message)
     # Terminating the session
     s.quit()
+
+
+def sms_handler(message_body, phone_number):
+    """Send a message to the user using Twilio programmable messaging API. """
+
+    account_sid = os.environ['TWILIO_ACCOUNT_SID']
+    auth_token = os.environ['TWILIO_AUTH_TOKEN']
+    client = Client(account_sid, auth_token)
+
+    message = client.messages \
+                .create(
+                     body=message_body,
+                     from_=os.environ['FROM_NUMBER'],
+                     to=f'+1{phone_number}'
+                 )
 
 if __name__ == '__main__':
     from server import app
