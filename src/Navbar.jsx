@@ -23,6 +23,7 @@ export default function Navbar(props) {
       </Link>
 
       <section className="d-flex justify-content-end">
+        {!isLogged && (
         <NavLink
           to="/be-a-volunteer"
           activeClassName="navlink-active"
@@ -30,6 +31,8 @@ export default function Navbar(props) {
         >
           Be a Volunteer
         </NavLink>
+        )}
+        {!isLogged && (
         <NavLink
           to="/be-a-beneficiary"
           activeClassName="navlink-active"
@@ -37,6 +40,12 @@ export default function Navbar(props) {
         >
           Be a Beneficiary
         </NavLink>
+        )}
+        {isLogged && (
+          <NavLink to="/welcome-user" className="nav-link nav-item">
+            My Dashboard
+          </NavLink>
+        )}
         <NavLink
           to="/get-in-touch"
           activeClassName="navlink-active"
@@ -51,16 +60,10 @@ export default function Navbar(props) {
         >
           About Us
         </NavLink>
-        {isLogged && (
-          <NavLink to="/welcome-user" className="nav-link nav-item">
-            My Dashboard
-          </NavLink>
-        )}
         {isLogged ? (
           <Link
             to="/#"
             onClick={handleLogout}
-            activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Log Out
@@ -68,7 +71,6 @@ export default function Navbar(props) {
         ) : (
           <Link
             to="/login"
-            activeClassName="navlink-active"
             className="nav-link nav-item"
           >
             Log In

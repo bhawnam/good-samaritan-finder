@@ -355,6 +355,8 @@ def sms_handler(message_body, phone_number):
                      from_=os.environ['FROM_NUMBER'],
                      to=f'+1{phone_number}'
                  )
+    print(message.sid)
+    
 
 if __name__ == '__main__':
     from server import app
