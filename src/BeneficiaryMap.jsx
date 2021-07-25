@@ -39,103 +39,112 @@ export default function MapExample() {
     return <Loading />;
   }
 
-  function submitAddress(event){
+  function submitAddress(event) {
     event.preventDefault();
-    fetch("api/accept-user-address", 
-    {
-      method : "POST",
-      headers : 
-      {
-        "Content-Type" : "application/json",
+    fetch("api/accept-user-address", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({address}),
-      }).then((response) => {
+      body: JSON.stringify({ address }),
+    }).then((response) => {
       response.json().then((result) => {
-        if ((result.success) == false){
+        if (result.success === false) {
           setAddress("");
-          alert("Oops! Something went wrong!")
+          alert("Oops! Something went wrong!");
         } else {
           setAddress("");
           setLat(result.lat);
           setLng(result.lng);
           setHasAddress(true);
-          alert("Here are the volunteers offering services near you.")
+          alert("Here are the volunteers offering services near you.");
         }
       });
     });
   }
 
   return (
-    <React.Fragment>
-    {hasAddress ? (  
-    <GoogleMap
-      center={{ lat: lat, lng: lng }}
-      mapContainerStyle={{ width: "400px", height: "400px" }}
-      zoom={10}
-    >
-      {mapData.map((dataPoint) => (
-        <Marker
-          key={dataPoint.request_id}
-          position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
-          onClick={() => { setSelectedMarker(dataPoint);
-          }}
-        />
-      ))}
-      {selectedMarker &&  (
-        <InfoWindow 
-        onCloseClick={() => {
-          setSelectedMarker(null);
-        }}
-        position={{
-          lat: selectedMarker.lat,
-          lng: selectedMarker.lng
-        }}
-        > 
-        <div>
-          <h4> Volunteer </h4>  
-        </div>  
-      </InfoWindow>
-  )}
-    </GoogleMap>    
-          ) : (
-    <GoogleMap
-      center={{ lat: 37.8272, lng: -122.2913 }}
-      mapContainerStyle={{ width: "400px", height: "400px" }}
-      zoom={8}
-    >
-      {mapData.map((dataPoint) => (
-        <Marker
-          key={dataPoint.request_id}
-          position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
-          onClick={() => { setSelectedMarker(dataPoint);
-          }}
-        />
-      ))}
-      {selectedMarker &&  (
-        <InfoWindow 
-        onCloseClick={() => {
-          setSelectedMarker(null);
-        }}
-        position={{
-          lat: selectedMarker.lat,
-          lng: selectedMarker.lng
-        }}
-        > 
-        <div>
-          <h4> Volunteer </h4>  
-        </div>  
-      </InfoWindow>
-  )}
-    </GoogleMap>
+    <>
+      {hasAddress ? (
+        <GoogleMap
+          center={{ lat, lng }}
+          mapContainerStyle={{ width: "400px", height: "400px" }}
+          zoom={10}
+        >
+          {mapData.map((dataPoint) => (
+            <Marker
+              key={dataPoint.request_id}
+              position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
+              onClick={() => {
+                setSelectedMarker(dataPoint);
+              }}
+            />
+          ))}
+          {selectedMarker && (
+            <InfoWindow
+              onCloseClick={() => {
+                setSelectedMarker(null);
+              }}
+              position={{
+                lat: selectedMarker.lat,
+                lng: selectedMarker.lng,
+              }}
+            >
+              <div>
+                <h4> Volunteer </h4>
+              </div>
+            </InfoWindow>
           )}
-    <form onSubmit={submitAddress}>
-    <h3>Where do you reside? </h3>
-    <div className="form-login">
-     <label> Address </label> <br/>
-     <input type="text" className="form-input" value={address} onChange={(event) => setAddress(event.target.value)} placeholder="Enter your address" required/>
-    </div>
-    <button type="submit" className="btn"> Submit </button> 
-    </form>
-    </React.Fragment>
+        </GoogleMap>
+      ) : (
+        <GoogleMap
+          center={{ lat: 37.8272, lng: -122.2913 }}
+          mapContainerStyle={{ width: "400px", height: "400px" }}
+          zoom={8}
+        >
+          {mapData.map((dataPoint) => (
+            <Marker
+              key={dataPoint.request_id}
+              position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
+              onClick={() => {
+                setSelectedMarker(dataPoint);
+              }}
+            />
+          ))}
+          {selectedMarker && (
+            <InfoWindow
+              onCloseClick={() => {
+                setSelectedMarker(null);
+              }}
+              position={{
+                lat: selectedMarker.lat,
+                lng: selectedMarker.lng,
+              }}
+            >
+              <div>
+                <h4> Volunteer </h4>
+              </div>
+            </InfoWindow>
+          )}
+        </GoogleMap>
+      )}
+      <form onSubmit={submitAddress}>
+        <h3>Where do you reside? </h3>
+        <div className="form-login">
+          <label> Address </label> <br />
+          <input
+            type="text"
+            className="form-input"
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
+            placeholder="Enter your address"
+            required
+          />
+        </div>
+        <button type="submit" className="btn">
+          Submit
+        </button>
+      </form>
+    </>
   );
 }

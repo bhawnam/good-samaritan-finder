@@ -226,34 +226,18 @@ def process_accepted_requests():
 
     for destination in destination_list:
         if destination == beneficiary_email:
-            # Create SMTP session
-            s = smtplib.SMTP('smtp.gmail.com', 587)
-            # Start TLS for security
-            s.starttls()
-            # Authentication with sender email account
-            s.login("goodsamaritanfinder@gmail.com", os.environ['LOGIN_PASSWORD'])
-            # Message to be sent to the users
+            # Beneficiary message to be sent to the user
             message = f"Hello {beneficiary_name}. Thank you for your request. We have found a volunteer to help you " \
                       f"out. You will be receiving your requested item tomorrow."
             # Sending the mail
-            s.sendmail("goodsamaritanfinder@gmail.com", beneficiary_email, message)
-            # Terminating the session
-            s.quit()
+            crud.email_handler(beneficiary_email, message)
 
         else:
-            # Create SMTP session
-            s = smtplib.SMTP('smtp.gmail.com', 587)
-            # Start TLS for security
-            s.starttls()
-            # Authentication with sender email account
-            s.login("goodsamaritanfinder@gmail.com", os.environ['LOGIN_PASSWORD'])
-            # Message to be sent to the users
+            # Volunteer message to be sent to the users
             message = f"Hello {volunteer_name}. Thank you for helping out with a request. Here are the beneficiary " \
                       f"details for your drop-off tomorrow."
             # Sending the mail
-            s.sendmail("goodsamaritanfinder@gmail.com", volunteer_email, message)
-            # Terminating the session
-            s.quit()
+            crud.email_handler(volunteer_email, message)
 
     return jsonify({"success": True})
 
@@ -297,7 +281,7 @@ def process_beneficiary_feedback():
 
 @app.route("/api/accept-user-address", methods=["POST"])
 def process_user_address():
-    """Process the address entered by the user and find its corresponding latitute and longitude coordinates. """
+    """Process the address entered by the user and find its corresponding latitude and longitude coordinates. """
 
     user_address = request.get_json().get("address")
     print(f"User {user_address}")
@@ -339,8 +323,32 @@ def get_map_offerings_data():
 
     return jsonify(map_offerings_data)
 
-    
+
+@app.route('/api/get-in-touch', methods=["POST"])
+def get_in_touch():
+    """Handle contact form. """
+
+    full_name = request.get_json().get("fullname")
+    email = request.get_json().get("email")
+    phone_number = request.get_json().get("phoneNumber")
+    comments = request.get_json().get("comments")
+
+    if '@' in email:
+        message = f"Hello Admin! \nYou have a new contact request. Following are the details:\n" \
+                  f"Name: {full_name}\n" \
+                  f"Email: {email}\n" \
+                  f"PhoneNumber: {phone_number}\n" \
+                  f"Comments: {comments}"
+        # Sending the mail
+        crud.email_handler(os.environ['ADMIN_EMAIL'], message)
+
+        return jsonify({"success": True})
+
+    else:
+        return jsonify({"success": False})
+
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)
-    app.run("0.0.0.0", debug=True, port=5001) # will run on port 5000 by default
+    app.run("0.0.0.0", debug=True, port=5001)  # will run on port 5000 by default

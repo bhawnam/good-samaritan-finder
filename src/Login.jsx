@@ -12,16 +12,17 @@ export default function Login(props) {
 
   const {username, setUsername} = props;
 
-  function processUserLogin(event){
+  function processUserLogin(event) {
     event.preventDefault();
     fetch("api/login-user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({username_or_email, password}),}).then((response) => {
+      body: JSON.stringify({ username_or_email, password }),
+    }).then((response) => {
       response.json().then((result) => {
-        if ((result.success) === false){
+        if (result.success === false) {
           setErrormessage(true);
           setPassword("");
           setUsernameOrEmail("");
@@ -35,27 +36,45 @@ export default function Login(props) {
   }
 
   return (
-      <React.Fragment>
-        <form onSubmit={processUserLogin}>
-          <h3>Log in</h3>
-          <div className="form-login">
-            <label>Username or Email </label> <br />
-            <input type="text" className="form-input" value={username_or_email} onChange={(event) => setUsernameOrEmail(event.target.value)} placeholder="Enter username or email" required/>
-          </div>
+    <>
+      <form onSubmit={processUserLogin}>
+        <h3>Log in</h3>
+        <div className="form-login">
+          <label>Username or Email </label> <br />
+          <input
+            type="text"
+            className="form-input"
+            value={username_or_email}
+            onChange={(event) => setUsernameOrEmail(event.target.value)}
+            placeholder="Enter username or email"
+            required
+          />
+        </div>
 
-          <div className="form-login">
-            <label>Password </label> <br />
-            <input type="password" className="form-input" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Enter password" required/>
-          </div>
+        <div className="form-login">
+          <label>Password </label> <br />
+          <input
+            type="password"
+            className="form-input"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Enter password"
+            required
+          />
+        </div>
 
-          <button type="submit" className="btn">Sign in</button>
-          <p className="forgot-password">
-            <a href="#">Forgot password?</a>
-          </p>
-        </form>
-        {errormessage && < form onSubmit={() => setErrormessage(true)}>
+        <button type="submit" className="btn">
+          Sign in
+        </button>
+        <p className="forgot-password">
+          <a href="/#">Forgot password?</a>
+        </p>
+      </form>
+      {errormessage && (
+        <form onSubmit={() => setErrormessage(true)}>
           <h6> Sorry the email and password do not match our records! </h6>
-        </form>}
-      </React.Fragment>
+        </form>
+      )}
+    </>
   );
 }

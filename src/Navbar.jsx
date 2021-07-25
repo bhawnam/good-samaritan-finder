@@ -9,8 +9,8 @@ export default function Navbar(props) {
 
   let history = useHistory();
 
-  function handleLogout(){
-    localStorage.removeItem("user")
+  function handleLogout() {
+    localStorage.removeItem("user");
     setIsLogged(false);
     history.push("/");
   }
@@ -38,7 +38,7 @@ export default function Navbar(props) {
           Be a Beneficiary
         </NavLink>
         <NavLink
-          to="/contact"
+          to="/get-in-touch"
           activeClassName="navlink-active"
           className="nav-link nav-item"
         >
@@ -51,31 +51,28 @@ export default function Navbar(props) {
         >
           About Us
         </NavLink>
-        {isLogged && 
-          <NavLink
-            to="/welcome-user"
-            className="nav-link nav-item"
-          > 
-          My Dashboard   
+        {isLogged && (
+          <NavLink to="/welcome-user" className="nav-link nav-item">
+            My Dashboard
           </NavLink>
-        }
+        )}
         {isLogged ? (
           <Link
-          to="#" 
-          onClick = {handleLogout}
-          activeClassName="navlink-active"
-          className="nav-link nav-item"
-        >
-          Log Out
-        </Link>
+            to="/#"
+            onClick={handleLogout}
+            activeClassName="navlink-active"
+            className="nav-link nav-item"
+          >
+            Log Out
+          </Link>
         ) : (
-        <Link
-          to="/login"
-          activeClassName="navlink-active"
-          className="nav-link nav-item"
-        >
-          Log In
-        </Link>
+          <Link
+            to="/login"
+            activeClassName="navlink-active"
+            className="nav-link nav-item"
+          >
+            Log In
+          </Link>
         )}
       </section>
     </nav>

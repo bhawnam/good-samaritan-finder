@@ -4,6 +4,8 @@ from model import db, connect_to_db
 from model import User, Beneficiary, Volunteer, VolunteerAvailability, BeneficiaryRating, VolunteerRating, ServiceRequest, ServiceOffered, ServiceName, ServiceType  
 import googlemaps
 import os
+import smtplib
+
 
 def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number, latitude, longitude):
     """Create and return a new user."""
@@ -324,6 +326,17 @@ def convert_user_address(user_address):
 
     return user_location
 
+
+def email_handler(recipient_address, message):
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    # Start TLS for security
+    s.starttls()
+    # Authentication with sender email account
+    s.login(os.environ['ADMIN_EMAIL'], os.environ['LOGIN_PASSWORD'])
+    # Sending the mail
+    s.sendmail(os.environ['ADMIN_EMAIL'], recipient_address, message)
+    # Terminating the session
+    s.quit()
 
 if __name__ == '__main__':
     from server import app

@@ -11,11 +11,12 @@ import Footer from "./Footer";
 import TermsOfService from "./TermsOfService";
 // from the current folder (.) import MapExample
 import VolunteerMap from "./VolunteerMap";
-import BeneficiaryMap from "./BeneficiaryMap"
+import BeneficiaryMap from "./BeneficiaryMap";
 import Requests from "./Requests";
 import Offerings from "./Offerings";
 import MatchedRequests from "./MatchedRequests";
 import FulfilledRequests from "./FulfilledRequests";
+import GetInTouch from "./GetInTouch";
 import "./App.css";
 
 export default function App() {
@@ -99,7 +100,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Navbar logo="/static/img/logo.png" brand="Good Samaritan Finder" isLogged={isLogged} setIsLogged={setIsLogged}/>
+      <Navbar
+        logo="/static/img/logo.png"
+        brand="Good Samaritan Finder"
+        isLogged={isLogged}
+        setIsLogged={setIsLogged}
+      />
       <div className="container-fluid">
         <Switch>
           <Route exact path="/">
@@ -118,7 +124,13 @@ export default function App() {
           </Route>
           <Route exact path="/welcome-user">
             <SideBar />
-            <UserProfile username={username} requests={requests} offerings={offerings} matchedRequests={matchedRequests} fulfilledRequests={fulfilledRequests}/>
+            <UserProfile
+              username={username}
+              requests={requests}
+              offerings={offerings}
+              matchedRequests={matchedRequests}
+              fulfilledRequests={fulfilledRequests}
+            />
           </Route>
           <Route exact path="/terms-of-service">
             <TermsOfService />
@@ -130,10 +142,19 @@ export default function App() {
             <Offerings username={username} offerings={offerings} />
           </Route>
           <Route exact path="/matched-requests">
-            <MatchedRequests username={username} matchedRequests={matchedRequests} />
+            <MatchedRequests
+              username={username}
+              matchedRequests={matchedRequests}
+            />
           </Route>
           <Route exact path="/fulfilled-requests">
-            <FulfilledRequests username={username} fulfilledRequests={fulfilledRequests} />
+            <FulfilledRequests
+              username={username}
+              fulfilledRequests={fulfilledRequests}
+            />
+          </Route>
+          <Route exact path="/get-in-touch">
+            <GetInTouch />
           </Route>
           <div> Sorry Page Not found </div>
         </Switch>

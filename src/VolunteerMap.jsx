@@ -35,36 +35,37 @@ export default function MapExample() {
   }
 
   return (
-    <React.Fragment>
-    <GoogleMap
-      center={{ lat: 37.8272, lng: -122.2913  }}
-      mapContainerStyle={{ width: "400px", height: "400px" }}
-      zoom={5}
-    >
-      {mapData.map((dataPoint) => (
-        <Marker
-          key={dataPoint.request_id}
-          position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
-          onClick={() => { setSelectedMarker(dataPoint);
-          }}
-        />
+    <>
+      <GoogleMap
+        center={{ lat: 37.8272, lng: -122.2913 }}
+        mapContainerStyle={{ width: "400px", height: "400px" }}
+        zoom={5}
+      >
+        {mapData.map((dataPoint) => (
+          <Marker
+            key={dataPoint.request_id}
+            position={{ lat: dataPoint.lat, lng: dataPoint.lng }}
+            onClick={() => {
+              setSelectedMarker(dataPoint);
+            }}
+          />
         ))}
-        {selectedMarker &&  (
-        <InfoWindow 
-        onCloseClick={() => {
-          setSelectedMarker(null);
-        }}
-        position={{
-          lat: selectedMarker.lat,
-          lng: selectedMarker.lng
-        }}
-        > 
-        <div>
-          <h4> Request </h4>  
-        </div>  
-      </InfoWindow>
-  )}
-    </GoogleMap>
-    </React.Fragment>
+        {selectedMarker && (
+          <InfoWindow
+            onCloseClick={() => {
+              setSelectedMarker(null);
+            }}
+            position={{
+              lat: selectedMarker.lat,
+              lng: selectedMarker.lng,
+            }}
+          >
+            <div>
+              <h4> Request </h4>
+            </div>
+          </InfoWindow>
+        )}
+      </GoogleMap>
+    </>
   );
 }
