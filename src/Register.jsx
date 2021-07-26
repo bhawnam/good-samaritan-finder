@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Modal from "react-modal";
 
 export default function Register() {
   const [firstname, setFirstname] = useState("");
@@ -14,12 +13,6 @@ export default function Register() {
   const [errormessage, setErrormessage] = useState(false);
   const history = useHistory();
 
-  const [isOpen, setIsOpen] = useState(false);
-  
-  function toggleModal() {
-      setIsOpen(!isOpen);
-
-  }
   function registerUser(event) {
     event.preventDefault();
     fetch("api/register-user", {
@@ -173,18 +166,6 @@ export default function Register() {
           </h6>
         </form>
       )}
-          <div className="App">
-      <button onClick={toggleModal}>Open modal</button>
-
-      <Modal
-        isOpen={isOpen}
-        onRequestClose={toggleModal}
-        contentLabel="My dialog"
-      >
-        <div>My modal dialog.</div>
-        <button onClick={toggleModal}>Close modal</button>
-      </Modal>
-    </div>
     </>
   );
 }
