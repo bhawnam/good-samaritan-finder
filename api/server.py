@@ -3,6 +3,7 @@
 from datetime import datetime
 from flask import (Flask, render_template, request, flash, session, redirect, send_from_directory)
 from flask.json import jsonify
+from flask_bcrypt import Bcrypt
 
 import model
 import crud
@@ -14,6 +15,7 @@ import smtplib
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 app.secret_key = "secret"
 app.jinja_env.undefined = StrictUndefined
 
@@ -40,7 +42,8 @@ def user_login():
     password = request.get_json().get("password")
 
     if user_in_db:
-        if user_in_db.password == password:
+        if bcrypt.check_password_hash(user_in_db.password, password):
+        # if user_in_db.password == password:
             return jsonify({"success": True, "username": username, "email": email})
 
         else:
@@ -66,12 +69,14 @@ def user_registration():
         return jsonify({"success": False})
 
     else:
+        # Use password hashing to convert the password into a hashed value
+        password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
         # Convert the user address using Geocoding into lat lng co-ordinates
         user_location = crud.convert_user_address(street)
         lat = user_location['lat']
         lng = user_location['lng']
         # Register the user in the users table in the DB
-        register_user = crud.create_user(first_name, last_name, username, email, password, street, zipcode,
+        register_user = crud.create_user(first_name, last_name, username, email, password_hash, street, zipcode,
                                          phone_number, lat, lng)
         # Add user in beneficiaries and volunteers table in the DB
         beneficiary = crud.create_beneficiary(False, register_user)
