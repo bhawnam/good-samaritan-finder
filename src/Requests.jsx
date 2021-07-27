@@ -38,23 +38,24 @@ export default function Requests(props){
       body: JSON.stringify({username, requestServiceType, requestForNumPersons}),}).then((response) => {
       response.json().then((result) => {
         if (result.success === true) {
-          alert(
+          swal.fire(
             "Thank you for your request! We found a matching volunteer. You will be connected to them shortly"
           );
           setRequestServiceType("");
           setRequestForNumPersons("");
           setRequestForm(false);
-          refreshPage();
+          // refreshPage();
         } else if (result.success === false) {
-          alert(
+          swal.fire(
             "Thank you for your request! We will find a matching volunteer"
           );
           setRequestServiceType("");
           setRequestForNumPersons("");
           setRequestForm(false);
-          refreshPage();
+          // refreshPage();
         } else {
-          alert("Sorry there was an error!");
+          swal.fire({icon:'error',
+            text: "Sorry there was an error!"});
         }
       });
     });
