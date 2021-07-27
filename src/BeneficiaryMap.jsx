@@ -51,13 +51,23 @@ export default function MapExample() {
       response.json().then((result) => {
         if (result.success === false) {
           setAddress("");
-          alert("Oops! Something went wrong!");
+          swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            timer: 1500
+          });
         } else {
           setAddress("");
           setLat(result.lat);
           setLng(result.lng);
           setHasAddress(true);
-          alert("Here are the volunteers offering services near you.");
+          swal.fire({
+            position: 'center',
+            title: 'Here are the volunteers offering services near you!',
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       });
     });

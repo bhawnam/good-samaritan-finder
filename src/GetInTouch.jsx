@@ -20,12 +20,17 @@ export default function GetInTouch() {
     }).then((response) => {
       response.json().then((jsonResponse) => {
         if (jsonResponse.success === false) {
-          alert("Please use a valid email.");
+          swal.fire("Please use a valid email.");
         } else {
-          alert(
-            "Thank you for contacting us! We'll get back in touch with you, shortly."
-          );
-          history.push("/about-us");
+          swal.fire({
+            text: 'Thank you for contacting us! We will be in touch with you, shortly',
+            showConfirmButton: true,
+            confirmButtonText: `Okay`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              history.push("/about-us");
+            }
+          })
         }
       });
     });
@@ -75,8 +80,7 @@ export default function GetInTouch() {
 
           <div className="form-register">
             <label> Suggestions/Feedback* </label> <br />
-            <input
-              type="textarea"
+            <textarea
               className="form-input"
               value={comments}
               onChange={(event) => setComments(event.target.value)}
