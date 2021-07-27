@@ -43,10 +43,10 @@ export default function FulfilledRequests(props) {
       response.json().then((result) => {
         if (result.success === true) {
           setFeedbackForm(false);
-          alert("Your feedback has been registered");
+          swal.fire("Your feedback has been registered");
           setDisable(true);
         } else {
-          alert("Sorry something went wrong!");
+          swal.fire("Sorry something went wrong!");
         }
       });
     });

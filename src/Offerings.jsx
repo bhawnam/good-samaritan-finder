@@ -44,8 +44,8 @@ export default function Offerings(props) {
     }).then((response) => {
       response.json().then((result) => {
         if (result.success === true) {
-          alert(
-            "Thank you for your offering! We found a matching beneficiary request. You will be connected to them shortly"
+          swal.fire(
+            "Thank you for your offering! We found a matching beneficiary request for you. You will be connected to them shortly."
           );
           setOfferingServiceType("");
           setOfferingForNumPersons("");
@@ -53,14 +53,15 @@ export default function Offerings(props) {
           setOfferingForm(false);
           refreshPage();
         } else if (result.success === false) {
-          alert("Thank you for your offering! We will find a matching request");
+          swal.fire("Thank you for your offering! We will find a matching request for you.");
           setOfferingServiceType("");
           setOfferingForNumPersons("");
           setAvailableDate("");
           setOfferingForm(false);
           refreshPage();
         } else {
-          alert("Sorry there was an error!");
+          swal.fire({icon:'error',
+            text: "Sorry there was an error!"});
         }
       });
     });

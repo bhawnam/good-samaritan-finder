@@ -30,11 +30,12 @@ export default function MatchedRequests(props) {
     }).then((response) => {
       response.json().then((result) => {
         if (result.success === true) {
-          alert(
-            "Thank you for providing your service. You will be receiving an email with the next steps."
+          swal.fire(
+            "Thank you for providing your service. You will be receiving an email shortly with the next steps."
           );
         } else {
-          alert("Sorry something went wrong!");
+          swal.fire({icon:'error',
+          text: "Sorry there was an error!"});
         }
       });
     });
