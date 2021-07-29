@@ -42,8 +42,17 @@ export default function Register() {
           setPhonenumber("");
           setAddress("");
           setZipcode("");
-        } else {
-          history.push("/login");
+        } else 
+        {
+          swal.fire({
+            text: 'Thank you for registering with us. You will now be redirected to the login page.',
+            showConfirmButton: true,
+            confirmButtonText: `Okay`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              history.push("/login");
+            }
+          })
         }
       });
     });
