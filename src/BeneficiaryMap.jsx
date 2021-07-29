@@ -6,6 +6,7 @@ import {
   Marker,
 } from "@react-google-maps/api";
 import Loading from "./Loading";
+import { PlacesAutocomplete } from "./Autocomplete";
 // https://react-google-maps-api-docs.netlify.app/#
 
 export default function MapExample() {
@@ -139,7 +140,6 @@ export default function MapExample() {
         </GoogleMap>
       )}
       <form onSubmit={submitAddress}>
-        <h3>Where do you reside? </h3>
         <div className="form-login">
           <label> Address </label> <br />
           <input
@@ -150,6 +150,7 @@ export default function MapExample() {
             placeholder="Enter your address"
             required
           />
+          <PlacesAutocomplete />
         </div>
         <button type="submit" className="btn">
           Submit
