@@ -46,6 +46,7 @@ export default function Navbar(props) {
             My Dashboard
           </NavLink>
         )}
+        {!isLogged && (
         <NavLink
           to="/get-in-touch"
           activeClassName="navlink-active"
@@ -53,6 +54,8 @@ export default function Navbar(props) {
         >
           Get in touch
         </NavLink>
+        )}
+        {!isLogged && (
         <NavLink
           to="/about-us"
           activeClassName="navlink-active"
@@ -60,6 +63,7 @@ export default function Navbar(props) {
         >
           About Us
         </NavLink>
+        )}
         {isLogged ? (
           <Link
             to="/#"
