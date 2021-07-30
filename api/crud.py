@@ -6,6 +6,7 @@ import googlemaps
 import os
 import smtplib
 from twilio.rest import Client
+from email.message import EmailMessage
 
 
 def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number, latitude, longitude):
@@ -68,6 +69,14 @@ def onboard_beneficiary(beneficiary):
     db.session.commit()
 
     return beneficiary
+
+
+def update_user_password(user, hashed_password):
+    """Update the value of  password for a user. """
+
+    user.password = hashed_password
+    db.session.add(user)
+    db.session.commit()
 
 
 def get_all_requests():
@@ -328,7 +337,7 @@ def convert_user_address(user_address):
     return user_location
 
 
-def email_handler(recipient_address, message):
+def email_handler(recipient_address, message, subject="Good Samaritan Finder"):
     """Send an email to the recipient address using smtp library. """
 
     s = smtplib.SMTP('smtp.gmail.com', 587)
@@ -337,7 +346,13 @@ def email_handler(recipient_address, message):
     # Authentication with sender email account
     s.login(os.environ['ADMIN_EMAIL'], os.environ['LOGIN_PASSWORD'])
     # Sending the mail
-    s.sendmail(os.environ['ADMIN_EMAIL'], recipient_address, message)
+    meta_message = EmailMessage()
+    meta_message.set_content(message)
+    meta_message['Subject'] = subject
+    meta_message['From'] = os.environ['ADMIN_EMAIL']
+    meta_message['To'] = recipient_address
+    s.send_message(meta_message)
+    # s.sendmail(os.environ['ADMIN_EMAIL'], recipient_address, message)
     # Terminating the session
     s.quit()
 

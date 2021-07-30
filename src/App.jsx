@@ -17,6 +17,8 @@ import Offerings from "./Offerings";
 import MatchedRequests from "./MatchedRequests";
 import FulfilledRequests from "./FulfilledRequests";
 import GetInTouch from "./GetInTouch";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 import "./App.css";
 
 export default function App() {
@@ -155,6 +157,12 @@ export default function App() {
           </Route>
           <Route exact path="/get-in-touch">
             <GetInTouch />
+          </Route>
+          <Route exact path="/forgot-password">
+            <ForgotPassword />
+          </Route>
+          <Route exact path="/reset-password">
+            <ResetPassword />
           </Route>
           <div> Sorry Page Not found </div>
         </Switch>

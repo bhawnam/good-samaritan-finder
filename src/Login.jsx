@@ -67,7 +67,10 @@ export default function Login(props) {
           Sign in
         </button>
         <p className="forgot-password">
-          <a href="/#">Forgot password?</a>
+          <a href="/forgot-password">Forgot password?</a>
+        </p>
+        <p className="reset-password">
+          <a href="/reset-password">Reset password?</a>
         </p>
       </form>
       {errormessage && (
