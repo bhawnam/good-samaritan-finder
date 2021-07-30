@@ -19,6 +19,10 @@ export default function MatchedRequests(props) {
     matchingRequestsTableData.push(requestAcceptCard);
   }
 
+    function refreshPage() {
+    window.location.reload(false);
+  }
+
   function handleAcceptBtn(request_id) {
     console.log(request_id);
     fetch("api/accept-request", {
@@ -30,9 +34,11 @@ export default function MatchedRequests(props) {
     }).then((response) => {
       response.json().then((result) => {
         if (result.success === true) {
-          swal.fire(
-            "Thank you for providing your service. You will be receiving an email shortly with the next steps."
-          );
+          swal.fire({
+            text: "Thank you for providing your service. You will be notifed with a text and receive an email shortly with the next steps.",
+            showConfirmButton: true,
+            confirmButtonText: `Okay`,
+          });
         } else {
           swal.fire({icon:'error',
           text: "Sorry there was an error!"});

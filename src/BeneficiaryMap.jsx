@@ -56,7 +56,7 @@ export default function MapExample() {
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong!',
-            timer: 1500
+            timer: 2000
           });
         } else {
           setAddress("");
@@ -64,10 +64,10 @@ export default function MapExample() {
           setLng(result.lng);
           setHasAddress(true);
           swal.fire({
-            position: 'center',
-            title: 'Here are the volunteers offering services near you!',
+            position: 'top',
+            text: 'Here are the volunteers offering services near you!',
             showConfirmButton: false,
-            timer: 1500
+            timer: 2000
           });
         }
       });

@@ -23,7 +23,7 @@ export default function GetInTouch() {
           swal.fire("Please use a valid email.");
         } else {
           swal.fire({
-            text: 'Thank you for contacting us! We will be in touch with you, shortly',
+            text: 'Thank you for contacting us! We will be in touch with you shortly.',
             showConfirmButton: true,
             confirmButtonText: `Okay`,
           }).then((result) => {

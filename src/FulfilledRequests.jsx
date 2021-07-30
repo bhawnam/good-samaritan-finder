@@ -48,7 +48,7 @@ export default function FulfilledRequests(props) {
             icon: 'success',
             text: 'Your feedback has been registered',
             showConfirmButton: false,
-            timer: 1500
+            timer: 2000
           });
           setDisable(true);
         } else {
@@ -56,7 +56,7 @@ export default function FulfilledRequests(props) {
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong!',
-            timer: 1500
+            timer: 2000
           });
         }
       });
