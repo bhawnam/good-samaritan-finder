@@ -44,21 +44,35 @@ export default function Offerings(props) {
     }).then((response) => {
       response.json().then((result) => {
         if (result.success === true) {
-          swal.fire(
-            "Thank you for your offering! We found a matching beneficiary request for you. You will be connected to them shortly."
-          );
-          setOfferingServiceType("");
-          setOfferingForNumPersons("");
-          setAvailableDate("");
-          setOfferingForm(false);
-          refreshPage();
+          swal.fire({
+            text: "Thank you for your offering! We found a matching beneficiary request for you. You will be connected to them shortly.",
+            showConfirmButton: true,
+            confirmButtonText: `Okay`,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              setOfferingServiceType("");
+              setOfferingForNumPersons("");
+              setAvailableDate("");
+              setOfferingForm(false);
+              refreshPage();
+            }
+          });
         } else if (result.success === false) {
-          swal.fire("Thank you for your offering! We will find a matching request for you.");
-          setOfferingServiceType("");
-          setOfferingForNumPersons("");
-          setAvailableDate("");
-          setOfferingForm(false);
-          refreshPage();
+          swal.fire({
+            text: "Thank you for your offering! We will find a matching request for you.",
+            showConfirmButton: true,
+            confirmButtonText: `Okay`,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              setOfferingServiceType("");
+              setOfferingForNumPersons("");
+              setAvailableDate("");
+              setOfferingForm(false);
+              refreshPage();
+            }
+          });
         } else {
           swal.fire({icon:'error',
             text: "Sorry there was an error!"});
