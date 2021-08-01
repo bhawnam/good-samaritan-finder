@@ -47,7 +47,7 @@ export default function Requests(props){
           // refreshPage();
         } else if (result.success === false) {
           swal.fire(
-            "Thank you for your request! When we find a matching volunteer for you."
+            "Thank you for your request! We will find a matching volunteer for you."
           );
           setRequestServiceType("");
           setRequestForNumPersons("");

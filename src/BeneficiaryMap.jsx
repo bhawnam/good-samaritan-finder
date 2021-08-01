@@ -141,16 +141,7 @@ export default function MapExample() {
       )}
       <form onSubmit={submitAddress}>
         <div className="form-login">
-          <label> Address </label> <br />
-          <input
-            type="text"
-            className="form-input"
-            value={address}
-            onChange={(event) => setAddress(event.target.value)}
-            placeholder="Enter your address"
-            required
-          />
-          <PlacesAutocomplete />
+          <PlacesAutocomplete setAddress={setAddress}/>
         </div>
         <button type="submit" className="btn">
           Submit
