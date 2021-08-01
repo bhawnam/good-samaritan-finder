@@ -19,6 +19,7 @@ import FulfilledRequests from "./FulfilledRequests";
 import GetInTouch from "./GetInTouch";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import AboutUs from "./AboutUs";
 import "./App.css";
 
 export default function App() {
@@ -163,6 +164,9 @@ export default function App() {
           </Route>
           <Route exact path="/reset-password">
             <ResetPassword />
+          </Route>
+          <Route exact path="/about-us">
+            <AboutUs />
           </Route>
           <div> Sorry Page Not found </div>
         </Switch>

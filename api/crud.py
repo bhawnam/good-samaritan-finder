@@ -175,7 +175,7 @@ def get_matching_requests_for_volunteer(volunteer):
     for offering in offerings:
         for req in requests:
             if ((req.service_type.service_name == offering.service_type.service_name) and 
-                    (req.service_type.for_num_persons < offering.service_type.for_num_persons)):
+                    (req.service_type.for_num_persons <= offering.service_type.for_num_persons)):
                 matching_requests.append(req)
 
     return matching_requests            
@@ -255,7 +255,7 @@ def create_service_request(date_request, beneficiary, service_type):
 def look_for_request(service_name, for_num_persons):
     """Look for a service and request based on the offering. """
 
-    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons < for_num_persons) & (ServiceType.is_offered == "false")).first()
+    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons <= for_num_persons) & (ServiceType.is_offered == "false")).first()
     if service:
         request = ServiceRequest.query.filter((ServiceRequest.service_type == service) & (ServiceRequest.request_active == 't')).first()
         if request:
@@ -279,12 +279,12 @@ def create_service_offered(volunteer, service_type):
 def look_for_offering(service_name, for_num_persons, date_of_request):
     """Look for a service and offering based on the request. """
 
-    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons > for_num_persons) & (ServiceType.is_offered == "true")).first()
+    service = ServiceType.query.filter((ServiceType.service_name == service_name) & (ServiceType.for_num_persons >= for_num_persons) & (ServiceType.is_offered == "true")).first()
     if service_name:
         offering = ServiceOffered.query.filter_by(service_type=service).first()
         if offering:
             volunteer = offering.volunteer
-            offering_volunteer = VolunteerAvailability.query.filter((VolunteerAvailability.volunteer == volunteer) & (VolunteerAvailability.availability > date_of_request)).first()
+            offering_volunteer = VolunteerAvailability.query.filter((VolunteerAvailability.volunteer == volunteer) & (VolunteerAvailability.availability >= date_of_request)).first()
             return offering_volunteer
     else: 
         return None        

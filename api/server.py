@@ -205,83 +205,81 @@ def show_matched_requests():
 @app.route("/api/accept-request", methods=["POST"])
 def process_accepted_requests():
     """Process the request accepted by the volunteer. """
+    try:
+        logged_user = request.get_json().get("username")
+        request_id = request.get_json().get("request_id")
+        # Get the user object from the users table
+        user_in_db = crud.get_user_by_displayname(logged_user)
+        volunteer = crud.get_volunteer_by_user(user_in_db)
+        # Search the request by the id in the requests table
+        beneficiary_request = crud.get_beneficiary_request_by_id(request_id)
 
-    logged_user = request.get_json().get("username")
-    request_id = request.get_json().get("request_id")
-    # Get the user object from the users table
-    user_in_db = crud.get_user_by_displayname(logged_user)
-    volunteer = crud.get_volunteer_by_user(user_in_db)
-    # Search the request by the id in the requests table
-    beneficiary_request = crud.get_beneficiary_request_by_id(request_id)
+        # Get the email address and names of volunteers and beneficiaries and send them confirmation emails.
+        beneficiary_name = beneficiary_request.beneficiary.user.first_name
+        print(f"name {beneficiary_name}")
+        beneficiary_email = beneficiary_request.beneficiary.user.email
+        print(f"email {beneficiary_email}")
+
+        volunteer_name = volunteer.user.first_name
+        print(f"name {volunteer_name}")
+        volunteer_email = volunteer.user.email
+        print(f"email {volunteer_email}")
+
+        # Beneficiary message to be sent to the user
+        subject = f"Help is on it's way!"
+
+        # Beneficiary message to be sent to the user
+        message = f"Hello {beneficiary_name},\n\nWe are delighted to let you know that we have found a volunteer to " \
+                  f"help you out. Your Good Samaritan will be contacting you shortly to arrange for the hand-off." \
+                  f"\n\nOnce you receive the help, please do not forget to go back to your dashboard at " \
+                  f"www.goodsamaritanfinder.org and leave a little note thanking your Good Samaritan. " \
+                  f"\n\nWe wish you and your loved ones, well.\n\nTake care and stay safe!\n\n" \
+                  f"-GSF Admin"
+        # Sending the mail
+        crud.email_handler(beneficiary_email, message, subject)
+
+        # Volunteer message to be sent to the users
+        subject = f"Thank you for stepping up to help!"
+
+        # Volunteer message to be sent to the users
+        message = f"Hello {volunteer_name},\n\nThank you for helping out with a request.\n\nHere are the beneficiary" \
+                  f" details:\n" \
+                  f"Name:  {beneficiary_request.beneficiary.user.first_name}\n" \
+                  f"Email: {beneficiary_request.beneficiary.user.email}\n" \
+                  f"Phone: {beneficiary_request.beneficiary.user.phone_number}\n" \
+                  f"Address: {beneficiary_request.beneficiary.user.street}, {beneficiary_request.beneficiary.user.zipcode}\n" \
+                  f"Google Maps: https://maps.google.com/?q={beneficiary_request.beneficiary.user.latitude},{beneficiary_request.beneficiary.user.longitude}" \
+                  f"\n\nThank you again for stepping up and being a Good Samaritan. The world could use a lot more " \
+                  f"folks like yourself!\n\nStay blessed and stay safe!\n\n-GSF Admin"
+
+        # Sending the mail
+        crud.email_handler(volunteer_email, message, subject)
+
+        # Get the phone numbers of volunteers and beneficiaries and send them confirmation text message.
+        beneficiary_phone_number = beneficiary_request.beneficiary.user.phone_number
+        print(f"number {beneficiary_phone_number}")
+        volunteer_phone_number = volunteer.user.phone_number
+        print(f"number {volunteer_phone_number}")
+
+        # Send SMS to beneficiary
+        message_body = f"Hello {beneficiary_name}. Thank you for your request. We have found a Good Samaritan " \
+                       f"to help you out. You will be hearing from them soon! Please keep an eye out for the " \
+                       f"email from one of our Good Samaritans. Help is on it's way!"
+        crud.sms_handler(message_body, beneficiary_phone_number)
+
+        # send SMS to volunteer
+        message_body = f"Hello {volunteer_name}. Thank you for helping out with a request and being a Good " \
+                       f"Samaritan! Please check your email for the beneficiary details. The Good Samaritan " \
+                       f"team thanks you for your service!"
+        crud.sms_handler(message_body, volunteer_phone_number)
+
+    except Exception:
+        return jsonify({"success": False})
+
     # Update request to not active, add volunteer_id to it
     beneficiary_request = crud.update_beneficiary_request(volunteer, beneficiary_request)
     # Update volunteer offering by updating the service type values
     volunteer_offering = crud.update_volunteer_offering(beneficiary_request, volunteer)
-
-    # Get the email address and names of volunteers and beneficiaries and send them confirmation emails.
-    beneficiary_name = beneficiary_request.beneficiary.user.first_name
-    print(f"name {beneficiary_name}")
-    beneficiary_email = beneficiary_request.beneficiary.user.email
-    print(f"email {beneficiary_email}")
-
-    volunteer_name = beneficiary_request.volunteer.user.first_name
-    print(f"name {volunteer_name}")
-    volunteer_email = beneficiary_request.volunteer.user.email
-    print(f"email {volunteer_email}")
-
-    destination_list = [beneficiary_email, volunteer_email]
-
-    for destination in destination_list:
-        if destination == beneficiary_email:
-            subject = f"Help is on it's way!"
-
-            # Beneficiary message to be sent to the user
-            message = f"Hello {beneficiary_name},\nWe are delighted to let you know that we have found a volunteer to " \
-                      f"help you out. Your Good Samaritan will be contacting you shortly to arrange for the hand-off." \
-                      f"\n\nOnce you receive the help, please do not forget to go back to your dashboard at " \
-                      f"www.goodsamaritanfinder.com and leave a little note thanking your Good Samaritan. " \
-                      f"\n\nWe wish you and your loved ones, well.\n\nTake care and stay safe!\n\n" \
-                      f"-GSF Admin"
-            # Sending the mail
-            crud.email_handler(beneficiary_email, message, subject)
-
-        else:
-            subject = f"Thank you for stepping up to help!"
-
-            # Volunteer message to be sent to the users
-            message = f"Hello {volunteer_name},\nThank you for helping out with a request.\n\nHere are the beneficiary" \
-                      f" details:\n" \
-                      f"Name:  {beneficiary_request.beneficiary.user.first_name}\n" \
-                      f"Email: {beneficiary_request.beneficiary.user.email}\n" \
-                      f"Phone: {beneficiary_request.beneficiary.user.phone_number}\n" \
-                      f"Address: {beneficiary_request.beneficiary.user.street}, {beneficiary_request.beneficiary.user.zipcode}\n" \
-                      f"Google Maps: https://maps.google.com/?q={beneficiary_request.beneficiary.user.latitude},{beneficiary_request.beneficiary.user.longitude}" \
-                      f"\n\nThank you again for stepping up and being a Good Samaritan. The world could use a lot more folks" \
-                      f"like yourself!\n\nStay blessed and stay safe!\n\n-GSF Admin"
-
-            # Sending the mail
-            crud.email_handler(volunteer_email, message, subject)
-
-    # Get the phone numbers of volunteers and beneficiaries and send them confirmation text message.
-    beneficiary_phone_number = beneficiary_request.beneficiary.user.phone_number
-    print(f"number {beneficiary_phone_number}")    
-    volunteer_phone_number = beneficiary_request.volunteer.user.phone_number
-    print(f"number {volunteer_phone_number}")
-
-    destination_number_list = [beneficiary_phone_number, volunteer_phone_number]
-
-    for destination_number in destination_number_list:
-        if destination_number == beneficiary_phone_number:
-            message_body = f"Hello {beneficiary_name}. Thank you for your request. We have found a Good Samaritan " \
-                           f"to help you out. You will be hearing from them soon! Please keep an eye out for the " \
-                           f"email from one of our Good Samaritans. Help is on it's way!"
-            crud.sms_handler(message_body, beneficiary_phone_number)
-
-        else:
-            message_body = f"Hello {volunteer_name}. Thank you for helping out with a request and being a Good " \
-                           f"Samaritan! Please check your email for the beneficiary details. The Good Samaritan " \
-                           f"team thanks you for your service!"
-            crud.sms_handler(message_body, volunteer_phone_number)          
 
     return jsonify({"success": True})
 
@@ -411,11 +409,11 @@ def forgot_password():
         crud.update_user_password(user, hashed_password)
 
         message = f"Hello {user.first_name}! \n\nA new password request has been made for your registered email with " \
-                  f"www.goodsamaritanfinder.com. \n\n" \
+                  f"www.goodsamaritanfinder.org. \n\n" \
                   f"Please use the below temporary password to login to your account:\n" \
                   f"password: {temporary_password}\n\n" \
                   f"We recommend resetting your temporary password using the password reset link below\n" \
-                  f"www.goodsamaritanfinder.com/reset-password\n\n" \
+                  f"www.goodsamaritanfinder.org/reset-password\n\n" \
                   f"Thank you being a part of the Good Samaritan Finder Network!\n\n" \
                   f"- GSF Admin"
 
