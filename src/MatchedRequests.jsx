@@ -19,31 +19,47 @@ export default function MatchedRequests(props) {
     matchingRequestsTableData.push(requestAcceptCard);
   }
 
-    function refreshPage() {
+  function refreshPage() {
     window.location.reload(false);
   }
 
   function handleAcceptBtn(request_id) {
     console.log(request_id);
-    fetch("api/accept-request", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, request_id }),
-    }).then((response) => {
-      response.json().then((result) => {
-        if (result.success === true) {
-          swal.fire({
-            text: "Thank you for providing your service. You will be notifed with a text and receive an email shortly with the next steps.",
-            showConfirmButton: true,
-            confirmButtonText: `Okay`,
-          });
-        } else {
-          swal.fire({icon:'error',
-          text: "Sorry there was an error!"});
-        }
+    swal.fire({
+      title: 'Are you sure?',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes!'
+    }).
+    then((result) => {
+      if (result.isConfirmed) {
+      fetch("api/accept-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, request_id }),
+      }).then((response) => {
+        response.json().then((result) => {
+          if (result.success === true) {
+            swal.fire({
+              text: "Thank you for providing your service. You will be notifed with a text and receive an email shortly with the next steps.",
+              showConfirmButton: true,
+              confirmButtonText: `Okay`,
+            })
+            .then((result) => {
+              if (result.isConfirmed) {
+                refreshPage();
+              }
+            });
+          } else {
+            swal.fire({icon:'error',
+            text: "Sorry there was an error!"});
+          }
+        });
       });
+    }
     });
   }
 
