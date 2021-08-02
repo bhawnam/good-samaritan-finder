@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { PlacesAutocomplete } from "./Autocomplete";
 
 export default function Register() {
   const [firstname, setFirstname] = useState("");
@@ -138,14 +139,15 @@ export default function Register() {
 
         <div className="form-register">
           <label> Address </label> <br />
-          <input
+          {/* <input
             type="text"
             className="form-input"
             value={address}
             onChange={(event) => setAddress(event.target.value)}
             placeholder="Street"
             required
-          />
+          /> */}
+          <PlacesAutocomplete setAddress={setAddress}/>
         </div>
 
         <div className="form-register">
