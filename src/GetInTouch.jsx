@@ -39,10 +39,15 @@ export default function GetInTouch() {
     <div>
       <>
         <form onSubmit={getInTouchRequest}>
-          <h4>
-            Your suggestions and feedback are important to us. Please get in
-            touch
-          </h4>
+        <h4>Your suggestions and feedback are very important to us!</h4>
+        <p>
+          We at Good Samaritan Finder are always looking for ways to make the
+          website better and more accessible. We will continue to offer our
+          services free of cost. If you wish to join us in the effort to help
+          us develop this website, please do not hesitate to reach out to us.
+          Thank you once again for your time! We will get back to you if we
+          need more information.
+        </p>
           <div className="form-register">
             <label>Full Name * </label> <br />
             <input
