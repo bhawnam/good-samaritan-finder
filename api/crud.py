@@ -7,7 +7,9 @@ import os
 import smtplib
 from twilio.rest import Client
 from email.message import EmailMessage
+from haversine import haversine, Unit
 
+SERVICE_RADIUS_MILES = 25
 
 def create_user(first_name, last_name, display_name, email, password, street, zipcode, phone_number, latitude, longitude):
     """Create and return a new user."""
@@ -172,11 +174,17 @@ def get_matching_requests_for_volunteer(volunteer):
     matching_requests = []
     requests = ServiceRequest.query.filter(ServiceRequest.request_active == 't').all()
     offerings = get_offerings_by_volunteer(volunteer)
+    volunteer_coordinates = get_volunteer_coordinates(volunteer)
+
     for offering in offerings:
         for req in requests:
+            beneficiary = req.beneficiary
+            beneficiary_coordinates = get_beneficiary_coordinates(beneficiary)
+            print(f"MILES {haversine(volunteer_coordinates, beneficiary_coordinates, unit=Unit.MILES)}")
             if ((req.service_type.service_name == offering.service_type.service_name) and 
                     (req.service_type.for_num_persons <= offering.service_type.for_num_persons)):
-                matching_requests.append(req)
+                    if haversine(volunteer_coordinates, beneficiary_coordinates, unit=Unit.MILES) < SERVICE_RADIUS_MILES:
+                        matching_requests.append(req)
 
     return matching_requests            
     
@@ -335,6 +343,26 @@ def convert_user_address(user_address):
     user_location = geocode_result[0]['geometry']['location']
 
     return user_location
+
+
+def get_volunteer_coordinates(volunteer):
+    """Get the latitude and longitude co-ordinates for the volunteer """
+
+    lat = volunteer.user.latitude
+    lng = volunteer.user.longitude
+    coordinates = (lat, lng)
+    
+    return coordinates
+
+
+def get_beneficiary_coordinates(beneficiary):
+    """Get the latitude and longitude co-ordinates for the volunteer """
+
+    lat = beneficiary.user.latitude
+    lng = beneficiary.user.longitude
+    coordinates = (lat, lng)
+    
+    return coordinates
 
 
 def email_handler(recipient_address, message, subject="Good Samaritan Finder"):
