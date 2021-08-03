@@ -174,12 +174,12 @@ def get_matching_requests_for_volunteer(volunteer):
     matching_requests = []
     requests = ServiceRequest.query.filter(ServiceRequest.request_active == 't').all()
     offerings = get_offerings_by_volunteer(volunteer)
-    volunteer_coordinates = get_volunteer_coordinates(volunteer)
+    volunteer_coordinates = get_user_coordinates(volunteer)
 
     for offering in offerings:
         for req in requests:
             beneficiary = req.beneficiary
-            beneficiary_coordinates = get_beneficiary_coordinates(beneficiary)
+            beneficiary_coordinates = get_user_coordinates(beneficiary)
             print(f"MILES {haversine(volunteer_coordinates, beneficiary_coordinates, unit=Unit.MILES)}")
             if ((req.service_type.service_name == offering.service_type.service_name) and 
                     (req.service_type.for_num_persons <= offering.service_type.for_num_persons)):
@@ -345,21 +345,11 @@ def convert_user_address(user_address):
     return user_location
 
 
-def get_volunteer_coordinates(volunteer):
+def get_user_coordinates(obj):
     """Get the latitude and longitude co-ordinates for the volunteer """
 
-    lat = volunteer.user.latitude
-    lng = volunteer.user.longitude
-    coordinates = (lat, lng)
-    
-    return coordinates
-
-
-def get_beneficiary_coordinates(beneficiary):
-    """Get the latitude and longitude co-ordinates for the volunteer """
-
-    lat = beneficiary.user.latitude
-    lng = beneficiary.user.longitude
+    lat = obj.user.latitude
+    lng = obj.user.longitude
     coordinates = (lat, lng)
     
     return coordinates
