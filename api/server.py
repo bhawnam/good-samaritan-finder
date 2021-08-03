@@ -1,6 +1,7 @@
 """Server for good-samaritan-finder app """
 
 from datetime import datetime
+import re
 from flask import (Flask, render_template, request, flash, session, redirect, send_from_directory)
 from flask.json import jsonify
 from flask_bcrypt import Bcrypt
@@ -189,14 +190,16 @@ def show_matched_requests():
     """Display the matched requests to the volunteer for approval. """
 
     logged_user = request.get_json().get("username")
-    # Get the user object from the users table
-    user_in_db = crud.get_user_by_displayname(logged_user)
-    volunteer = crud.get_volunteer_by_user(user_in_db)
-    # Get all the service requests matching for this volunteer
-    matching_requests = crud.get_matching_requests_for_volunteer(volunteer)
+    if logged_user:
+        # Get the user object from the users table
+        user_in_db = crud.get_user_by_displayname(logged_user)
+        volunteer = crud.get_volunteer_by_user(user_in_db)
+        # Get all the service requests matching for this volunteer
+        matching_requests = crud.get_matching_requests_for_volunteer(volunteer)
 
-    return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
+        return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
 
+    return jsonify({})
 
 @app.route("/api/accept-request", methods=["POST"])
 def process_accepted_requests():
