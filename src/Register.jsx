@@ -11,6 +11,7 @@ export default function Register() {
   const [phonenumber, setPhonenumber] = useState("");
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState("");
+  const [aptSuite, setAptSuite] = useState("");
   const [errormessage, setErrormessage] = useState(false);
   const history = useHistory();
 
@@ -30,6 +31,7 @@ export default function Register() {
         phonenumber,
         address,
         zipcode,
+        aptSuite,
       }),
     }).then((response) => {
       response.json().then((jsonResponse) => {
@@ -43,6 +45,7 @@ export default function Register() {
           setPhonenumber("");
           setAddress("");
           setZipcode("");
+          setAptSuite("");
         } else 
         {
           swal.fire({
@@ -139,27 +142,17 @@ export default function Register() {
 
         <div className="form-register">
           <label> Address </label> <br />
-          {/* <input
-            type="text"
-            className="form-input"
-            value={address}
-            onChange={(event) => setAddress(event.target.value)}
-            placeholder="Street"
-            required
-          /> */}
-          <PlacesAutocomplete setAddress={setAddress}/>
+          <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
 
         <div className="form-register">
-          <label>Zipcode </label> <br />
+          <label>Apt/Suite </label> <br />
           <input
             type="text"
             className="form-input"
-            value={zipcode}
-            onChange={(event) => setZipcode(event.target.value)}
-            placeholder="Zipcode"
-            pattern="[0-9]*"
-            required
+            value={aptSuite}
+            onChange={(event) => setAptSuite(event.target.value)}
+            placeholder="Apt/Suite (Optional)"
           />
         </div>
 

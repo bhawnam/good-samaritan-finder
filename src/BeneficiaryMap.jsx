@@ -10,6 +10,7 @@ import { PlacesAutocomplete } from "./Autocomplete";
 // https://react-google-maps-api-docs.netlify.app/#
 
 export default function MapExample() {
+  const [zipcode, setZipcode] = useState("");
   const [mapData, setMapData] = useState([]);
   const [loading, setLoading] = useState(false);
   const { isLoaded, loadError } = useJsApiLoader({
@@ -141,7 +142,7 @@ export default function MapExample() {
       )}
       <form onSubmit={submitAddress}>
         <div className="form-login">
-          <PlacesAutocomplete setAddress={setAddress}/>
+          <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
         <button type="submit" className="btn">
           Submit

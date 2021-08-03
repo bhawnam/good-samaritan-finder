@@ -1,10 +1,10 @@
 import React from "react";
 import usePlacesAutocomplete, {
   getGeocode,
-  getLatLng,
+  getZipCode,
 } from "use-places-autocomplete";
 
-export const PlacesAutocomplete = ({setAddress}) => {
+export const PlacesAutocomplete = ({setAddress, setZipcode}) => {
   const {
     ready,
     value,
@@ -30,11 +30,12 @@ export const PlacesAutocomplete = ({setAddress}) => {
     setAddress(description);
     clearSuggestions();
 
-    // Get latitude and longitude via utility functions
+    // Get zipcode based on address selected
     getGeocode({ address: description })
-      .then((results) => getLatLng(results[0]))
-      .then(({ lat, lng }) => {
-        console.log("Coordinates: ", { lat, lng });
+      .then((results) => getZipCode(results[0], false))
+      .then((zipCode ) => {
+        setZipcode(zipCode);
+        console.log("Zipcode: ", { zipCode });
       })
       .catch((error) => {
         console.log("Error: ", error);

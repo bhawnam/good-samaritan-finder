@@ -64,6 +64,11 @@ def user_registration():
     phone_number = request.get_json().get("phonenumber")
     street = request.get_json().get("address")
     zipcode = request.get_json().get("zipcode")
+    apt_suite = request.get_json().get("aptSuite")
+
+    # Add apartment or suite number to the street address if available
+    if apt_suite.strip():
+        street = f'{street}, {apt_suite}'
 
     user_in_db = crud.get_user_by_displayname(username)
 
