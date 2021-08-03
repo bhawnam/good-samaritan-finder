@@ -121,11 +121,8 @@ def add_user_request():
     """Process the request added by the user. """
 
     service_name = request.get_json().get("requestServiceType")
-    print(f"Service type {service_name}")
     for_num_persons = request.get_json().get("requestForNumPersons")
-    print(f"Number {for_num_persons}")
     logged_user = request.get_json().get("username")
-    print(f"User {logged_user}")
     # Get user object by displayname
     user_in_db = crud.get_user_by_displayname(logged_user)
     # For user(ben)in beneficiaries table, set onboarded to True
@@ -152,13 +149,9 @@ def add_user_offering():
     """Process the offering added by the user. """
 
     service_name = request.get_json().get("offeringServiceType")
-    print(f"Service type {service_name}")
     for_num_persons = request.get_json().get("offeringForNumPersons")
-    print(f"Number {for_num_persons}")
     available_date = request.get_json().get("availableDate")
-    print(f"Date {available_date}")
     logged_user = request.get_json().get("username")
-    print(f"User {logged_user}")
     # Get user object by displayname
     user_in_db = crud.get_user_by_displayname(logged_user)
     # For user(vol)in volunteers table, set onboarded to True
@@ -172,7 +165,6 @@ def add_user_offering():
     # If the service exists by that volunteer, just update for_num_persons
     # Else, create a service type and service offering to be added to the DB
     is_service = crud.check_existing_service(volunteer, service_name)
-    print(f"is_service {is_service}")
     if is_service:
         service_offering = crud.update_service_offering(volunteer, service_name, for_num_persons)
     else:
@@ -192,7 +184,6 @@ def show_matched_requests():
     """Display the matched requests to the volunteer for approval. """
 
     logged_user = request.get_json().get("username")
-    print(f"Logged user: {logged_user}")
     # Get the user object from the users table
     user_in_db = crud.get_user_by_displayname(logged_user)
     volunteer = crud.get_volunteer_by_user(user_in_db)
@@ -216,16 +207,12 @@ def process_accepted_requests():
 
         # Get the email address and names of volunteers and beneficiaries and send them confirmation emails.
         beneficiary_name = beneficiary_request.beneficiary.user.first_name
-        print(f"name {beneficiary_name}")
         beneficiary_email = beneficiary_request.beneficiary.user.email
-        print(f"email {beneficiary_email}")
 
         volunteer_name = volunteer.user.first_name
-        print(f"name {volunteer_name}")
         volunteer_email = volunteer.user.email
-        print(f"email {volunteer_email}")
 
-        # Beneficiary message to be sent to the user
+        # Beneficiary message subject to be sent to the user
         subject = f"Help is on it's way!"
 
         # Beneficiary message to be sent to the user
@@ -238,7 +225,7 @@ def process_accepted_requests():
         # Sending the mail
         crud.email_handler(beneficiary_email, message, subject)
 
-        # Volunteer message to be sent to the users
+        # Volunteer message subject to be sent to the users
         subject = f"Thank you for stepping up to help!"
 
         # Volunteer message to be sent to the users
@@ -257,9 +244,7 @@ def process_accepted_requests():
 
         # Get the phone numbers of volunteers and beneficiaries and send them confirmation text message.
         beneficiary_phone_number = beneficiary_request.beneficiary.user.phone_number
-        print(f"number {beneficiary_phone_number}")
         volunteer_phone_number = volunteer.user.phone_number
-        print(f"number {volunteer_phone_number}")
 
         # Send SMS to beneficiary
         message_body = f"Hello {beneficiary_name}. Thank you for your request. We have found a Good Samaritan " \
@@ -305,10 +290,8 @@ def process_beneficiary_feedback():
     """Process the feedback message by the beneficiary for the offered service. """
 
     logged_user = request.get_json().get("username")
-    print(f"User {logged_user}")
     request_id = request.get_json().get("feedbackRequestID")
     feedback_message = request.get_json().get("feedbackMessage")
-    print(f"Msg {feedback_message}")
     # Get user object by displayname
     user_in_db = crud.get_user_by_displayname(logged_user)
     # For user(ben)in beneficiaries table, get the ben object
@@ -326,12 +309,10 @@ def process_user_address():
     """Process the address entered by the user and find its corresponding latitude and longitude coordinates. """
 
     user_address = request.get_json().get("address")
-    print(f"User {user_address}")
     # Convert this address using Geocoding into lat lng co-ordinates
     user_location = crud.convert_user_address(user_address)
     lat = user_location['lat']
     lng = user_location['lng']
-    print(f"Lat {lat} Lng {lng}")
 
     return jsonify({"success": True, "lat": lat, "lng": lng})
 
