@@ -438,6 +438,19 @@ def reset_password():
     return jsonify({"success": False})
 
 
+@app.route('/api/send-otp-sms', methods=["POST"])
+def send_otp_sms():
+    """Send otp to phone number. """
+
+    otp = request.get_json().get("otp")
+
+    phone_number = request.get_json().get("phonenumber")
+
+    crud.sms_handler(f'OTP for Good Samaritan Finder: {otp}', phone_number)
+
+    return jsonify({"success": True})
+
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)

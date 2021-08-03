@@ -9,11 +9,54 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
+  const [phoneValidated, setPhoneValidated] = useState(true);
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [aptSuite, setAptSuite] = useState("");
   const [errormessage, setErrormessage] = useState(false);
   const history = useHistory();
+
+  function handlePhoneValidate() {
+    const otp = Math.floor(Math.random() * 300000).toString();
+
+    fetch("/api/send-otp-sms", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        otp,
+        phonenumber,
+      }),
+    }).then((response) => {
+      response.json().then((jsonResponse) => {
+        swal.fire({
+            title: "Validate Phone Number",
+            input: "text",
+            inputLabel: "Please enter the validation code",
+            inputPlaceholder: "Enter code",
+            showConfirmButton: true,
+            confirmButtonText: `Okay`,
+          })
+          .then((result) => {
+            if (result.value === otp) {
+              setPhoneValidated(true);
+              swal.fire({
+                text: "Thank you for verifying the phone number!",
+                timer: 2000,
+              });
+            } else {
+              setPhoneValidated(false);
+              swal.fire({
+                text: "Incorrect validation code. Please re-validate phone number.",
+                showConfirmButton: true,
+                confirmButtonText: `Okay`,
+              });
+            }
+          });
+      });
+    });
+  }
 
   function registerUser(event) {
     event.preventDefault();
@@ -46,17 +89,18 @@ export default function Register() {
           setAddress("");
           setZipcode("");
           setAptSuite("");
-        } else 
-        {
-          swal.fire({
-            text: 'Thank you for registering with us. You will now be redirected to the login page.',
-            showConfirmButton: true,
-            confirmButtonText: `Okay`,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              history.push("/login");
-            }
-          })
+        } else {
+          swal
+            .fire({
+              text: "Thank you for registering with us. You will now be redirected to the login page.",
+              showConfirmButton: true,
+              confirmButtonText: `Okay`,
+            })
+            .then((result) => {
+              if (result.isConfirmed) {
+                history.push("/login");
+              }
+            });
         }
       });
     });
@@ -133,11 +177,22 @@ export default function Register() {
             type="text"
             className="form-input"
             value={phonenumber}
-            onChange={(event) => setPhonenumber(event.target.value)}
-            placeholder="Phone number"
+            onChange={(event) => {
+              setPhonenumber(event.target.value);
+              setPhoneValidated(false);
+            }}
+            placeholder="XXX-XXX-XXXX"
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             required
           />
+          <button
+            id="phoneValidate"
+            type="button"
+            disabled={phoneValidated === true}
+            onClick={() => handlePhoneValidate()}
+          >
+            Verify Phone Number
+          </button>
         </div>
 
         <div className="form-register">
@@ -156,7 +211,11 @@ export default function Register() {
           />
         </div>
 
-        <button type="submit" className="btn">
+        <button
+          type="submit"
+          className="btn"
+          disabled={phoneValidated === false}
+        >
           Register
         </button>
         <p className="forgot-password">
