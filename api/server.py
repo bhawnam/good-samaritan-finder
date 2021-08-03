@@ -454,6 +454,19 @@ def send_otp_sms():
     return jsonify({"success": True})
 
 
+@app.route('/api/send-code-email', methods=["POST"])
+def send_code_email():
+    """Send verification code to the email address. """
+
+    code = request.get_json().get("verificationCode")
+
+    email = request.get_json().get("email")
+
+    crud.email_handler(email, f'Verification code for Good Samaritan Finder: {code}')
+
+    return jsonify({"success": True})
+
+
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)

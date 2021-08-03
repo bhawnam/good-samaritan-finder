@@ -10,6 +10,7 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [phonenumber, setPhonenumber] = useState("");
   const [phoneValidated, setPhoneValidated] = useState(true);
+  const [emailValidated, setEmailValidated] = useState(true);
   const [address, setAddress] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [aptSuite, setAptSuite] = useState("");
@@ -49,6 +50,48 @@ export default function Register() {
               setPhoneValidated(false);
               swal.fire({
                 text: "Incorrect validation code. Please re-validate phone number.",
+                showConfirmButton: true,
+                confirmButtonText: `Okay`,
+              });
+            }
+          });
+      });
+    });
+  }
+
+  function handleEmailValidate() {
+    const verificationCode = Math.floor(Math.random() * 300000).toString();
+
+    fetch("/api/send-code-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        verificationCode,
+        email,
+      }),
+    }).then((response) => {
+      response.json().then((jsonResponse) => {
+        swal.fire({
+            title: "Validate Email",
+            input: "text",
+            inputLabel: "Please enter the verification code",
+            inputPlaceholder: "Enter code",
+            showConfirmButton: true,
+            confirmButtonText: `Okay`,
+          })
+          .then((result) => {
+            if (result.value === verificationCode) {
+              setEmailValidated(true);
+              swal.fire({
+                text: "Thank you for verifying the email address!",
+                timer: 2000,
+              });
+            } else {
+              setEmailValidated(false);
+              swal.fire({
+                text: "Incorrect verification code. Please re-validate email address.",
                 showConfirmButton: true,
                 confirmButtonText: `Okay`,
               });
@@ -153,10 +196,20 @@ export default function Register() {
             type="email"
             className="form-input"
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) => {
+              setEmail(event.target.value);
+              setEmailValidated(false);
+            }}
             placeholder="Email"
             required
           />
+            <button
+            type="button"
+            disabled={emailValidated === true}
+            onClick={() => handleEmailValidate()}
+          >
+            Validate Email
+          </button>
         </div>
 
         <div className="form-register">
@@ -186,7 +239,6 @@ export default function Register() {
             required
           />
           <button
-            id="phoneValidate"
             type="button"
             disabled={phoneValidated === true}
             onClick={() => handlePhoneValidate()}
