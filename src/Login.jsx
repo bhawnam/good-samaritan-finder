@@ -46,7 +46,7 @@ export default function Login(props) {
             className="form-input"
             value={username_or_email}
             onChange={(event) => setUsernameOrEmail(event.target.value)}
-            placeholder="Enter username or email"
+            placeholder="Username or Email"
             required
           />
         </div>
@@ -58,7 +58,7 @@ export default function Login(props) {
             className="form-input"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            placeholder="Enter password"
+            placeholder="Password"
             required
           />
         </div>

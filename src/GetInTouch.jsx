@@ -55,7 +55,7 @@ export default function GetInTouch() {
               className="form-input"
               value={fullname}
               onChange={(event) => setFullname(event.target.value)}
-              placeholder="Full name"
+              placeholder="John Doe"
               required
             />
           </div>
@@ -67,7 +67,7 @@ export default function GetInTouch() {
               className="form-input"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="Email"
+              placeholder="example@xyz.com"
               required
             />
           </div>
@@ -79,7 +79,7 @@ export default function GetInTouch() {
               className="form-input"
               value={phoneNumber}
               onChange={(event) => setPhoneNumber(event.target.value)}
-              placeholder="Phone number (Optional)"
+              placeholder="xxx-xxx-xxxx"
             />
           </div>
 
@@ -89,7 +89,7 @@ export default function GetInTouch() {
               className="form-input"
               value={comments}
               onChange={(event) => setComments(event.target.value)}
-              placeholder="Suggestions/Feedback"
+              placeholder="What's on your mind?"
               required
             />
           </div>

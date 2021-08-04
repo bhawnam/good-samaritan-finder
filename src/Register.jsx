@@ -161,7 +161,7 @@ export default function Register() {
             className="form-input"
             value={firstname}
             onChange={(event) => setFirstname(event.target.value)}
-            placeholder="First name"
+            placeholder="John"
             required
           />
         </div>
@@ -173,7 +173,7 @@ export default function Register() {
             className="form-input"
             value={lastname}
             onChange={(event) => setLastname(event.target.value)}
-            placeholder="Last name"
+            placeholder="Doe"
             required
           />
         </div>
@@ -185,7 +185,7 @@ export default function Register() {
             className="form-input"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
-            placeholder="User name"
+            placeholder="johnDoe"
             required
           />
         </div>
@@ -200,7 +200,7 @@ export default function Register() {
               setEmail(event.target.value);
               setEmailValidated(false);
             }}
-            placeholder="Email"
+            placeholder="example@xyz.com"
             required
           />
             <button
@@ -234,7 +234,7 @@ export default function Register() {
               setPhonenumber(event.target.value);
               setPhoneValidated(false);
             }}
-            placeholder="XXX-XXX-XXXX"
+            placeholder="xxx-xxx-xxxx"
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             required
           />

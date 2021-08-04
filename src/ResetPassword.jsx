@@ -53,7 +53,7 @@ export default function ResetPassword() {
               className="form-input"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              placeholder="Email"
+              placeholder="example@xyz.com"
               required
             />
           </div>
@@ -64,7 +64,7 @@ export default function ResetPassword() {
               className="form-input"
               value={currentPassword}
               onChange={(event) => setCurrentPassword(event.target.value)}
-              placeholder="old password"
+              placeholder="Old password"
               required
             />
           </div>
@@ -75,7 +75,7 @@ export default function ResetPassword() {
               className="form-input"
               value={newPassword}
               onChange={(event) => setNewPassword(event.target.value)}
-              placeholder="new password"
+              placeholder="New password"
               required
             />
           </div>
