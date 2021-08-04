@@ -62,7 +62,7 @@ export const PlacesAutocomplete = ({setAddress, setZipcode}) => {
         value={value}
         onChange={handleInput}
         disabled={!ready}
-        placeholder="Where do you reside?"
+        placeholder="Street address"
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && <ul>{renderSuggestions()}</ul>}

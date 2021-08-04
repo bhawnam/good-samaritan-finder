@@ -23,6 +23,8 @@ export default function MapExample() {
   const [hasAddress, setHasAddress] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
+  let value = Math.floor(Math.random() * 100).toString();
+
   useEffect(() => {
     setLoading(true);
     fetch("/api/show_map_offerings_data")
@@ -104,6 +106,7 @@ export default function MapExample() {
             >
               <div>
                 <h4> Volunteer </h4>
+                <h6> Fulfilled Requests: {value}</h6>
               </div>
             </InfoWindow>
           )}
@@ -135,6 +138,7 @@ export default function MapExample() {
             >
               <div>
                 <h4> Volunteer </h4>
+                <h6> Fulfilled Requests: {value}</h6>
               </div>
             </InfoWindow>
           )}
@@ -142,6 +146,7 @@ export default function MapExample() {
       )}
       <form onSubmit={submitAddress}>
         <div className="form-login">
+        <label>Where do you reside? </label> <br />
           <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
         <button type="submit" className="btn">
