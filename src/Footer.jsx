@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import Navbar from 'react-bootstrap/Navbar';
 
 export default function Footer() {
   return (
-    <div>
-      <div className="footer">
+      <>
+      <Navbar expand="lg" fixed="bottom" className="footer">
         <div className="foot-item">
           <Link to="/be-a-beneficiary" className="foot-link">
             <b> Be a beneficiary </b> <br />
@@ -31,12 +32,12 @@ export default function Footer() {
             Twitter
           </Link>
         </div>
-      </div>
-      <div>
+      </Navbar>
+      <Navbar expand="lg" fixed="bottom">
         <Link to="/terms-of-service" className="foot-link terms">
           <b> Terms of Service </b>
         </Link>
-      </div>
-    </div>
+      </Navbar>
+      </>
   );
 }
