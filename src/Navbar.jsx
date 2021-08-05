@@ -1,10 +1,11 @@
 import React from "react";
-import { Nav } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import logoPath from "./images/logo.png";
+import Navbar from 'react-bootstrap/Navbar';
 
-export default function Navbar(props) {
+export default function Nav(props) {
   const { logo, brand, isLogged, setIsLogged} = props;
 
   let history = useHistory();
@@ -16,7 +17,8 @@ export default function Navbar(props) {
   }
 
   return (
-    <nav className="navbar">
+    <Navbar className="navbar">
+      <Container>
       <Link to="/" className="navbar-brand d-flex justify-content-center">
         <img src={logoPath} height="30" alt="logo" />
         <span> {brand} </span>
@@ -81,6 +83,7 @@ export default function Navbar(props) {
           </Link>
         )}
       </section>
-    </nav>
+      </Container>
+    </Navbar>
   );
 }
