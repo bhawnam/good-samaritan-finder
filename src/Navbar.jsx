@@ -17,14 +17,15 @@ export default function Nav(props) {
   }
 
   return (
-    <Navbar className="navbar">
+    <Navbar collapseOnSelect expand="lg" bg="dark" fixed="top" className="navbar" >
       <Container>
-      <Link to="/" className="navbar-brand d-flex justify-content-center">
+      <Navbar.Brand href="/" className="d-inline-block align-top">
         <img src={logoPath} height="30" alt="logo" />
         <span> {brand} </span>
-      </Link>
-
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <section className="d-flex justify-content-end">
+      <Navbar.Collapse id="responsive-navbar-nav">
         {!isLogged && (
         <NavLink
           to="/be-a-volunteer"
@@ -81,7 +82,8 @@ export default function Nav(props) {
           >
             Log In
           </Link>
-        )}
+        )} 
+      </Navbar.Collapse>
       </section>
       </Container>
     </Navbar>
