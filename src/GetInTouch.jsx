@@ -36,10 +36,8 @@ export default function GetInTouch() {
     });
   }
   return (
-    <div>
       <>
-        <form onSubmit={getInTouchRequest}>
-        <h4>Your suggestions and feedback are very important to us!</h4>
+      <h4>Your suggestions and feedback are very important to us!</h4>
         <p>
           We at Good Samaritan Finder are always looking for ways to make the
           website better and more accessible. We will continue to offer our
@@ -48,6 +46,8 @@ export default function GetInTouch() {
           Thank you once again for your time! We will get back to you if we
           need more information.
         </p>
+
+        <form onSubmit={getInTouchRequest}>
           <div className="form-register">
             <label>Full Name * </label> <br />
             <input
@@ -102,6 +102,5 @@ export default function GetInTouch() {
           </div>
         </form>
       </>
-    </div>
   );
 }
