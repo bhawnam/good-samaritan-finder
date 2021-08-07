@@ -50,6 +50,7 @@ export default function GetInTouch() {
           need more information.
         </p>
       </section>
+
       <div className="form-box">
         <h2> GET IN TOUCH</h2> <br/>
         <form onSubmit={getInTouchRequest}>
@@ -65,6 +66,7 @@ export default function GetInTouch() {
               required
             />
           </div>
+
           <div className="form-contact mb-2">
             <label htmlFor="contactInputEmail1" className="form-label">Email * </label> <br />
             <input
@@ -77,6 +79,7 @@ export default function GetInTouch() {
               required
             />
           </div>
+
           <div className="form-contact mb-2">
             <label htmlFor="contactInputNumber1" className="form-label"> Phone Number </label> <br />
             <input
@@ -88,6 +91,7 @@ export default function GetInTouch() {
               placeholder="xxx-xxx-xxxx"
             />
           </div>
+
           <div className="form-contact mb-2">
             <label htmlFor="contactInputMessage1" className="form-label"> Suggestions/Feedback* </label> <br />
             <textarea
@@ -99,9 +103,11 @@ export default function GetInTouch() {
               required
             />
           </div>
+
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
+          
           <div>
           (*) are required fields
           </div>

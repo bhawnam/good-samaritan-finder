@@ -151,14 +151,15 @@ export default function Register() {
 
   return (
     <>
+    <div className="form-box">
+    <h3> REGISTER </h3> <br />
       <form onSubmit={registerUser}>
-        <h3>Register</h3>
-
-        <div className="form-register">
-          <label>First Name </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputFirstName1" className="form-label">First Name </label> <br />
           <input
             type="text"
             className="form-input"
+            id="registerInputFirstName1"
             value={firstname}
             onChange={(event) => setFirstname(event.target.value)}
             placeholder="John"
@@ -166,8 +167,8 @@ export default function Register() {
           />
         </div>
 
-        <div className="form-register">
-          <label>Last Name </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputLastName1" className="form-label">Last Name </label> <br />
           <input
             type="text"
             className="form-input"
@@ -178,11 +179,12 @@ export default function Register() {
           />
         </div>
 
-        <div className="form-register">
-          <label>User Name </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputUserName1" className="form-label">User Name </label> <br />
           <input
             type="text"
             className="form-input"
+            id="registerInputUserName1"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             placeholder="johnDoe"
@@ -190,11 +192,12 @@ export default function Register() {
           />
         </div>
 
-        <div className="form-register">
-          <label>Email </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputEmail1" className="form-label">Email </label> <br />
           <input
             type="email"
             className="form-input"
+            id="registerInputEmail1"
             value={email}
             onChange={(event) => {
               setEmail(event.target.value);
@@ -212,11 +215,12 @@ export default function Register() {
           </button>
         </div>
 
-        <div className="form-register">
-          <label>Password </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputPassword1" className="form-label">Password </label> <br />
           <input
             type="password"
             className="form-input"
+            id="registerInputPassword1"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="Password"
@@ -224,11 +228,12 @@ export default function Register() {
           />
         </div>
 
-        <div className="form-register">
-          <label> Phone Number </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputPhoneNumber1" className="form-label"> Phone Number </label> <br />
           <input
             type="text"
             className="form-input"
+            id="registerInputPhoneNumber1"
             value={phonenumber}
             onChange={(event) => {
               setPhonenumber(event.target.value);
@@ -247,28 +252,34 @@ export default function Register() {
           </button>
         </div>
 
-        <div className="form-register">
-          <label> Address </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputAddress1" className="form-label"> Address </label> <br />
           <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
 
-        <div className="form-register">
-          <label>Apt/Suite </label> <br />
+        <div className="form-register mb-2">
+          <label htmlFor="registerInputtApt1" className="form-label">Apt/Suite </label> <br />
           <input
             type="text"
             className="form-input"
+            id="registerInputApt1"
             value={aptSuite}
             onChange={(event) => setAptSuite(event.target.value)}
             placeholder="Apt/Suite (Optional)"
           />
         </div>
-
+        <div className="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="registerInputCheck1" />
+          <label className="form-check-label" htmlfor="registerInputCheck1">
+              I agree all statements in <a href="/terms-of-service">Terms of service</a>
+          </label>
+        </div>      
         <button
           type="submit"
-          className="btn"
+          className="btn btn-primary"
           disabled={phoneValidated === false}
         >
-          Register
+          Join Us
         </button>
         <p className="forgot-password">
           <a href="/login"> Already registered? </a>
@@ -276,11 +287,12 @@ export default function Register() {
       </form>
       {errormessage && (
         <form onSubmit={() => setErrormessage(true)}>
-          <h6>
-            Sorry the username is already registered with us. Please sign in.
-          </h6>
+          <div className="alert alert-warning" role="alert">
+          Sorry the username is already registered with us. Please sign in.
+          </div>
         </form>
       )}
+      </div>
     </>
   );
 }
