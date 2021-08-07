@@ -154,8 +154,9 @@ export default function Register() {
     <div className="form-box">
     <h3> REGISTER </h3> <br />
       <form onSubmit={registerUser}>
-        <div className="form-register mb-2">
-          <label htmlFor="registerInputFirstName1" className="form-label">First Name </label> <br />
+        <div className="form-register row mb-2">
+          <div className="col">
+          <label htmlFor="registerInputFirstName1" className="form-label">First Name </label> <br/>
           <input
             type="text"
             className="form-input"
@@ -166,8 +167,7 @@ export default function Register() {
             required
           />
         </div>
-
-        <div className="form-register mb-2">
+          <div className="col">
           <label htmlFor="registerInputLastName1" className="form-label">Last Name </label> <br />
           <input
             type="text"
@@ -177,8 +177,8 @@ export default function Register() {
             placeholder="Doe"
             required
           />
+          </div>
         </div>
-
         <div className="form-register mb-2">
           <label htmlFor="registerInputUserName1" className="form-label">User Name </label> <br />
           <input
@@ -192,8 +192,9 @@ export default function Register() {
           />
         </div>
 
-        <div className="form-register mb-2">
+        <div className="form-register row mb-2">
           <label htmlFor="registerInputEmail1" className="form-label">Email </label> <br />
+          <div className="col">
           <input
             type="email"
             className="form-input"
@@ -206,6 +207,8 @@ export default function Register() {
             placeholder="example@xyz.com"
             required
           />
+          </div>
+          <div className="col">
             <button
             type="button"
             disabled={emailValidated === true}
@@ -214,9 +217,10 @@ export default function Register() {
             Validate Email
           </button>
         </div>
+        </div>
 
         <div className="form-register mb-2">
-          <label htmlFor="registerInputPassword1" className="form-label">Password </label> <br />
+          <label htmlFor="registerInputPassword1" className="form-label" aria-describedby="passwordHelpBlock">Password </label> <br />
           <input
             type="password"
             className="form-input"
@@ -226,10 +230,14 @@ export default function Register() {
             placeholder="Password"
             required
           />
-        </div>
+          <div id="passwordHelpBlock" class="form-text">
+            Your password must be 8-20 characters long, and must not contain spaces, special characters, or emoji.
+          </div>
+          </div>
 
-        <div className="form-register mb-2">
+        <div className="form-register row mb-2">
           <label htmlFor="registerInputPhoneNumber1" className="form-label"> Phone Number </label> <br />
+          <div className="col">
           <input
             type="text"
             className="form-input"
@@ -243,6 +251,8 @@ export default function Register() {
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             required
           />
+          </div>
+          <div className="col">
           <button
             type="button"
             disabled={phoneValidated === true}
@@ -251,13 +261,14 @@ export default function Register() {
             Verify Phone Number
           </button>
         </div>
+        </div>
 
         <div className="form-register mb-2">
           <label htmlFor="registerInputAddress1" className="form-label"> Address </label> <br />
           <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
 
-        <div className="form-register mb-2">
+        <div className="form-register mb-3">
           <label htmlFor="registerInputtApt1" className="form-label">Apt/Suite </label> <br />
           <input
             type="text"
@@ -282,7 +293,8 @@ export default function Register() {
           Join Us
         </button>
         <p className="forgot-password">
-          <a href="/login"> Already registered? </a>
+        Already registered?
+          <a href="/login"> Log In </a>
         </p>
       </form>
       {errormessage && (

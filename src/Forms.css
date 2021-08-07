@@ -18,3 +18,12 @@ body {
   input, textarea {
     width: 100%;
   }
+
+  .logo {
+    width: 100px;
+    height: 40px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -10px;
+  }
