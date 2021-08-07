@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./GetInTouch.css";
 
 export default function GetInTouch() {
   const [fullname, setFullname] = useState("");
@@ -37,7 +39,8 @@ export default function GetInTouch() {
   }
   return (
       <>
-      <h4>Your suggestions and feedback are very important to us!</h4>
+      <section>
+        <h4>Your suggestions and feedback are very important to us!</h4>
         <p>
           We at Good Samaritan Finder are always looking for ways to make the
           website better and more accessible. We will continue to offer our
@@ -46,61 +49,64 @@ export default function GetInTouch() {
           Thank you once again for your time! We will get back to you if we
           need more information.
         </p>
-
+      </section>
+      <div className="form-box">
+        <h1> Get In Touch</h1>
         <form onSubmit={getInTouchRequest}>
-          <div className="form-register">
-            <label>Full Name * </label> <br />
+          <div className="form-contact mb-2">
+            <label htmlFor="contactInputName1" className="form-label">Full Name * </label> <br />
             <input
               type="text"
               className="form-input"
+              id="contactInputName1"
               value={fullname}
               onChange={(event) => setFullname(event.target.value)}
               placeholder="John Doe"
               required
             />
           </div>
-
-          <div className="form-register">
-            <label>Email * </label> <br />
+          <div className="form-contact mb-2">
+            <label htmlFor="contactInputEmail1" className="form-label">Email * </label> <br />
             <input
               type="email"
               className="form-input"
+              id="contactInputEmail1"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="example@xyz.com"
               required
             />
           </div>
-
-          <div className="form-register">
-            <label> Phone Number </label> <br />
+          <div className="form-contact mb-2">
+            <label htmlFor="contactInputNumber1" className="form-label"> Phone Number </label> <br />
             <input
               type="text"
               className="form-input"
+              id="contactInputNumber1"
               value={phoneNumber}
               onChange={(event) => setPhoneNumber(event.target.value)}
               placeholder="xxx-xxx-xxxx"
             />
           </div>
-
-          <div className="form-register">
-            <label> Suggestions/Feedback* </label> <br />
+          <div className="form-contact mb-2">
+            <label htmlFor="contactInputMessage1" className="form-label"> Suggestions/Feedback* </label> <br />
             <textarea
               className="form-input"
+              id="contactInputMessage1"
               value={comments}
               onChange={(event) => setComments(event.target.value)}
               placeholder="What's on your mind?"
               required
             />
           </div>
-
-          <button type="submit" className="btn">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
           <div>
-            <p>(*) are required fields</p>
+          (*) are required fields
           </div>
         </form>
+        </div>
       </>
   );
 }
