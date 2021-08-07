@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./GetInTouch.css";
+import "./Forms.css";
 
 export default function GetInTouch() {
   const [fullname, setFullname] = useState("");
@@ -51,7 +51,7 @@ export default function GetInTouch() {
         </p>
       </section>
       <div className="form-box">
-        <h1> Get In Touch</h1>
+        <h2> Get In Touch</h2>
         <form onSubmit={getInTouchRequest}>
           <div className="form-contact mb-2">
             <label htmlFor="contactInputName1" className="form-label">Full Name * </label> <br />
