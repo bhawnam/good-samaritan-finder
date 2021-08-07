@@ -51,7 +51,7 @@ export default function GetInTouch() {
         </p>
       </section>
       <div className="form-box">
-        <h2> Get In Touch</h2>
+        <h2> GET IN TOUCH</h2> <br/>
         <form onSubmit={getInTouchRequest}>
           <div className="form-contact mb-2">
             <label htmlFor="contactInputName1" className="form-label">Full Name * </label> <br />

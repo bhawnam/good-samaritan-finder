@@ -39,7 +39,7 @@ export default function Login(props) {
   return (
     <>
     <div className="form-box">
-      <h2>Log in</h2>
+      <h2> WELCOME</h2> <br />
       <form onSubmit={processUserLogin}>
         <div className="form-login mb-2">
           <label htmlFor="loginInputEmail1" class="form-label">Username or Email </label> <br />
@@ -76,7 +76,7 @@ export default function Login(props) {
             </div>
           </div>
         <button type="submit" className="btn btn-primary btn-block mb-4">
-          Sign in
+          Log in
         </button>
       </form>
       {errormessage && (
