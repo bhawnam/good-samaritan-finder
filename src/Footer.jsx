@@ -6,7 +6,8 @@ import Navbar from 'react-bootstrap/Navbar';
 export default function Footer() {
   return (
       <>
-      <Navbar expand="lg" fixed="bottom" className="footer">
+ <div className="position-relative">
+      <Navbar expand="lg" fixed="bottom" sticky="top" className="footer">
         <div className="foot-item">
           <Link to="/be-a-beneficiary" className="foot-link">
             <b> Be a beneficiary </b> <br />
@@ -31,13 +32,12 @@ export default function Footer() {
             Instagram <br />
             Twitter
           </Link>
+          <Link to="/terms-of-service" className="foot-link">
+            <b> Terms of Service </b>
+          </Link>
         </div>
       </Navbar>
-      <Navbar expand="lg" fixed="bottom">
-        <Link to="/terms-of-service" className="foot-link terms">
-          <b> Terms of Service </b>
-        </Link>
-      </Navbar>
+    </div>
       </>
   );
 }

@@ -109,7 +109,7 @@ export default function App() {
         isLogged={isLogged}
         setIsLogged={setIsLogged}
       />
-      <div className="container-fluid">
+      <div className="container-lg">
         <Switch>
           <Route exact path="/">
             <Homepage />
