@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import RequestAccept from "./RequestAccept";
+import Table from 'react-bootstrap/Table';
 
 export default function MatchedRequests(props) {
   const { username, matchedRequests } = props;
@@ -67,7 +68,7 @@ export default function MatchedRequests(props) {
     <>
       <div className="matchedrequests">
         <h6> Matched requests: </h6>
-        <table className="matchedrequeststable">
+        <Table striped bordered hover className="matchedrequeststable">
           <thead>
             <tr>
               <th>Request ID</th>
@@ -76,7 +77,7 @@ export default function MatchedRequests(props) {
             </tr>
           </thead>
           <tbody>{matchingRequestsTableData}</tbody>
-        </table>
+        </Table>
       </div>
     </>
   );

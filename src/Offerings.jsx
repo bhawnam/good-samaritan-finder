@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Table from 'react-bootstrap/Table';
 
 export default function Offerings(props) {
   const [offeringForm, setOfferingForm] = useState(false);
@@ -86,7 +87,7 @@ export default function Offerings(props) {
       <div className="offerings">
         <div className="userofferings">
           <h6> Your offerings: </h6>
-          <table className="offeringstable">
+          <Table striped bordered hover className="offeringstable">
             <thead>
               <tr>
                 <th>Offering ID</th>
@@ -95,9 +96,9 @@ export default function Offerings(props) {
               </tr>
             </thead>
             <tbody>{offeringsTableData}</tbody>
-          </table>
+          </Table>
         </div>
-        <button type="submit" className="btn" onClick={handleOfferingButton}>
+        <button type="submit" className="btn btn-primary" onClick={handleOfferingButton}>
           Add an offering
         </button>
       </div>

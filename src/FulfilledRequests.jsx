@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import RequestFeedback from "./RequestFeedback";
+import Table from 'react-bootstrap/Table';
 
 export default function FulfilledRequests(props) {
   const [feedbackForm, setFeedbackForm] = useState(false);
@@ -64,10 +65,10 @@ export default function FulfilledRequests(props) {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="fulfilledrequests">
         <h6> Give feedback for fulfilled requests: </h6>
-        <table className="fulfilledrequeststable">
+        <Table striped bordered hover className="fulfilledrequeststable">
           <thead>
             <tr>
               <th>Request ID</th>
@@ -75,7 +76,7 @@ export default function FulfilledRequests(props) {
             </tr>
           </thead>
           <tbody>{fulfilledRequestsTableData}</tbody>
-        </table>
+        </Table>
       </div>
       {feedbackForm ? (
         <form onSubmit={handleFeedbackResponse}>
@@ -95,6 +96,6 @@ export default function FulfilledRequests(props) {
           </button>
         </form>
       ) : null}
-    </React.Fragment>
+    </>
   );
 }

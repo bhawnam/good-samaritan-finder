@@ -10,7 +10,7 @@ export default function RequestAccept(props) {
         <td>{service_type} </td>
         <td> {for_num_persons}</td>
         <td>
-          <button type="submit" className="btn" onClick={()=>handleAcceptRequest(request_id)}>
+          <button type="submit" className="btn btn-primary" onClick={()=>handleAcceptRequest(request_id)}>
             Accept
           </button>
         </td>

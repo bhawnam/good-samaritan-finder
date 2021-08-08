@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Table from 'react-bootstrap/Table';
 
 export default function Requests(props){
 
@@ -78,7 +79,7 @@ export default function Requests(props){
       <div className="services">
         <div className="userservices">
           <h6> Your requests: </h6>
-          <table className="requeststable">
+          <Table striped bordered hover className="requeststable">
             <thead>
               <tr>
                 <th>Request ID</th>
@@ -87,9 +88,9 @@ export default function Requests(props){
               </tr>
             </thead>
             <tbody>{requestsTableData}</tbody>
-          </table>
+          </Table>
         </div>
-        <button type="submit" className="btn" onClick={handleRequestButton}>
+        <button type="submit" className="btn btn-primary" onClick={handleRequestButton}>
           Add a request
         </button>
       </div>
