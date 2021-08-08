@@ -18,6 +18,6 @@ h6, .foot-link {
   background-color: gray;
 }
 
-h6{
-  margin-bottom: -10px;
+.col h6{
+  margin-bottom: 1px;
 }

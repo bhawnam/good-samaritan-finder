@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Forms.css";
 import {
   GoogleMap,
   useJsApiLoader,
@@ -144,14 +145,19 @@ export default function MapExample() {
           )}
         </GoogleMap>
       )}
+      <br/>
       <form onSubmit={submitAddress}>
-        <div className="form-login">
-        <label>Where do you reside? </label> <br />
+        <div className="form-login row mb-4">
+        <label htmlFor="mapInputAddress1" className="form-label" >Where do you reside? </label> <br />
+        <div className="col">
           <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
-        <button type="submit" className="btn">
-          Submit
+        <div className="col">    
+        <button type="submit" className="btn btn-primary">
+          Choose
         </button>
+        </div>
+        </div>
       </form>
     </>
   );
