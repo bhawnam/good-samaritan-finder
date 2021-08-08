@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Table from 'react-bootstrap/Table';
+import Modal from 'react-bootstrap/Modal';
 
 export default function Offerings(props) {
   const [offeringForm, setOfferingForm] = useState(false);
   const [offeringServiceType, setOfferingServiceType] = useState("");
   const [offeringForNumPersons, setOfferingForNumPersons] = useState("");
   const [availableDate, setAvailableDate] = useState("");
+  const [show, setShow] = useState(false);
 
   const { username, offerings } = props;
 
@@ -27,6 +29,11 @@ export default function Offerings(props) {
 
   function handleOfferingButton() {
     setOfferingForm(true);
+    setShow(true);
+  }
+
+  function handleClose(){
+    setShow(false);
   }
 
   function addOffering(event) {
@@ -103,12 +110,17 @@ export default function Offerings(props) {
         </button>
       </div>
       {offeringForm ? (
+        <Modal centered show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title> Add an Offering </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
         <form onSubmit={addOffering}>
           <br />
-          <div className="form-offering">
+          <div className="form-offering mb-4">
             <label> Service Type </label>
             <select
-              className="form-input"
+              className="form-input mx-2"
               value={offeringServiceType}
               onChange={(event) => setOfferingServiceType(event.target.value)}
             >
@@ -120,34 +132,34 @@ export default function Offerings(props) {
               <option value="PET_FOOD"> Pet Food </option>
             </select>
           </div>
-          <br />
-          <div className="form-offering">
+          <div className="form-offering mb-2">
             <label>For number of people </label>
             <input
               type="text"
-              className="form-input"
+              className="form-input mx-2 w-25"
               value={offeringForNumPersons}
               onChange={(event) => setOfferingForNumPersons(event.target.value)}
               required
             />
           </div>
-          <br />
-          <div className="form-offering">
+          <div className="form-offering mb-2">
             <label> Date of availability </label>
             <input
               type="date"
               min="2021-01-01"
               max="2021-12-31"
-              className="form-input"
+              className="form-input mx-2 w-50"
               value={availableDate}
               onChange={(event) => setAvailableDate(event.target.value)}
               required
             />
           </div>
-          <button type="submit" className="btn">
+          <button type="submit" className="btn btn-primary">
             Add
           </button>
         </form>
+        </Modal.Body>
+        </Modal>
       ) : null}
     </>
   );
