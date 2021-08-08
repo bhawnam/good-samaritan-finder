@@ -152,7 +152,7 @@ export default function Register() {
   return (
     <>
     <div className="form-box">
-    <h3> REGISTER </h3> <br />
+    <h2> REGISTER </h2> <br />
       <form onSubmit={registerUser}>
         <div className="form-register row mb-2">
           <div className="col">

@@ -41,56 +41,55 @@ export default function ResetPassword() {
     });
   }
   return (
-    <div>
       <>
+      <div className="form-box">
+      <h4>Please enter your registered email address, current password and new password.</h4>
         <form onSubmit={resetPasswordRequest}>
-          <h4>Please enter your registered email address, current password and new password.</h4>
-
-          <div className="form-register">
-            <label>Email * </label> <br />
+          <div className="form-register mb-2">
+            <label htmlFor="resetInputEmail1" className="form-label">Email * </label> <br />
             <input
               type="email"
               className="form-input"
+              id="resetInputEmail1"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="example@xyz.com"
               required
             />
           </div>
-          <div className="form-register">
-            <label>Current Password * </label> <br />
+          <div className="form-register mb-2">
+            <label htmlFor="resetInputOldPassword1" className="form-label">Current Password * </label> <br />
             <input
               type="password"
               className="form-input"
+              id="resetInputOldPassword1"
               value={currentPassword}
               onChange={(event) => setCurrentPassword(event.target.value)}
               placeholder="Old password"
               required
             />
           </div>
-          <div className="form-register">
-            <label>New Password * </label> <br />
+          <div className="form-register mb-3">
+            <label htmlFor="resetInputNewPassword1" className="form-label">New Password * </label> <br />
             <input
               type="password"
               className="form-input"
+              id="resetInputNewPassword1"
               value={newPassword}
               onChange={(event) => setNewPassword(event.target.value)}
               placeholder="New password"
               required
             />
           </div>
-
-          <button type="submit" className="btn">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
+
           <div>
-            <p>(*) are required fields</p>
+            (*) are required fields
           </div>
         </form>
-        <p className="forgot-password">
-          <a href="/forgot-password">Forgot password?</a>
-        </p>
+        </div>
       </>
-    </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "./Forms.css";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -39,16 +40,16 @@ export default function ForgotPassword() {
     });
   }
   return (
-    <div>
       <>
+      <div className="form-box">
+      <h4>Please enter your registered email address.</h4>
         <form onSubmit={forgotPasswordRequest}>
-          <h4>Please enter your registered email address.</h4>
-
-          <div className="form-register">
-            <label>Email * </label> <br />
+          <div className="form-register mb-2">
+            <label htmlFor="forgotInputEmail1" className="form-label">Email * </label> <br />
             <input
               type="email"
               className="form-input"
+              id="forgotInputEmail1"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               placeholder="example@xyz.com"
@@ -56,14 +57,14 @@ export default function ForgotPassword() {
             />
           </div>
 
-          <button type="submit" className="btn">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
           <div>
-            <p>(*) are required fields</p>
+            (*) are required fields
           </div>
         </form>
+        </div>
       </>
-    </div>
   );
 }
