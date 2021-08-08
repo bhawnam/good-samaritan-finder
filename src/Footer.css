@@ -1,4 +1,4 @@
-h5, .foot-link {
+h6, .foot-link {
   display: inline;
   align-items: center;
   justify-content: center;
@@ -18,6 +18,6 @@ h5, .foot-link {
   background-color: gray;
 }
 
-h5{
+h6{
   margin-bottom: -10px;
 }

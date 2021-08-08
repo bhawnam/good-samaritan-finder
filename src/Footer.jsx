@@ -15,7 +15,7 @@ export default function Footer() {
       </div>
 
     <div className="col">
-      <h5> <b> Be a Beneficiary </b></h5>
+      <h6> <b> Be a Beneficiary </b></h6>
           <Link to="/be-a-beneficiary" className="foot-link">
             How it works <br />
             Services Offered <br />
@@ -23,28 +23,28 @@ export default function Footer() {
     </div>
 
     <div className="col">
-      <h5> <b> Be a Volunteer </b></h5>
+      <h6> <b> Be a Volunteer </b></h6>
           <Link to="/be-a-volunteer" className="foot-link">
             How it works <br />
           </Link>
     </div>
 
     <div className="col">
-      <h5> <b>Company </b></h5>
+      <h6> <b>Company </b></h6>
            <Link to="/about-us" className="foot-link">
             About Us <br />
           </Link>
     </div>
 
     <div className="col">
-      <h5> <b>Get in Touch </b></h5>
+      <h6> <b>Get in Touch </b></h6>
           <Link to="/get-in-touch" className="foot-link">
             Contact Us <br />
           </Link>
     </div>
 
     <div className="col">
-    <h5> <b>Follow Us </b></h5>
+    <h6> <b>Follow Us </b></h6>
            <Link to="/#" className="foot-link">
             Facebook <br />
             Instagram <br />
