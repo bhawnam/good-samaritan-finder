@@ -42,9 +42,9 @@ export default function ForgotPassword() {
   return (
       <>
       <div className="form-box">
-      <h4>Please enter your registered email address.</h4>
+      <h5>Please enter your registered email address.</h5>
         <form onSubmit={forgotPasswordRequest}>
-          <div className="form-register mb-2">
+          <div className="form-register mb-4">
             <label htmlFor="forgotInputEmail1" className="form-label">Email * </label> <br />
             <input
               type="email"

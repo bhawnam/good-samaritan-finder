@@ -43,7 +43,7 @@ export default function ResetPassword() {
   return (
       <>
       <div className="form-box">
-      <h4>Please enter your registered email address, current password and new password.</h4>
+      <h5>Please enter your registered email address, current password and new password.</h5> 
         <form onSubmit={resetPasswordRequest}>
           <div className="form-register mb-2">
             <label htmlFor="resetInputEmail1" className="form-label">Email * </label> <br />
@@ -65,7 +65,6 @@ export default function ResetPassword() {
               id="resetInputOldPassword1"
               value={currentPassword}
               onChange={(event) => setCurrentPassword(event.target.value)}
-              placeholder="Old password"
               required
             />
           </div>
@@ -77,7 +76,6 @@ export default function ResetPassword() {
               id="resetInputNewPassword1"
               value={newPassword}
               onChange={(event) => setNewPassword(event.target.value)}
-              placeholder="New password"
               required
             />
           </div>
