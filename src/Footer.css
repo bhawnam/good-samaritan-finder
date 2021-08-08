@@ -1,4 +1,4 @@
-.foot-link {
+h5, .foot-link {
   display: inline;
   align-items: center;
   justify-content: center;
@@ -16,4 +16,8 @@
 
 .terms{
   background-color: gray;
+}
+
+h5{
+  margin-bottom: -10px;
 }

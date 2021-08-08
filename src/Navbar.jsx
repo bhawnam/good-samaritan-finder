@@ -17,7 +17,7 @@ export default function Nav(props) {
   }
 
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" fixed="top" className="navbar" >
+    <Navbar collapseOnSelect expand="lg" bg="light" fixed="top" className="navbar" >
       <Container>
       <Navbar.Brand href="/" className="d-inline-block align-top">
         <img src={logoPath} height="30" alt="logo" />

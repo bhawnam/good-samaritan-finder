@@ -171,7 +171,9 @@ export default function App() {
           <div> Sorry Page Not found </div>
         </Switch>
       </div>
+      <div>
       <Footer />
+      </div>
     </BrowserRouter>
   );
 }
