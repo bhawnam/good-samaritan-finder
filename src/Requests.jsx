@@ -79,7 +79,7 @@ export default function Requests(props){
       <div className="services">
         <div className="userservices">
           <h6> Your requests: </h6>
-          <Table striped bordered hover className="requeststable">
+          <Table striped bordered hover responsive="md" className="requeststable">
             <thead>
               <tr>
                 <th>Request ID</th>

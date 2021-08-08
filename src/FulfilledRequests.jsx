@@ -68,7 +68,7 @@ export default function FulfilledRequests(props) {
     <>
       <div className="fulfilledrequests">
         <h6> Give feedback for fulfilled requests: </h6>
-        <Table striped bordered hover className="fulfilledrequeststable">
+        <Table striped bordered hover responsive="md" className="fulfilledrequeststable">
           <thead>
             <tr>
               <th>Request ID</th>

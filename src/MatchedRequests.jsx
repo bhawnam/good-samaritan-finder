@@ -68,7 +68,7 @@ export default function MatchedRequests(props) {
     <>
       <div className="matchedrequests">
         <h6> Matched requests: </h6>
-        <Table striped bordered hover className="matchedrequeststable">
+        <Table striped bordered hover responsive="md" className="matchedrequeststable">
           <thead>
             <tr>
               <th>Request ID</th>

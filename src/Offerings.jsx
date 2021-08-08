@@ -87,7 +87,7 @@ export default function Offerings(props) {
       <div className="offerings">
         <div className="userofferings">
           <h6> Your offerings: </h6>
-          <Table striped bordered hover className="offeringstable">
+          <Table striped bordered hover responsive="md" className="offeringstable">
             <thead>
               <tr>
                 <th>Offering ID</th>
