@@ -21,7 +21,7 @@ export default function Nav(props) {
       <Container>
       <Navbar.Brand href="/" className="d-inline-block align-top">
         <img src={logoPath} height="30" alt="logo" />
-        <span> {brand} </span>
+        <span id="brand"> {brand} </span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <section className="d-flex justify-content-end">
