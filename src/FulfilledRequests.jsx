@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import RequestFeedback from "./RequestFeedback";
 import Table from 'react-bootstrap/Table';
+import Modal from 'react-bootstrap/Modal';
 
 export default function FulfilledRequests(props) {
   const [feedbackForm, setFeedbackForm] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [feedbackRequestID, setFeedbackRequestID] = useState("");
 
+  const [show, setShow] = useState(false);
   const [disable, setDisable] = useState(false);
 
   const { username, fulfilledRequests } = props;
@@ -30,6 +32,12 @@ export default function FulfilledRequests(props) {
     setFeedbackForm(true);
     setFeedbackRequestID(request_id);
     setDisable(true);
+    setShow(true);
+  }
+
+  function handleClose(){
+    setDisable(false);
+    setShow(false);
   }
 
   function handleFeedbackResponse(event) {
@@ -73,28 +81,35 @@ export default function FulfilledRequests(props) {
             <tr>
               <th>Request ID</th>
               <th>Service Type</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>{fulfilledRequestsTableData}</tbody>
         </Table>
       </div>
       {feedbackForm ? (
+        <Modal centered show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title> Leave a Note </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
         <form onSubmit={handleFeedbackResponse}>
-          <br />
-          <div className="form-feedback">
+          <div className="form-feedback mb-2">
             <label> Feedback Message</label>
             <input
               type="textarea"
-              className="form-input"
+              className="form-input mx-2 w-50"
               value={feedbackMessage}
               onChange={(event) => setFeedbackMessage(event.target.value)}
               required
             />
           </div>
-          <button type="submit" className="btn">
+          <button type="submit" className="btn btn-primary">
             Submit
           </button>
         </form>
+        </Modal.Body>
+        </Modal>
       ) : null}
     </>
   );

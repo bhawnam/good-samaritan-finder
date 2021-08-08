@@ -74,6 +74,7 @@ export default function MatchedRequests(props) {
               <th>Request ID</th>
               <th>Service Type</th>
               <th>For num persons</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>{matchingRequestsTableData}</tbody>
