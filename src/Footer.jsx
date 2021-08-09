@@ -53,8 +53,9 @@ export default function Footer() {
     </div>
 
     <div className="col">
+    <h6> <b> Terms </b></h6>
           <Link to="/terms-of-service" className="foot-link">
-            <b> Terms of Service </b>
+            Terms of Service
           </Link>
     </div>
   </footer>

@@ -20,8 +20,7 @@ export default function Nav(props) {
     <Navbar collapseOnSelect expand="lg" bg="light" fixed="top" className="navbar" >
       <Container>
       <Navbar.Brand href="/" className="d-inline-block align-top">
-        <img src={logoPath} height="30" alt="logo" />
-        <span id="brand"> {brand} </span>
+        <img src={logoPath} height="40" alt={brand} />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <section className="d-flex justify-content-end">
