@@ -49,13 +49,6 @@ body {
   background-color: floralwhite;
 }
 
-#sidebarButton {
-  background:none;
-  border:none;
-  font-size:1em;
-  color:rgb(0, 90, 255);
-} 
-
 #twitterTweet{
   display: block;
   margin-left: auto;

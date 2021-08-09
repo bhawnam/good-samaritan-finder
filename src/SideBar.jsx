@@ -38,9 +38,7 @@ export default function SideBar(props) {
 return (
   <>
     {isLogged && (
-    <Button id="sidebarButton" variant="primary" onClick={handleShow}>
-      Quick Links
-    </Button>
+    <a href="#" onClick={handleShow} > Quick Links</a>
     )}
     <br />
     <Offcanvas show={show} onHide={handleClose}>

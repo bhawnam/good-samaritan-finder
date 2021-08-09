@@ -12,19 +12,20 @@ export default function Homepage() {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            <h3> Stepping up. </h3>
+            <p> Packaging of food items for distribution. </p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item style={{height: "500px"}}>
+          <br/>
           <img
             className="d-block w-100"
             src="src/images/carousel2.png"
             alt="Second slide"
           />
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <h3> Help one another.</h3>
+            <p> Helping and Uplifting one another.</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item style={{height: "500px"}}>
@@ -35,8 +36,8 @@ export default function Homepage() {
           />
 
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            <h3> Love our community.</h3>
+            <p> Coming together as a community.</p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
