@@ -60,7 +60,7 @@ export const PlacesAutocomplete = ({setAddress, setZipcode}) => {
     <div>
       <input
         value={value}
-        className="form-input mx-2 w-100"
+        className="form-input w-100"
         onChange={handleInput}
         disabled={!ready}
         placeholder="Street address"
