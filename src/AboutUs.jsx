@@ -8,7 +8,9 @@ export default function AboutUs() {
       <div>
         <h3>Welcome to Good Samaritan Finder</h3>
       </div>
+      <br/>
       <div>
+        <h4> Our Mission </h4>
         <p>
           Our generation has lived to see the unthinkable - a global pandemic
           and challenges emerging from changing climatic conditions. While
@@ -24,6 +26,8 @@ export default function AboutUs() {
           getting overwhelmed with the requests so that they can continue what
           they do best - helping people.
         </p>
+         <hr/> <br />
+        <h4> Our Inspiration </h4>
         <p>
           Amid India&apos;s 2nd Covid-19 wave, a Good Samaritan (Sonu Sood)
           had stepped up to help out families who needed hospital beds,
@@ -31,7 +35,17 @@ export default function AboutUs() {
           exploded with tweets for help. And this was what he had posted as a
           response:
         </p>
+        <div id="twitterTweet">
         <TwitterTweetEmbed tweetId="1391298808735174659" />
+        </div>
+        <br />
+        <p>
+          This encouraged us ------------
+
+        </p>
+        <hr /> <br/>
+        <h4> How are we trying to achieve our goal ? </h4>
+        <br/>
         <p>
           <b>Good Samaritan Finder</b> tries to solve this issue. By
           registering as a Good Samaritan on our platform, you could sign up
@@ -39,7 +53,11 @@ export default function AboutUs() {
           matched if the services provided by the Good Samaritan matches the
           services the beneficiaries are seeking help for. This would help the
           the contact details of the volunteers so that, volunteers can reach
-          out to the beneficiaries and arrange for the much needed help.
+          out to the beneficiaries and arrange for the much needed help. We match the
+          Volunteers and the Beneficiaries based on the services they are looking for
+          and also make sure that the recipient is in the vicinity of the Volunteer
+          helping out to not make the entire process overwhelming for both the 
+          Beneficiary and Volunteer.
         </p>
 
         <br />
