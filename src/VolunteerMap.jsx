@@ -38,8 +38,8 @@ export default function MapExample() {
     <>
       <GoogleMap
         center={{ lat: 37.8272, lng: -122.2913 }}
-        mapContainerStyle={{ width: "400px", height: "400px" }}
-        zoom={5}
+        mapContainerStyle={{ width: "500px", height: "500px" }}
+        zoom={7}
       >
         {mapData.map((dataPoint) => (
           <Marker
@@ -61,7 +61,7 @@ export default function MapExample() {
             }}
           >
             <div>
-              <h4> Request </h4>
+              <h6> Request </h6>
             </div>
           </InfoWindow>
         )}

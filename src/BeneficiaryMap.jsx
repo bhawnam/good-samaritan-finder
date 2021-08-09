@@ -24,7 +24,7 @@ export default function MapExample() {
   const [hasAddress, setHasAddress] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
-  let value = Math.floor(Math.random() * 100).toString();
+  let value = Math.floor(Math.random() * 50).toString();
 
   useEffect(() => {
     setLoading(true);
@@ -83,7 +83,7 @@ export default function MapExample() {
       {hasAddress ? (
         <GoogleMap
           center={{ lat, lng }}
-          mapContainerStyle={{ width: "400px", height: "400px" }}
+          mapContainerStyle={{ width: "500px", height: "500px" }}
           zoom={10}
         >
           {mapData.map((dataPoint) => (
@@ -115,7 +115,7 @@ export default function MapExample() {
       ) : (
         <GoogleMap
           center={{ lat: 37.8272, lng: -122.2913 }}
-          mapContainerStyle={{ width: "400px", height: "400px" }}
+          mapContainerStyle={{ width: "500px", height: "500px" }}
           zoom={8}
         >
           {mapData.map((dataPoint) => (
@@ -149,10 +149,10 @@ export default function MapExample() {
       <form onSubmit={submitAddress}>
         <div className="form-login row mb-4">
         <label htmlFor="mapInputAddress1" className="form-label" >Where do you reside? </label> <br />
-        <div className="col">
+        <div className="col-3">
           <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
-        <div className="col">    
+        <div className="col-3">    
         <button type="submit" className="btn btn-primary">
           Choose
         </button>
