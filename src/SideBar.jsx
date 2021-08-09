@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Button } from "react-bootstrap";
 
-export default function SideBar() {
+export default function SideBar(props) {
+  const {isLogged} = props;
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -35,13 +37,12 @@ export default function SideBar() {
 // }
 return (
   <>
-  <br/>
-  <br/>
-  <br/>
-    <Button variant="primary" onClick={handleShow}>
+    {isLogged && (
+    <Button id="sidebarButton" variant="primary" onClick={handleShow}>
       Quick Links
     </Button>
-
+    )}
+    <br />
     <Offcanvas show={show} onHide={handleClose}>
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Quick Links</Offcanvas.Title>

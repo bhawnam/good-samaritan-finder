@@ -4,6 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import logoPath from "./images/logo.png";
 import Navbar from 'react-bootstrap/Navbar';
+import SideBar from "./SideBar";
 
 export default function Nav(props) {
   const { logo, brand, isLogged, setIsLogged} = props;
@@ -42,6 +43,11 @@ export default function Nav(props) {
         >
           Be a Beneficiary
         </NavLink>
+        )}
+        {isLogged && (
+          <Link to="#" className="nav-link nav-item">
+            <SideBar isLogged={isLogged}/>
+          </Link>
         )}
         {isLogged && (
           <NavLink to="/welcome-user" className="nav-link nav-item">
