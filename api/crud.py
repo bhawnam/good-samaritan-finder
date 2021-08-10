@@ -172,6 +172,7 @@ def get_matching_requests_for_volunteer(volunteer):
     """Get all matching requests for the volunteer. """
     
     matching_requests = []
+    distance_list = []
     requests = ServiceRequest.query.filter(ServiceRequest.request_active == 't').all()
     offerings = get_offerings_by_volunteer(volunteer)
     volunteer_coordinates = get_user_coordinates(volunteer)
@@ -180,13 +181,14 @@ def get_matching_requests_for_volunteer(volunteer):
         for req in requests:
             beneficiary = req.beneficiary
             beneficiary_coordinates = get_user_coordinates(beneficiary)
-            print(f"MILES {haversine(volunteer_coordinates, beneficiary_coordinates, unit=Unit.MILES)}")
             if ((req.service_type.service_name == offering.service_type.service_name) and 
                     (req.service_type.for_num_persons <= offering.service_type.for_num_persons)):
-                    if haversine(volunteer_coordinates, beneficiary_coordinates, unit=Unit.MILES) < SERVICE_RADIUS_MILES:
+                    distance = haversine(volunteer_coordinates, beneficiary_coordinates, unit=Unit.MILES)
+                    if distance < SERVICE_RADIUS_MILES:
+                        distance_list.append(round(distance,1))
                         matching_requests.append(req)
 
-    return matching_requests            
+    return matching_requests, distance_list           
     
     
 def update_volunteer_offering(beneficiary_request, volunteer):

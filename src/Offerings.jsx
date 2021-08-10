@@ -12,16 +12,18 @@ export default function Offerings(props) {
   const { username, offerings } = props;
 
   const offeringsTableData = [];
+  let i = 1;
   for (const offered_id in offerings) {
     const currentOffering = offerings[offered_id];
     offeringsTableData.push(
       <tr key={currentOffering.offered_id}>
-        <td>{currentOffering.offered_id}</td>
+        <td>{i}</td>
         <td>{currentOffering.service_type}</td>
         <td>{currentOffering.for_num_persons}</td>
       </tr>
     );
-  }
+    i++;
+  };
 
   function refreshPage() {
     window.location.reload(false);
@@ -93,13 +95,14 @@ export default function Offerings(props) {
     <>
       <div className="offerings">
         <div className="userofferings">
-          <h6> Your offerings: </h6>
+          <h4> <b> OFFERINGS </b> </h4>
+          <p> All your past and current open offerings are listed below. </p>
           <Table striped bordered hover responsive="md" className="offeringstable">
             <thead>
               <tr>
-                <th>Offering ID</th>
-                <th>Service Type</th>
-                <th>For Num persons</th>
+                <th> # </th>
+                <th> Offered Service Type</th>
+                <th> Serving Number of PAX </th>
               </tr>
             </thead>
             <tbody>{offeringsTableData}</tbody>

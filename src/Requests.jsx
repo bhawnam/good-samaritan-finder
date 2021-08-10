@@ -12,15 +12,18 @@ export default function Requests(props){
   const {username, requests} = props
   
   const requestsTableData = [];
+  let i = 1
   for (const request_id in requests) {
     let currentRequest = requests[request_id];
     requestsTableData.push(
       <tr key={currentRequest.request_id}>
-        <td>{currentRequest.request_id}</td>
+        <td> {i}</td>
         <td>{currentRequest.service_type}</td>
+        <td> {currentRequest.for_num_persons}</td>
         <td>{currentRequest.request_active.toString()}</td>
       </tr>
     );
+    i++;
   }
 
   function refreshPage() {
@@ -85,13 +88,15 @@ export default function Requests(props){
     <>
       <div className="services">
         <div className="userservices">
-          <h6> Your requests: </h6>
+          <h4> <b> REQUESTS </b></h4>
+          <p> All your past and current open requests are listed below. </p>
           <Table striped bordered hover responsive="md" className="requeststable">
             <thead>
               <tr>
-                <th>Request ID</th>
-                <th>Service Type</th>
-                <th>Active</th>
+                <th> #</th>
+                <th> Requested Service Type</th>
+                <th> Number of PAX </th>
+                <th> Request Status </th>
               </tr>
             </thead>
             <tbody>{requestsTableData}</tbody>

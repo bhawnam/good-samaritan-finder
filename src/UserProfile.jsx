@@ -9,7 +9,7 @@ export default function UserProfile(props) {
 
   return (
     <>
-      <h3> <b>Welcome, </b> {username}</h3>
+      <h2> <b>Welcome, </b> {username}</h2>
       <br />
       <Requests username={username} requests={requests} />
       <br /> <br />

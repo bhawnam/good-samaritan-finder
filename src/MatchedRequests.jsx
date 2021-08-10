@@ -6,17 +6,21 @@ export default function MatchedRequests(props) {
   const { username, matchedRequests } = props;
 
   const matchingRequestsTableData = [];
+  let i = 1;
   for (const currentMatchingRequest of Object.values(matchedRequests)) {
     // let currentMatchingRequest = matchedRequests[request_id];
     const requestAcceptCard = (
       <RequestAccept
         key={currentMatchingRequest.request_id}
+        i = {i}
         request_id={currentMatchingRequest.request_id}
         service_type={currentMatchingRequest.service_type}
         for_num_persons={currentMatchingRequest.for_num_persons}
+        distance = {currentMatchingRequest.distance}
         handleAcceptRequest={handleAcceptBtn}
       />
     );
+    i++;
     matchingRequestsTableData.push(requestAcceptCard);
   }
 
@@ -67,13 +71,17 @@ export default function MatchedRequests(props) {
   return (
     <>
       <div className="matchedrequests">
-        <h6> Matched requests: </h6>
+        <h4> <b> MATCHED REQUESTS </b> </h4>
+        <p> We have found the following requests by our beneficiaries 
+          which match your offerlings and are listed below. We apprecited 
+          your help! </p>
         <Table striped bordered hover responsive="md" className="matchedrequeststable">
           <thead>
             <tr>
-              <th>Request ID</th>
-              <th>Service Type</th>
-              <th>For num persons</th>
+              <th> # </th>
+              <th> Requested Service Type</th>
+              <th> Number of PAX </th>
+              <th> Distance (in Miles) </th>
               <th></th>
             </tr>
           </thead>

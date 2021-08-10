@@ -195,9 +195,15 @@ def show_matched_requests():
         user_in_db = crud.get_user_by_displayname(logged_user)
         volunteer = crud.get_volunteer_by_user(user_in_db)
         # Get all the service requests matching for this volunteer
-        matching_requests = crud.get_matching_requests_for_volunteer(volunteer)
+        matching_requests, distance_list = crud.get_matching_requests_for_volunteer(volunteer)
 
-        return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
+        matching_request = {}
+        for i in range(len(matching_requests)):
+            matched_request = matching_requests[i].to_dict(distance_list[i])
+            matching_request[matched_request['request_id']] = matched_request
+
+        #return jsonify({matching_request.request_id: matching_request.to_dict() for matching_request in matching_requests})
+        return jsonify(matching_request)
 
     return jsonify({})
 
@@ -329,7 +335,7 @@ def process_user_address():
 def get_map_requests_data():
     """Show all the nearby service requests as markers on the map for a Volunteer. """
 
-    time.sleep(2)
+    time.sleep(1)
     map_request_data = []
     user_requests = crud.get_all_requests()
     for user_request in user_requests:
@@ -344,7 +350,7 @@ def get_map_requests_data():
 def get_map_offerings_data():
     """Show all the nearby service offerings as markers on the map for a Beneficiary. """
 
-    time.sleep(2)
+    time.sleep(1)
     map_offerings_data = []
     user_offerings = crud.get_all_offerings()
     for user_offering in user_offerings:

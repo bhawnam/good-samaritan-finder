@@ -140,16 +140,17 @@ class ServiceRequest(db.Model):
         """ """
         return f'<ServiceRequest request_id={self.request_id} date_of_request={self.date_of_request}>'
 
-    def to_dict(self):
+    def to_dict(self, distance=0):
         return {
             'request_id': self.request_id,
             'date_of_request': self.date_of_request,
             'date_of_fulfillment': self.date_of_fulfillment,
-            'request_active': self.request_active,
+            'request_active': "Active" if self.request_active else "Fulfilled",
             # 'volunteer': self.volunteer.volunteer_id,
             'beneficiary': self.beneficiary.beneficiary_id,
             'service_type': self.service_type.service_name.name,
-            'for_num_persons': self.service_type.for_num_persons
+            'for_num_persons': self.service_type.for_num_persons,
+            'distance': distance
         }
 
 

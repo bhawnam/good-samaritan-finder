@@ -14,10 +14,12 @@ export default function FulfilledRequests(props) {
   const { username, fulfilledRequests } = props;
 
   const fulfilledRequestsTableData = [];
+  let i = 1;
   for (const currentFulfilledRequest of Object.values(fulfilledRequests)) {
     const requestFeedbackCard = (
       <RequestFeedback
         key={currentFulfilledRequest.request_id}
+        i = {i}
         request_id={currentFulfilledRequest.request_id}
         service_type={currentFulfilledRequest.service_type}
         for_num_persons={currentFulfilledRequest.for_num_persons}
@@ -25,6 +27,7 @@ export default function FulfilledRequests(props) {
         feedbackRequestid={feedbackRequestID}
       />
     );
+    i++;
     fulfilledRequestsTableData.push(requestFeedbackCard);
   }
 
@@ -75,12 +78,15 @@ export default function FulfilledRequests(props) {
   return (
     <>
       <div className="fulfilledrequests">
-        <h6> Give feedback for fulfilled requests: </h6>
+        <h4> <b> FEEDBACK: </b> </h4>
+        <p> We have gathered all your fulfilled requests below. Please leave a note for our Volunteers
+          to let them know how they did. 
+        </p>
         <Table striped bordered hover responsive="md" className="fulfilledrequeststable">
           <thead>
             <tr>
-              <th>Request ID</th>
-              <th>Service Type</th>
+              <th> # </th>
+              <th>Requested Service Type</th>
               <th></th>
             </tr>
           </thead>
