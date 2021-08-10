@@ -132,7 +132,7 @@ export default function Offerings(props) {
               <option value="PET_FOOD"> Pet Food </option>
             </select>
           </div>
-          <div className="form-offering mb-2">
+          <div className="form-offering mb-4">
             <label>For number of people </label>
             <input
               type="text"

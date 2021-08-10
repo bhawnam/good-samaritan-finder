@@ -151,6 +151,7 @@ export default function Register() {
 
   return (
     <>
+    <div className="bg-image">
     <div className="form-box">
     <img className="logo" src="src/images/logo.png" />
     <h2> JOIN US </h2> <br />
@@ -305,6 +306,7 @@ export default function Register() {
           </div>
         </form>
       )}
+      </div>
       </div>
     </>
   );

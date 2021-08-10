@@ -60,3 +60,16 @@ body {
   display: flex;
   justify-content: center;
 }
+
+.bg-image {
+  background-image: url("src/images/pexels-rodnae-productions-6646917.jpeg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 2em;
+}
+
+.navbar{
+  background-color:rgb(224, 215, 195);
+}

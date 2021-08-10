@@ -38,6 +38,7 @@ export default function Login(props) {
 
   return (
     <>
+    <div className="bg-image">
     <div className="form-box">
     <img className="logo" src="src/images/logo.png" />
       <h2> WELCOME</h2> <br />
@@ -95,6 +96,7 @@ export default function Login(props) {
           </div>
         </form>
       )}
+      </div>
       </div>
     </>
   );
