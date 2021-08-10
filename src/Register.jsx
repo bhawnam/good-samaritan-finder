@@ -286,14 +286,16 @@ export default function Register() {
           <label className="form-check-label" htmlfor="registerInputCheck1">
               I agree all statements in <a href="/terms-of-service">Terms of service</a>
           </label>
-        </div>      
+        </div> 
+        <div class="d-grid gap-2 col-6 mx-auto mb-2"> 
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-dark"
           disabled={phoneValidated === false}
         >
           Join Us
         </button>
+        </div>
         <p className="forgot-password">
         Already registered?
           <a href="/login"> Log In </a>

@@ -79,10 +79,11 @@ export default function ResetPassword() {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <div class="d-grid gap-2 col-6 mx-auto mb-2"> 
+          <button type="submit" className="btn btn-dark">
             Submit
           </button>
-
+          </div>
           <div>
             (*) are required fields
           </div>
