@@ -11,7 +11,7 @@ body {
     border-radius: 25px;
   }
   
-  h1, h2, h3 {
+  .form-box h1, .form-box h2, .form-box h3 {
     text-align: center;
   }
 

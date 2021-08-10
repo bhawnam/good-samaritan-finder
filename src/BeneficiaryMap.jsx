@@ -200,7 +200,7 @@ export default function MapExample() {
         Services our Good Samaritans Offer
       </h4>
       <p>
-        Our is it to continue to grow and provide as many services we can.
+        Our goal is it to continue to grow and provide as many services we can.
         Currently our Volunteers provide their services to drop off the following 
         commodities to those in need:      
       </p>

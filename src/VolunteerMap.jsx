@@ -118,7 +118,7 @@ export default function MapExample() {
         Services our Beneficiaries can seek
       </h4>
       <p>
-        Our is it to continue to grow and provide as many services we can.
+        Our goal is it to continue to grow and provide as many services we can.
         Currently our Beneficiaries can seek the services for the following 
         commodities:      
       </p>
