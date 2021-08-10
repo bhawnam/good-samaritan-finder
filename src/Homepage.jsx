@@ -8,13 +8,9 @@ export default function Homepage() {
         <Carousel.Item style={{ height: "500px" }}>
           <img
             className="d-flex w-100"
-            src="src/images/carousel1.png"
+            src="src/images/pexels-rodnae-productions-6646778.jpeg"
             alt="First slide"
           />
-          <Carousel.Caption>
-            <h3> Stepping up. </h3>
-            <p> Packaging of food items for distribution. </p>
-          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item style={{height: "500px"}}>
           <br/>
@@ -23,10 +19,6 @@ export default function Homepage() {
             src="src/images/carousel2.png"
             alt="Second slide"
           />
-          <Carousel.Caption>
-            <h3> Help one another.</h3>
-            <p> Helping and Uplifting one another.</p>
-          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item style={{height: "500px"}}>
           <img
@@ -34,49 +26,55 @@ export default function Homepage() {
             src="src/images/carousel3.png"
             alt="Third slide"
           />
-
-          <Carousel.Caption>
-            <h3> Love our community.</h3>
-            <p> Coming together as a community.</p>
-          </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
 
       <div className="container-fluid">
-        <div>
-          <h3>Welcome to Good Samaritan Finder</h3>
-        </div>
-        <div className="row">
-          <div className="col-4">
-            <img
-              src="src/images/joel-muniz-qvzjG2pF4bE-unsplash.jpeg"
-              alt="Elderly Hands"
-              width="100%"
-              className="rounded"
-            />
-
-          </div>
-          <div className="col-8">col-4</div>
-        </div>
-        <div>
-          <p>
-            We are a non-profit organization connect volunteers and
-            beneficiaries during unanticipated times. This started out as a
-            small effort to organize the work being taken up by Volunteers so,
-            they can focus on helping folks without being{" "}
+        <div class="p-1 rounded-3">
+          <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to Good Samaritan Finder </h1>
+        <p class="col-md-8 fs-4"> Good Samaritan Finder is a non-profit organization which connects volunteers (Good Samaritans) 
+        with beneficiaries during unanticipated times. This started out as an effort to help volunteers organize the work 
+        that they can sign up for without getting overwhelmed with the requests and they can continue what they 
+        do best - helping people. </p>
+       </div>
+      </div>
+      <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-4 border rounded-3">
+          <h2>Volunteers </h2>
+          <p> Our Good Samaritans provide their valuable time and offer services and help those in need.
+            Using our platform they can put in an offering of a service and their availability radius area. Keeping urgent need
+            of our beneficiaries in mind, we match the their offerings with our beneficiary requests. Only when matched,  volunteers
+            recieve the details of the beneficairy thereby protecting the identities of all our users.
           </p>
+          <p>
+            Join our platform to help someone in need. You can also know more about being a Volunteer on our Volunteer page.  
+          </p>
+          <div class="d-grid gap-5 d-md-flex justify-content-center">
+          <a class="btn btn-outline-primary" href="/join-us" role="button">Join Us</a>
+          <a class="btn btn-outline-primary" href="/be-a-volunteer" role="button">Learn More</a>
         </div>
-        <div>
-          <blockquote className="blockquote">
-            <p className="mb-2">
-              Thank you dear Allen for helping us with the much needed
-              essentials to keep us going during our most difficult times!
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="h-100 p-4 border rounded-3">
+          <h2> Beneficiaries </h2>
+          <p> With these unprecendeted times, we have seen numerous people starve for the basic neccesities. 
+            A lot of people have struggled to keep their familes safe. Our platform provides a step to add in a 
+            request of their need and we match it with the offerings of our Good Samaritans. We keep in mind the urgency, and 
+            immediately notify the Beneficiaries and Volunteers of a match and the next steps. 
             </p>
-            <footer className="blockquote-footer">
-              Richard<cite title="Source Title">Dallas, Texas</cite>
-            </footer>
-          </blockquote>
+            <p>
+            Join our platform if you are need of assistance. You can also know more about being a Beneficiary on our Beneficiary page.
+            </p>
+            <div class="d-grid gap-5 d-md-flex justify-content-center">
+          <a class="btn btn-outline-primary" href="/join-us" role="button">Join Us</a>
+          <a class="btn btn-outline-primary" href="/be-a-beneficiary" role="button">Learn More</a>
         </div>
+        </div>
+      </div>
+    </div>
       </div>
     </div>
   );
