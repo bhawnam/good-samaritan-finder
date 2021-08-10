@@ -80,6 +80,31 @@ export default function MapExample() {
 
   return (
     <>
+    <br />
+    <h4> Why be a Beneficiary on our platform ? </h4>
+    <p>
+    Our generation has lived to see the unthinkable - a global pandemic and challenges emerging from changing 
+    climatic conditions. While some of us have been fortunate to endure through the rough times, there have 
+    been challenging and pressing times where some of us were desperately seeking help.
+    </p>
+    <p>
+    Our platform <b> Good Samaritan Finder </b> is aimed at helping people in need by matching the beneficiaries
+    with Good Samaritans offering their help. The beneficiary can put in a request of what their requirements are. 
+    For instance, if a user is a high-risk personnel and needs to buy their medication but are unable to do so, 
+    they can log onto our platform, state their requirements with some necessary details. Our platform will match 
+    them to the Volunteer who has a bandwidth to buy those medicines and drop them off at the desired location. 
+    We always make sure to match your requests with volunteers in the vicinity to provide you with help as fast as 
+    possible.  
+    </p>
+
+  <p> <center> <b>  Would you like to get onboarded? </b>
+    <a class="btn btn-primary mx-2" href="/join-us" role="button"> Join Us</a>
+  </center> </p>  
+  <hr/> <br/>
+  <h4> Would you like to checkout volunteers near you? </h4>
+  <br />
+  <div className="beneficiary-map row">
+    <div className="col">
       {hasAddress ? (
         <GoogleMap
           center={{ lat, lng }}
@@ -145,20 +170,53 @@ export default function MapExample() {
           )}
         </GoogleMap>
       )}
-      <br/>
+      </div>
+      <div className="col">
+        <br/>
+        <br/>
+      <p>
+        You can enter your street address and checkout the volunteers offering 
+        different services around you.
+        You can also see how many requests they have fulfilled in the past on 
+        our platform.
+      </p>
       <form onSubmit={submitAddress}>
         <div className="form-login row mb-4">
         <label htmlFor="mapInputAddress1" className="form-label" >Where do you reside? </label> <br />
-        <div className="col-3">
+        <div className="col">
           <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>
-        <div className="col-3">    
+        <div className="col">    
         <button type="submit" className="btn btn-primary">
           Choose
         </button>
         </div>
         </div>
       </form>
+      </div>
+      </div>
+      <hr/> <br/>
+      <h4>
+        Services our Good Samaritans Offer
+      </h4>
+      <p>
+        Our is it to continue to grow and provide as many services we can.
+        Currently our Volunteers provide their services to drop off the following 
+        commodities to those in need:      
+      </p>
+      <ul>
+        <li> Packaged Drinking Water</li>
+        <li> First-Aid Kit</li>
+        <li> Pre-prepared Meal Kits</li>
+        <li> Blankets </li>
+        <li> Pet Food</li>
+      </ul>
+      <p>     
+      The platform keeps tabs of all these requirements that volunteers are willing 
+      to contribute. 
+      We also ensure the requests are handled in order such that the oldest request is fulfilled
+      before the newly added ones.
+      </p>
     </>
   );
 }

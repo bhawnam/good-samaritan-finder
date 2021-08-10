@@ -23,12 +23,20 @@ export default function AboutUs() {
           connects volunteers (Good Samaritans) with beneficiaries during
           unanticipated times. This started out as an effort to help
           volunteers organize the work that they can sign up for without
-          getting overwhelmed with the requests so that they can continue what
+          getting overwhelmed with the requests and they can continue what
           they do best - helping people.
         </p>
          <hr/> <br />
         <h4> Our Inspiration </h4>
         <p>
+          During to the pandemic, we have witnessed situations where elderly and high-risk personnel were left 
+          without basic necessities like getting groceries and medications. In Texas during the cold front, 
+          there have been cases where families were looking for food, water and a source of heat to keep their 
+          families that were left without power and water, safe. In California, the continuously growing fires 
+          have created a havoc and left people without food and water to survive. These are just a few instances where 
+          people have been left helpless and hopeless.
+        </p>
+        <p>  
           Amid India&apos;s 2nd Covid-19 wave, a Good Samaritan (Sonu Sood)
           had stepped up to help out families who needed hospital beds,
           hospital cylinders, etc. It did not take too long before his Twitter
@@ -40,8 +48,8 @@ export default function AboutUs() {
         </div>
         <br />
         <p>
-          This encouraged us ------------
-
+          These are just a few instances which inspired us to step up and build a platform to allow 
+          Volunteers to come onboard and provide their services to those who need it.
         </p>
         <hr /> <br/>
         <h4> How are we trying to achieve our goal ? </h4>
@@ -58,6 +66,13 @@ export default function AboutUs() {
           and also make sure that the recipient is in the vicinity of the Volunteer
           helping out to not make the entire process overwhelming for both the 
           Beneficiary and Volunteer.
+          </p>
+          <p>
+          In the social media age, it is easy for a person to volunteer. But, the fact is one can only volunteer part-time 
+          or have the capacity to only help x number of people. In such cases, if one would offer their services 
+          on social media platforms, their inbox would be flooded with help requests that they may not have the 
+          bandwidth and/or the resources to handle. The goal of the platform is to only match beneficiaries and volunteers 
+          in a given area and more importantly offer the ability to put in their date of availability.
         </p>
 
         <br />

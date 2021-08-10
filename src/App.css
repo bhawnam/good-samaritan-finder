@@ -55,3 +55,8 @@ body {
   margin-right: auto;
   width: 40%;
 }
+
+.volunteer-map{
+  display: flex;
+  justify-content: center;
+}

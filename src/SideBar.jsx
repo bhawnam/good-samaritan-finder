@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { Button } from "react-bootstrap";
 
 export default function SideBar(props) {
   const {isLogged} = props;

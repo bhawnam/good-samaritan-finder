@@ -117,13 +117,14 @@ export default function App() {
           <Route exact path="/login">
             <Login username={username} setUsername={setUsername} />
           </Route>
+          <Route exact path="/join-us">
+            <Register />
+          </Route>
           <Route exact path="/be-a-volunteer">
             <VolunteerMap />
-            <Register />
           </Route>
           <Route exact path="/be-a-beneficiary">
             <BeneficiaryMap />
-            <Register />
           </Route>
           <Route exact path="/welcome-user">
             <SideBar />
