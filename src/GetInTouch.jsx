@@ -52,6 +52,7 @@ export default function GetInTouch() {
       </section>
 
       <div className="form-box">
+      <img className="logo" src="src/images/logo.png" />
         <h2> GET IN TOUCH</h2> <br/>
         <form onSubmit={getInTouchRequest}>
           <div className="form-contact mb-2">

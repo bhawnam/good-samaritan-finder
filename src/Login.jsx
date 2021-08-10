@@ -82,6 +82,10 @@ export default function Login(props) {
         <button type="submit" className="btn btn-primary btn-block mb-4">
           Log in
         </button>
+        <p className="forgot-password">
+        Don't have an account?
+          <a href="/join-us"> Join us </a>
+        </p>
       </form>
 
       {errormessage && (

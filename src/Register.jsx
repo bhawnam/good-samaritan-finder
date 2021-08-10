@@ -152,6 +152,7 @@ export default function Register() {
   return (
     <>
     <div className="form-box">
+    <img className="logo" src="src/images/logo.png" />
     <h2> JOIN US </h2> <br />
       <form onSubmit={registerUser}>
         <div className="form-register row mb-2">
