@@ -98,7 +98,7 @@ export default function MapExample() {
     </p>
 
   <p> <center> <b>  Would you like to get onboarded? </b>
-    <a class="btn btn-primary mx-2" href="/join-us" role="button"> Join Us</a>
+    <a class="btn btn-primary col-1 mx-2" href="/join-us" role="button"> Join Us</a>
   </center> </p>  
   <hr/> <br/>
   <h4> Would you like to checkout volunteers near you? </h4>
@@ -182,7 +182,7 @@ export default function MapExample() {
       </p>
       <form onSubmit={submitAddress}>
         <div className="form-login row mb-4">
-        <label htmlFor="mapInputAddress1" className="form-label" >Where do you reside? </label> <br />
+        <label htmlFor="mapInputAddress1" className="form-label" > <b>Where do you reside?  </b> </label> <br />
         <div className="col">
           <PlacesAutocomplete setAddress={setAddress} setZipcode={setZipcode} />
         </div>

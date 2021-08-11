@@ -77,3 +77,12 @@ body {
 .table { 
   width: 65%;
 }
+
+.profile-image{
+  background-image: url("src/images/temp.png");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 3em 
+}

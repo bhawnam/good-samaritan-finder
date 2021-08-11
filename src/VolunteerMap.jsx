@@ -55,7 +55,7 @@ export default function MapExample() {
     resources to handle.
     </p>
     <p> <center> <b>Would you like to get onboarded? </b>
-      <a class="btn btn-primary mx-2" href="/join-us" role="button"> Join Us</a>
+      <a class="btn btn-primary col-1 mx-2" href="/join-us" role="button"> Join Us</a>
     </center>
     </p>  
     <br/> <hr/>

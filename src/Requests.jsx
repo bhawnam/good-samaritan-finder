@@ -89,7 +89,7 @@ export default function Requests(props){
       <div className="services">
         <div className="userservices">
           <h4> <b> REQUESTS </b></h4>
-          <p> All your past and current open requests are listed below. </p>
+          <p> All your fulfilled and current open requests are listed below. </p>
           <Table striped bordered hover responsive="md" className="requeststable">
             <thead>
               <tr>
