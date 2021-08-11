@@ -96,7 +96,7 @@ export default function Offerings(props) {
       <div className="offerings">
         <div className="userofferings">
           <h4> <b> OFFERINGS </b> </h4>
-          <p> All your past and current open offerings are listed below. </p>
+          <p> All your offered services are listed below. </p>
           <Table striped bordered hover responsive="md" className="offeringstable">
             <thead>
               <tr>
@@ -108,7 +108,7 @@ export default function Offerings(props) {
             <tbody>{offeringsTableData}</tbody>
           </Table>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleOfferingButton}>
+        <button type="submit" className="btn btn-outline-dark col-2" onClick={handleOfferingButton}>
           Add an offering
         </button>
       </div>
@@ -157,9 +157,11 @@ export default function Offerings(props) {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <center>
+          <button type="submit" className="btn btn-outline-primary">
             Add
           </button>
+          </center>
         </form>
         </Modal.Body>
         </Modal>

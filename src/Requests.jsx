@@ -102,7 +102,7 @@ export default function Requests(props){
             <tbody>{requestsTableData}</tbody>
           </Table>
         </div>
-        <button type="submit" className="btn btn-primary" onClick={handleRequestButton}>
+        <button type="submit" className="btn btn-outline-dark col-2" onClick={handleRequestButton}>
           Add a request
         </button>
       </div>
@@ -135,9 +135,11 @@ export default function Requests(props){
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <center>
+          <button type="submit" className="btn btn-outline-primary">
             Add
           </button>
+          </center>
         </form>
         </Modal.Body>
         </Modal>

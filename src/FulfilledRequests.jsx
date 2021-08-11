@@ -110,9 +110,11 @@ export default function FulfilledRequests(props) {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <center>
+          <button type="submit" className="btn btn-outline-primary">
             Submit
           </button>
+          </center>
         </form>
         </Modal.Body>
         </Modal>

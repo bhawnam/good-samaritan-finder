@@ -73,3 +73,7 @@ body {
 .navbar{
   background-color:rgb(224, 215, 195);
 }
+
+.table { 
+  width: 65%;
+}

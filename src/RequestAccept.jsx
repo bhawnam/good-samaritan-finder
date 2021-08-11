@@ -11,7 +11,7 @@ export default function RequestAccept(props) {
         <td> {for_num_persons}</td>
         <td> {distance}</td>
         <td>
-          <button type="submit" className="btn btn-primary" onClick={()=>handleAcceptRequest(request_id)}>
+          <button type="submit" className="btn btn-outline-success" onClick={()=>handleAcceptRequest(request_id)}>
             Accept
           </button>
         </td>
