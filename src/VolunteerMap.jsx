@@ -64,7 +64,7 @@ export default function MapExample() {
     <div className="volunteer-map">
       <GoogleMap
         center={{ lat: 37.8272, lng: -122.2913 }}
-        mapContainerStyle={{ width: "500px", height: "500px" }}
+        mapContainerStyle={{ width: "600px", height: "500px" }}
         zoom={7}
       >
         {mapData.map((dataPoint) => (

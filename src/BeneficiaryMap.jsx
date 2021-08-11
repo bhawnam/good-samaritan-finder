@@ -108,7 +108,7 @@ export default function MapExample() {
       {hasAddress ? (
         <GoogleMap
           center={{ lat, lng }}
-          mapContainerStyle={{ width: "500px", height: "500px" }}
+          mapContainerStyle={{ width: "600px", height: "500px" }}
           zoom={10}
         >
           {mapData.map((dataPoint) => (
@@ -140,7 +140,7 @@ export default function MapExample() {
       ) : (
         <GoogleMap
           center={{ lat: 37.8272, lng: -122.2913 }}
-          mapContainerStyle={{ width: "500px", height: "500px" }}
+          mapContainerStyle={{ width: "600px", height: "500px" }}
           zoom={8}
         >
           {mapData.map((dataPoint) => (
