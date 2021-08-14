@@ -71,14 +71,14 @@ service_type_in_db = []
 service_name = ["PACKAGED_MEAL_KIT", "WATER", "FIRST_AID_KIT", "BLANKET", "PET_FOOD"]
 
 for name in service_name:
-    for_num_persons = randint(1, 10)
+    for_num_persons = randint(20, 30)
     is_offered = False
     service_type = crud.create_service_type(name, for_num_persons, is_offered)
     service_type_in_db.append(service_type)
 
 # Creating service offered entries in offerings table in the database
 service_offered_in_db = []
-for _ in range(5):
+for _ in range(15):
     service_type = choice(service_type_in_db)
     volunteer = choice(volunteers_in_db)
     rating = randint(1, 5)
@@ -90,7 +90,7 @@ for _ in range(5):
 
 # Creating service request entries in requests table in the database
 service_request_in_db = []
-for _ in range(7):
+for _ in range(15):
     beneficiary = choice(beneficiaries_in_db)
     service_type = choice(service_type_in_db)
     volunteer = choice(volunteers_in_db)
