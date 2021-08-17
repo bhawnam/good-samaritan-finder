@@ -25,9 +25,43 @@ Google Maps JavaScript API, Places API, Geocoding API, Twilio SMS Programmable A
 
 ## <a name="installation"></a> Set-up & Installation
 
-# Instructions
+Install a code editor such as [VS code](https://code.visualstudio.com/download) or [Sublime Text](https://www.sublimetext.com/).<br>
+Install [Python3](https://www.python.org/downloads/mac-osx/)<br>
+Install [pip](https://pip.pypa.io/en/stable/installing/), the package installer for Python <br>
+Install [postgreSQL](https://www.postgresql.org/) for the relational database.<br>
 
-## Setup
+
+Clone or fork repository:
+```
+$ git clone https://github.com/bhawnam/good-samaritan-finder.git
+```
+Create and activate a virtual environment inside the good samaritan finder directory:
+```
+$ virtualenv env
+$ source env/bin/activate
+```
+Install dependencies:
+```
+$ pip3 install -r requirements.txt
+```
+Make an account with [Google](https://.com/documentation) & get an [API key](https://.com/users/register/free).<br>
+Make an account with [Twilio](https://www.twilio.com/docs) & get an [API key](https://www.twilio.com/docs/usage/api).<br>
+
+Store these keys in a file named 'secrets.sh' <br> 
+```
+$ source secrets.sh
+```
+With PostgreSQL, create the samaritan-finder database
+```
+$ createdb samaritan-finder
+```
+Create all tables and relations in the database and seed all data:
+```
+$ python3 seed_database.py
+```
+Run the app from the command line:
+```
+$ python3 server.py
 
 First, from `api/` folder run `virtualenv env` then `source env/bin/activate` then
 `pip3 install -r requirements.txt`
