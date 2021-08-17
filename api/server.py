@@ -23,6 +23,18 @@ app.secret_key = "secret"
 app.jinja_env.undefined = StrictUndefined
 
 
+@app.route('/')
+def index_page():
+
+    return send_from_directory('', 'index.html')
+
+
+@app.route('/<path>')
+def route(path):
+
+    return send_from_directory('', 'index.html')
+
+
 @app.route('/api/login-user', methods=["POST"])
 def user_login():
     """Process user login. """
@@ -476,4 +488,4 @@ def send_code_email():
 if __name__ == "__main__":
     # Connecting to DB before running the app
     model.connect_to_db(app)
-    app.run("0.0.0.0", debug=True, port=5001)  # will run on port 5000 by default
+    app.run("0.0.0.0", debug=True)  # will run on port 5000 by default

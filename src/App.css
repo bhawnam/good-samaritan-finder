@@ -62,7 +62,7 @@ body {
 }
 
 .bg-image {
-  background-image: url("src/images/pexels-rodnae-productions-6646917.jpeg");
+  background-image: url("./images/pexels-rodnae-productions-6646917.jpeg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -79,7 +79,7 @@ body {
 }
 
 .profile-image{
-  background-image: url("src/images/temp.png");
+  background-image: url("./images/temp.png");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;

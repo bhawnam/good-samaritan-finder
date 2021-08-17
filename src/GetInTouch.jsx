@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Forms.css";
+import logo from './images/logo.png'
 
 export default function GetInTouch() {
   const [fullname, setFullname] = useState("");
@@ -52,7 +53,7 @@ export default function GetInTouch() {
       </section>
 
       <div className="form-box">
-      <img className="logo" src="src/images/logo.png" />
+      <img className="logo" src={logo} />
         <h2> GET IN TOUCH</h2> <br/>
         <form onSubmit={getInTouchRequest}>
           <div className="form-contact mb-2">

@@ -2,7 +2,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && rm -rf api/static && cp -r dist/static api/ && cp dist/index.html api/index.html",
     "serve": "vite preview",
     "py-dev": "cd api && source env/bin/activate && python3 server.py"
   },

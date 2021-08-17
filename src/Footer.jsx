@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import logo from './images/logo.png'
 
 export default function Footer() {
   return (
@@ -9,7 +10,7 @@ export default function Footer() {
       <footer className="row row-cols-7 py-5 my-5 border-top">
       <div className="col">
         <a href="/" className="d-flex align-items-center mb-3 link-dark text-decoration-none">
-        <img className="logo" src="src/images/logo.png" />
+        <img className="logo" src={logo} />
         </a>
         <p className="text-muted">© 2021</p>
       </div>

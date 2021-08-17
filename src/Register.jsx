@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { PlacesAutocomplete } from "./Autocomplete";
+import logo from './images/logo.png'
 
 export default function Register() {
   const [firstname, setFirstname] = useState("");
@@ -153,7 +154,7 @@ export default function Register() {
     <>
     <div className="bg-image">
     <div className="form-box">
-    <img className="logo" src="src/images/logo.png" />
+    <img className="logo" src={logo} />
     <h2> JOIN US </h2> <br />
       <form onSubmit={registerUser}>
         <div className="form-register row mb-2">

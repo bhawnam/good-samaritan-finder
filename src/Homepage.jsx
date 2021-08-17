@@ -1,5 +1,9 @@
 import React from "react";
 import Carousel from 'react-bootstrap/Carousel'
+import carousel_img1 from './images/pexels-rodnae-productions-6646778.jpeg'
+import carousel_img2 from './images/carousel2.png'
+import carousel_img3 from './images/carousel3.png'
+
 
 export default function Homepage() {
   return (
@@ -8,7 +12,7 @@ export default function Homepage() {
         <Carousel.Item style={{ height: "500px" }}>
           <img
             className="d-flex w-100"
-            src="src/images/pexels-rodnae-productions-6646778.jpeg"
+            src={carousel_img1}
             alt="First slide"
           />
         </Carousel.Item>
@@ -16,14 +20,14 @@ export default function Homepage() {
           <br/>
           <img
             className="d-block w-100"
-            src="src/images/carousel2.png"
+            src={carousel_img2}
             alt="Second slide"
           />
         </Carousel.Item>
         <Carousel.Item style={{height: "500px"}}>
           <img
             className="d-block w-100"
-            src="src/images/carousel3.png"
+            src={carousel_img3}
             alt="Third slide"
           />
         </Carousel.Item>

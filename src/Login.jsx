@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./Forms.css";
+import logo from './images/logo.png'
 
 export default function Login(props) {
   const [username_or_email, setUsernameOrEmail] = useState("");
@@ -40,7 +41,7 @@ export default function Login(props) {
     <>
     <div className="bg-image">
     <div className="form-box">
-    <img className="logo" src="src/images/logo.png" />
+    <img className="logo" src={logo} />
       <h2> WELCOME</h2> <br />
       <form onSubmit={processUserLogin}>
         <div className="form-login mb-2">

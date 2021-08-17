@@ -1,5 +1,7 @@
 import React from "react";
 import { TwitterTweetEmbed } from "react-twitter-embed";
+import about_img1 from './images/elderly-hand.jpeg'
+import about_img2 from './images/joel-muniz-qvzjG2pF4bE-unsplash.jpeg'
 
 export default function AboutUs() {
   return (
@@ -44,8 +46,20 @@ export default function AboutUs() {
           response:
         </p>
         <div id="twitterTweet">
-        <TwitterTweetEmbed tweetId="1391298808735174659" />
+        <blockquote class="twitter-tweet">
+          <a href="https://twitter.com/SonuSood/status/1391298808735174659?ref_src=twsrc%5Etfw">
+          <p lang="en" dir="ltr">Yesterday I got close to 41660 requests
+          <br />We try our best to reach out to all.
+          <br />Which we can&#39;t..
+          <br />If I try to reach out to everyone it will take me 14 years to do that.
+          <br />That means it will be 2035</p> 🇮🇳🙏
+          <p>&mdash; sonu sood (@SonuSood)</p>
+          </a>
+        </blockquote>
         </div>
+        {/* <div id="twitterTweet">
+        <TwitterTweetEmbed tweetId="1391298808735174659" />
+        </div> */}
         <br />
         <p>
           These are just a few instances which inspired us to step up and build a platform to allow 
@@ -78,11 +92,11 @@ export default function AboutUs() {
         <br />
         <div className="row">
           <div className="col-sm">
-            <img src="src/images/elderly-hand.jpeg" alt="Elderly Hands" width="100%" className="rounded" />
+            <img src={about_img1} alt="Elderly Hands" width="100%" className="rounded" />
           </div>
 
           <div className="col-sm">
-            <img src="src/images/joel-muniz-qvzjG2pF4bE-unsplash.jpeg" alt="Elderly Hands" width="100%" className="rounded"/>
+            <img src={about_img2} alt="Elderly Hands" width="100%" className="rounded"/>
           </div>
         </div>
         <p>
