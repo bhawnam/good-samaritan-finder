@@ -487,5 +487,5 @@ def send_code_email():
 
 if __name__ == "__main__":
     # Connecting to DB before running the app
-    model.connect_to_db(app)
-    app.run("0.0.0.0", debug=True)  # will run on port 5000 by default
+    model.connect_to_db(app, echo=False)
+    app.run("0.0.0.0", debug=False)  # will run on port 5000 by default
