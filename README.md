@@ -42,6 +42,12 @@ Validate Email and Phone-Number during Registration
 ![](src/images/gifs/validate_phone.gif)
 <br>
 <br>
+![](src/images/gifs/add_request.gif)
+<br>
+<br>
+![](src/images/gifs/matched_request.gif)
+<br>
+<br>
 ## <a name="techstack"></a> Technologies and Stack
 **Backend:**
 Python, Flask, Flask Bcrypt, SQLAlchemy, PostgreSQL, SMTP Library, JS Sweet Alerts,
@@ -64,7 +70,7 @@ Clone or fork repository:
 ```
 $ git clone https://github.com/bhawnam/good-samaritan-finder.git
 ```
-Make an account with [Google](https://console.cloud.google.com/) & get an API key for Places API, GoogleMaps API, Geocoding API.<br>
+Make an account on [Google Console](https://console.cloud.google.com/) & get an API key for Places API, GoogleMaps API, Geocoding API.<br>
 Make an account with [Twilio](https://www.twilio.com/docs) & get an [API key](https://www.twilio.com/docs/usage/api).<br>
 
 Store these keys in a file named 'secrets.sh' <br> 
@@ -90,13 +96,13 @@ Create all tables and relations in the database and seed all data:
 ```
 $ python3 seed_database.py
 ```
-Run the app from the command line:
-From the main project folder, 
+
+In the main project folder, 
 ```
 run `npm install`.
 ```
 
-In 2 different tabs
+Run the app from the command line in 2 different tabs
 ```
 - Run Python server `npm run py-dev`
 - Run Javascript server `npm run dev`
