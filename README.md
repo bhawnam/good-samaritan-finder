@@ -42,10 +42,28 @@ Validate Email and Phone-Number during Registration
 ![](src/images/gifs/validate_phone.gif)
 <br>
 <br>
+Beneficiary adding a request
+<br>
+<br>
 ![](src/images/gifs/add_request.gif)
 <br>
 <br>
+Volunteer accepting a matched request for their offered service
+<br>
+<br>
 ![](src/images/gifs/matched_request.gif)
+<br>
+<br>
+Beneficiary recieving a confirmation text
+<br>
+<br>
+![](src/images/confirm_text.png)
+<br>
+<br>
+Volunteer recieving a confirmation email
+<br>
+<br>
+![](src/images/confirm_email.png)
 <br>
 <br>
 ## <a name="techstack"></a> Technologies and Stack
@@ -104,8 +122,8 @@ run `npm install`.
 
 Run the app from the command line in 2 different tabs
 ```
-- Run Python server `npm run py-dev`
-- Run Javascript server `npm run dev`
+Run Python server `npm run py-dev`
+Run Javascript server `npm run dev`
 ```
 
 ## <a name="aboutme"></a> About the Developer
