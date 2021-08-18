@@ -4,7 +4,7 @@ In this social media age, it is very easy to put up a post for volunteering a se
 <br> 
 This single-page React app uses Python and Flask at backend, Google Maps and Places API for geocoding and autocompleting addresses. A tailor made matching algorithm  matches users within a certain radius is determined from Geo coordinates using Haversine formula based on the services offered, availability date and the number of persons. Once a match is found, both Volunteers and Beneficiaries are notified over email and SMS using SMTP library and the Twilio API, respectively. The GoodSamaritanFinder website also supports features like leaving feedback, keeping track of statistics. As of 8/5/2021 Good Samaritan Finder has been officially registered as a non-profit in the state of California. 
 <br>
-The deployment of www.GoodSamaritanFinder.org is done using the Amazon LightSail.
+Deployment Link:  http://www.goodsamaritanfinder.org
 
 <br> 
 
@@ -16,6 +16,11 @@ The deployment of www.GoodSamaritanFinder.org is done using the Amazon LightSail
 
 ## <a name="features"></a> Features
 
+User-friendly landing page
+<br>
+<br>
+![](src/images/gifs/home_page.gif)
+<br>
 
 ## <a name="techstack"></a> Technologies and Stack
 **Backend:**
