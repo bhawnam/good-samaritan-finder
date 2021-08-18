@@ -2,10 +2,12 @@
 
 In this social media age, it is very easy to put up a post for volunteering a service and get overwhelming number of responses with not enough bandwidth to help out. Good Samaritan Finder is a full-stack web-app matching volunteer offerings with beneficiary requests in a local community. Unless services match, the details of the users are not shared thus protecting their privacy.
 <br> 
-This single-page React app uses Python and Flask at backend, Google Maps and Places API for geocoding and autocompleting addresses. A tailor made matching algorithm  matches users within a certain radius is determined from Geo coordinates using Haversine formula based on the services offered, availability date and the number of persons. Once a match is found, both Volunteers and Beneficiaries are notified over email and SMS using SMTP library and the Twilio API, respectively. The GoodSamaritanFinder website also supports features like leaving feedback, keeping track of statistics. As of 8/5/2021 Good Samaritan Finder has been officially registered as a non-profit in the state of California. 
+This single-page React app uses Python and Flask at backend, Google Maps and Places API for geocoding and autocompleting addresses. A tailor made matching algorithm  matches users within a certain radius is determined from Geo coordinates using Haversine formula based on the services offered, availability date and the number of persons. Once a match is found, both Volunteers and Beneficiaries are notified over email and SMS using SMTP library and the Twilio API, respectively. The GoodSamaritanFinder website also supports features like leaving feedback, keeping track of statistics. 
+<br>
+As of 8/5/2021 Good Samaritan Finder has been officially registered as a non-profit in the state of California. 
+<br>
 <br>
 Deployment Link:  http://www.goodsamaritanfinder.org
-
 <br> 
 
 ## Contents 
@@ -21,20 +23,24 @@ Web-app Home Page
 <br>
 ![](src/images/gifs/home_page.gif)
 <br>
+<br>
 Login Page
 <br>
 <br>
 ![](src/images/gifs/login_page.gif)
+<br>
 <br>
 Register Page
 <br>
 <br>
 ![](src/images/gifs/register_page.gif)
 <br>
+<br>
 Validate Email and Phone-Number during Registration
 <br>
 <br>
 ![](src/images/gifs/validate_phone.gif)
+<br>
 <br>
 ## <a name="techstack"></a> Technologies and Stack
 **Backend:**
@@ -58,21 +64,23 @@ Clone or fork repository:
 ```
 $ git clone https://github.com/bhawnam/good-samaritan-finder.git
 ```
-Create and activate a virtual environment inside the good samaritan finder directory:
+Make an account with [Google](https://console.cloud.google.com/) & get an API key for Places API, GoogleMaps API, Geocoding API.<br>
+Make an account with [Twilio](https://www.twilio.com/docs) & get an [API key](https://www.twilio.com/docs/usage/api).<br>
+
+Store these keys in a file named 'secrets.sh' <br> 
+cd into the good samaritan finder directory run:
 ```
+$ source secrets.sh
+```
+Create and activate a virtual environment inside the api directory:
+```
+$ cd api
 $ virtualenv env
 $ source env/bin/activate
 ```
 Install dependencies:
 ```
 $ pip3 install -r requirements.txt
-```
-Make an account with [Google](https://.com/documentation) & get an [API key](https://.com/users/register/free).<br>
-Make an account with [Twilio](https://www.twilio.com/docs) & get an [API key](https://www.twilio.com/docs/usage/api).<br>
-
-Store these keys in a file named 'secrets.sh' <br> 
-```
-$ source secrets.sh
 ```
 With PostgreSQL, create the samaritan-finder database
 ```
@@ -83,21 +91,16 @@ Create all tables and relations in the database and seed all data:
 $ python3 seed_database.py
 ```
 Run the app from the command line:
+From the main project folder, 
 ```
-$ python3 server.py
-
-First, from `api/` folder run `virtualenv env` then `source env/bin/activate` then
-`pip3 install -r requirements.txt`
-
-From the main project folder, run `npm install`.
-
-## Running the application
+run `npm install`.
+```
 
 In 2 different tabs
-
+```
 - Run Python server `npm run py-dev`
 - Run Javascript server `npm run dev`
-
+```
 
 ## <a name="aboutme"></a> About the Developer
 
