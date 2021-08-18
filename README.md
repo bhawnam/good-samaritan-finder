@@ -1,6 +1,10 @@
 # Good Samaritan Finder
 
-Good Samaritan Finder is a full-stack web application aimed at .
+In this social media age, it is very easy to put up a post for volunteering a service and get overwhelming number of responses with not enough bandwidth to help out. Good Samaritan Finder is a full-stack web-app matching volunteer offerings with beneficiary requests in a local community. Unless services match, the details of the users are not shared thus protecting their privacy.
+<br> 
+This single-page React app uses Python and Flask at backend, Google Maps and Places API for geocoding and autocompleting addresses. A tailor made matching algorithm  matches users within a certain radius is determined from Geo coordinates using Haversine formula based on the services offered, availability date and the number of persons. Once a match is found, both Volunteers and Beneficiaries are notified over email and SMS using SMTP library and the Twilio API, respectively. The GoodSamaritanFinder website also supports features like leaving feedback, keeping track of statistics. As of 8/5/2021 Good Samaritan Finder has been officially registered as a non-profit in the state of California. 
+<br>
+The deployment of www.GoodSamaritanFinder.org is done using the Amazon LightSail.
 
 <br> 
 
