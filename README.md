@@ -16,12 +16,26 @@ Deployment Link:  http://www.goodsamaritanfinder.org
 
 ## <a name="features"></a> Features
 
-User-friendly landing page
+Web-app Home Page
 <br>
 <br>
 ![](src/images/gifs/home_page.gif)
 <br>
-
+Login Page
+<br>
+<br>
+![](src/images/gifs/login_page.gif)
+<br>
+Register Page
+<br>
+<br>
+![](src/images/gifs/register_page.gif)
+<br>
+Validate Email and Phone-Number during Registration
+<br>
+<br>
+![](src/images/gifs/validate_phone.gif)
+<br>
 ## <a name="techstack"></a> Technologies and Stack
 **Backend:**
 Python, Flask, Flask Bcrypt, SQLAlchemy, PostgreSQL, SMTP Library, JS Sweet Alerts,
