@@ -24,6 +24,12 @@ Web-app Home Page
 ![](src/images/gifs/home_page.gif)
 <br>
 <br>
+User checking out Volunteers serving in their area 
+<br>
+<br>
+![](src/images/gifs/map.gif)
+<br>
+<br>
 Login Page
 <br>
 <br>
@@ -64,6 +70,12 @@ Volunteer recieving a confirmation email
 <br>
 <br>
 ![](src/images/confirm_email.png)
+<br>
+<br>
+Beneficiary providing feedback for service
+<br>
+<br>
+![](src/images/gifs/feedback.gif)
 <br>
 <br>
 ## <a name="techstack"></a> Technologies and Stack
